@@ -3,8 +3,10 @@ import Navbar from "../sharedComponents/Navbar/Navbar";
 
 const MainLayout = () => {
     return (
-        <div>
-            <Navbar></Navbar>
+        <div className="font-poppins">
+           <div className="absolute top-0 w-full py-2 text-white">
+                <Navbar></Navbar>
+            </div>
             <Outlet></Outlet>
         </div>
     );
