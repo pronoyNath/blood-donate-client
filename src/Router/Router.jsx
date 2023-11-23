@@ -6,6 +6,7 @@ import DonationRequests from "../Pages/DonationRequests/DonationRequests";
 import Blogs from "../Pages/Blogs/Blogs";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import GiveFund from "../Pages/GiveFund/GiveFund";
+import Register from "../Pages/Register/Register";
 
 const router = createBrowserRouter([
     {
@@ -33,8 +34,11 @@ const router = createBrowserRouter([
           element: <GiveFund></GiveFund>
         }
       ]
-
     },
+    {
+      path: '/register',
+      element: <Register></Register>
+    }
   ]);
 
   export default router;
