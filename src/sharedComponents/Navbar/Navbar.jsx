@@ -82,7 +82,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <a className="btn px-10 hover:bg-red-500 bg-red-700 border-none text-white uppercase">Login</a>
             </div>
         </div>
     );
