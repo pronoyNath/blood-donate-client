@@ -1,8 +1,16 @@
 import { Link, NavLink } from "react-router-dom";
 import { FaFileWaveform } from "react-icons/fa6";
+import useAuth from "../../Hooks/useAuth";
 
 
 const Navbar = () => {
+    const { user, logOut } = useAuth();
+    
+
+
+    const handleLogOut = () => {
+        logOut()
+    }
 
     const links = <>
         <li className="text-xl hover:scale-125 transform transition-transform duration-300">
@@ -18,44 +26,44 @@ const Navbar = () => {
         <li className="text-xl hover:scale-110 transform transition-transform duration-300">
             <NavLink
                 to="/donation-requests"
-                className={({ isActive}) =>
-                     isActive ? "active text-red-500 border-b-4 border-red-500" : ""
+                className={({ isActive }) =>
+                    isActive ? "active text-red-500 border-b-4 border-red-500" : ""
                 }
             >
-               Donation Requests
+                Donation Requests
 
             </NavLink>
         </li>
         <li className="text-xl hover:scale-110 transform transition-transform duration-300">
             <NavLink
                 to="/blogs"
-                className={({ isActive}) =>
-                     isActive ? "active text-red-500 border-b-4 border-red-500" : ""
+                className={({ isActive }) =>
+                    isActive ? "active text-red-500 border-b-4 border-red-500" : ""
                 }
             >
-               Blogs
+                Blogs
 
             </NavLink>
         </li>
         <li className="text-xl hover:scale-110 transform transition-transform duration-300">
             <NavLink
                 to="/dashboard"
-                className={({ isActive}) =>
-                     isActive ? "active text-red-500 border-b-4 border-red-500" : ""
+                className={({ isActive }) =>
+                    isActive ? "active text-red-500 border-b-4 border-red-500" : ""
                 }
             >
-               Dashboard
+                Dashboard
 
             </NavLink>
         </li>
         <li className="text-xl hover:scale-110 transform transition-transform duration-300">
             <NavLink
                 to="/give-fund"
-                className={({ isActive}) =>
-                     isActive ? "active text-red-500 border-b-4 border-red-500" : ""
+                className={({ isActive }) =>
+                    isActive ? "active text-red-500 border-b-4 border-red-500" : ""
                 }
             >
-               Give Fund
+                Give Fund
 
             </NavLink>
         </li>
@@ -74,7 +82,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div>
-                  <Link to='/' className=" text-xl">
+                    <Link to='/' className=" text-xl">
                         <img src="https://i.ibb.co/64XsX5Z/blood-Logo2.png" alt="" className='w-[180px] h-[100px] hover:scale-110 transform transition-transform duration-300' />
                     </Link>
                 </div>
@@ -85,8 +93,15 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end hover:scale-110 transform transition-transform duration-300">
-                <Link to='/register' className="btn px-10 hover:bg-red-500 bg-red-700 border-none text-white uppercase">Register Now <FaFileWaveform  className="text-2xl animate-bounce"/>
-  </Link>
+           {
+            user ? <Link onClick={handleLogOut} className="btn px-10 hover:bg-red-500 bg-red-700 border-none text-white uppercase">Log out<FaFileWaveform className="text-2xl animate-bounce" />
+            </Link>
+            : <Link to='/register' className="btn px-10 hover:bg-red-500 bg-red-700 border-none text-white uppercase">Register Now <FaFileWaveform className="text-2xl animate-bounce" />
+            </Link>
+           }
+           
+           
+                
             </div>
         </div>
     );

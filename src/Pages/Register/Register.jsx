@@ -26,6 +26,7 @@ const Register = () => {
 
     const [selectedDistrict, setSelectedDistrict] = useState('');
     const [filteredUpazilas, setFilteredUpazilas] = useState([]);
+    const [selectedUpazila, setSelectedUpazila] = useState('');
 
     // district data load 
     useEffect(() => {
@@ -68,6 +69,17 @@ const Register = () => {
         const district = form.get('district');
         const upazila = form.get('upazila');
 
+        // const currentUser = {
+        //     name,
+        //     email,
+        //     role: 'donor',
+        //     status: 'active',
+        //     imageURL, bloodGroup,
+        //     district: districts.find(district => district.id === selectedDistrict)?.name,
+        //     upazila: upazilas.find(upazila => upazila.id === selectedUpazila)?.name
+        // }
+        // console.log(currentUser);
+
         if (!bloodGroup || !district || !upazila) {
             setRegisterError("Please fill the form properly.")
             return
@@ -94,7 +106,7 @@ const Register = () => {
         }
 
 
-        //     //creating user
+        //creating user
         createUser(email, password)
             .then(async (res) => {
                 const currentUser = {
@@ -102,7 +114,9 @@ const Register = () => {
                     email,
                     role: 'donor',
                     status: 'active',
-                     imageURL, bloodGroup, district, upazila
+                    imageURL, bloodGroup,
+                    district: districts.find(district => district.id === selectedDistrict)?.name,
+                    upazila: upazilas.find(upazila => upazila.id === selectedUpazila)?.name
                 }
                 const { data } = await axiosPublic.post('/user-info', currentUser)
                 console.log("responseee", data);
@@ -214,7 +228,7 @@ const Register = () => {
                                         </div>
                                     </div>
                                     <div className='flex gap-5'>
-                                       
+
                                         <div className="space-y-2 flex-1">
                                             <div className="flex justify-between">
                                                 <label className="text-sm">District*</label>
@@ -225,6 +239,7 @@ const Register = () => {
                                                 onChange={(e) => {
                                                     setSelectedDistrict(e.target.value);
                                                 }}
+
                                                 required
                                                 className="select select-error w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 "
                                             >
@@ -235,7 +250,7 @@ const Register = () => {
                                             </select>
                                         </div>
 
-                                        <div className="space-y-2 flex-1">
+                                        {/* <div className="space-y-2 flex-1">
                                             <div className="flex justify-between">
                                                 <label className="text-sm">Upazila*</label>
                                             </div>
@@ -251,8 +266,29 @@ const Register = () => {
                                                     </option>
                                                 ))}
                                             </select>
-                                        </div>
+                                        </div> */}
 
+                                        <div className="space-y-2 flex-1">
+                                            <div className="flex justify-between">
+                                                <label className="text-sm">Upazila*</label>
+                                            </div>
+                                            <select
+                                                name="upazila"
+                                                value={selectedUpazila}
+                                                onChange={(e) => {
+                                                    setSelectedUpazila(e.target.value);
+                                                }}
+                                                required
+                                                className="select select-error w-full px-3 py-2 border rounded-md dark:bg-gray-800 dark:text-gray-100 "
+                                            >
+                                                <option disabled value="">Select Your Upazila</option>
+                                                {filteredUpazilas.map((upazila) => (
+                                                    <option key={upazila?.id} value={upazila.id}>
+                                                        {upazila.name}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
 

@@ -60,16 +60,16 @@ const AuthProvider = ({ children }) => {
             setLoading(false);
 
             // // token creator(***) & remover(server side)
-            // if (currentUser) {
-            //     axios.post('http://localhost:5000/jwt', loggedUser, { withCredentials: true })
-            //         .then(res => {
-            //             console.log(res.data);
-            //         })
-            // }
-            // else {
-            //     axios.post('http://localhost:5000/logout', loggedUser, { withCredentials: true })
-            //         .then(res => console.log(res.data))
-            // }
+            if (currentUser) {
+                axios.post('http://localhost:5000/jwt', loggedUser, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data);
+                    })
+            }
+            else {
+                axios.post('http://localhost:5000/logout', loggedUser, { withCredentials: true })
+                    .then(res => console.log(res.data))
+            }
 
         });
         return () => {
