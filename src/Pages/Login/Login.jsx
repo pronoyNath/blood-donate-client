@@ -156,7 +156,7 @@ const Login = () => {
 
                         <div className="w-full flex-1 max-w-xl rounded-md shadow p-5 sm:p-8 dark:bg-gray-800 dark:text-gray-100" >
                             <h2 className="mb-3 text-3xl font-semibold text-center">Login to your account</h2>
-                            <p className="text-sm text-center dark:text-gray-400">Dont have account?
+                            <p className="text-sm text-center dark:text-gray-400 hover:scale-110 transform transition-transform duration-300">Dont have account?
                                 <Link to='/register' rel="noopener noreferrer" className="focus:underline hover:underline ml-5 text-red-500 text-xl">Register here</Link>
                             </p>
                             <div className="mt-10 space-y-4" >
@@ -186,7 +186,7 @@ const Login = () => {
                                     </div>
                                     <p className='text-red-500'>{loginError}</p>
                                 </div>
-                                <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-red-500 dark:text-white">
+                                <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-red-500 dark:text-white hover:scale-105 transform transition-transform duration-300">
                                     {
                                         loading ? <ImSpinner9 className='mx-auto animate-spin text-xl'></ImSpinner9> : 'Login'
                                     }

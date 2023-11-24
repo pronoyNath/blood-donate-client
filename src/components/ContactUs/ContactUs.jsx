@@ -42,7 +42,7 @@ const ContactUs = () => {
                         <span className="mb-1">Message</span>
                         <textarea rows="3" className="block w-full border border-white p-5 rounded-md focus:ring focus:ri focus:ri dark:bg-gray-800"></textarea>
                     </label>
-                    <button type="button" className="text-white  px-8 py-3 text-lg rounded    hover:bg-red-500 bg-red-800 ">Submit</button>
+                    <button type="button" className="hover:scale-105 transform transition-transform duration-300 text-white  px-8 py-3 text-lg rounded    hover:bg-red-500 bg-red-800 ">Submit</button>
                 </form>
             </div>
         </section>

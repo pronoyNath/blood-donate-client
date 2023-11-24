@@ -5,17 +5,17 @@ import { FaFileWaveform } from "react-icons/fa6";
 const Navbar = () => {
 
     const links = <>
-        <li className="text-xl">
+        <li className="text-xl hover:scale-125 transform transition-transform duration-300">
             <NavLink
                 to="/"
                 className={({ isActive }) =>
-                    isActive ? "active text-red-500 border-b-4 border-red-500" : ""
+                    isActive ? "active text-red-500 border-b-4 border-red-500 " : ""
                 }
             >
                 Home
             </NavLink>
         </li>
-        <li className="text-xl">
+        <li className="text-xl hover:scale-110 transform transition-transform duration-300">
             <NavLink
                 to="/donation-requests"
                 className={({ isActive}) =>
@@ -26,7 +26,7 @@ const Navbar = () => {
 
             </NavLink>
         </li>
-        <li className="text-xl">
+        <li className="text-xl hover:scale-110 transform transition-transform duration-300">
             <NavLink
                 to="/blogs"
                 className={({ isActive}) =>
@@ -37,7 +37,7 @@ const Navbar = () => {
 
             </NavLink>
         </li>
-        <li className="text-xl">
+        <li className="text-xl hover:scale-110 transform transition-transform duration-300">
             <NavLink
                 to="/dashboard"
                 className={({ isActive}) =>
@@ -48,7 +48,7 @@ const Navbar = () => {
 
             </NavLink>
         </li>
-        <li className="text-xl">
+        <li className="text-xl hover:scale-110 transform transition-transform duration-300">
             <NavLink
                 to="/give-fund"
                 className={({ isActive}) =>
@@ -74,9 +74,9 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div>
-                    <a className="btn btn-ghost text-xl">
-                        <img src="https://i.ibb.co/64XsX5Z/blood-Logo2.png" alt="" className='w-[180px] h-[100px]' />
-                    </a>
+                  <Link to='/' className=" text-xl">
+                        <img src="https://i.ibb.co/64XsX5Z/blood-Logo2.png" alt="" className='w-[180px] h-[100px] hover:scale-110 transform transition-transform duration-300' />
+                    </Link>
                 </div>
             </div>
             <div className="navbar hidden lg:flex ">
@@ -84,7 +84,7 @@ const Navbar = () => {
                     {links}
                 </ul>
             </div>
-            <div className="navbar-end">
+            <div className="navbar-end hover:scale-110 transform transition-transform duration-300">
                 <Link to='/register' className="btn px-10 hover:bg-red-500 bg-red-700 border-none text-white uppercase">Register Now <FaFileWaveform  className="text-2xl animate-bounce"/>
   </Link>
             </div>

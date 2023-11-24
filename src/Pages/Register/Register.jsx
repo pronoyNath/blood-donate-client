@@ -139,7 +139,7 @@ const Register = () => {
 
                         <div className="w-full max-w-xl p-4 rounded-md shadow sm:p-8 bg-gray-800 dark:text-gray-100" >
                             <h2 className="mb-3 text-3xl font-semibold text-center">Register Your Account</h2>
-                            <p className="text-sm text-center dark:text-gray-400">Already have account?
+                            <p className="text-sm text-center dark:text-gray-400 hover:scale-110 transform transition-transform duration-300">Already have account?
                                 <Link to='/login' rel="noopener noreferrer" className="focus:underline hover:underline ml-5 text-red-500 text-xl">Login here</Link>
                             </p>
                             <form onSubmit={handleRegister} action="" className="space-y-8 mt-10">
@@ -236,7 +236,7 @@ const Register = () => {
                                     registerError && <div className='text-red-500 flex items-center justify-center gap-2'><FaBan /> {registerError}</div>
                                 }
 
-                                <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-red-800 hover:bg-red-500 dark:text-white">
+                                <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-red-800 hover:scale-105 transform transition-transform duration-300 hover:bg-red-500 dark:text-white">
                                     {
                                         loading ? <ImSpinner9 className='mx-auto animate-spin text-xl'></ImSpinner9> :
                                             'Register'
