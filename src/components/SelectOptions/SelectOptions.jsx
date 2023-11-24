@@ -1,7 +1,10 @@
 
-const SelectOptions = ({name}) => {
+
+const SelectOptions = ({ district }) => {
+    const { id, name } = district;
+
     return (
-        <option> {name}</option>
+        <option value={id}>{name}</option>
     );
 };
 

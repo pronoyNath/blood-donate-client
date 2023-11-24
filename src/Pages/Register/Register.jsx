@@ -24,6 +24,9 @@ const Register = () => {
     const [districts, setDistricts] = useState([]);
     const [upazilas, setUpazilas] = useState([]);
 
+    const [selectedDistrict, setSelectedDistrict] = useState('');
+    const [filteredUpazilas, setFilteredUpazilas] = useState([]);
+
     // district data load 
     useEffect(() => {
         fetch('/districts.json')
@@ -37,6 +40,14 @@ const Register = () => {
             .then(res => res.json())
             .then(data => setUpazilas(data))
     }, [])
+
+    // filter selected district upazilas
+    useEffect(() => {
+        const filteredUpazilas = upazilas.filter(upazila => upazila.district_id === selectedDistrict);
+        setFilteredUpazilas(filteredUpazilas);
+    }, [selectedDistrict, upazilas]);
+
+
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -82,7 +93,7 @@ const Register = () => {
             return;
         }
 
-        
+
         //     //creating user
         createUser(email, password)
             .then(async (res) => {
@@ -201,34 +212,45 @@ const Register = () => {
                                         </div>
                                     </div>
                                     <div className='flex gap-5'>
-                                        <div className="space-y-2 flex-1" >
-                                            <div className="flex justify-between" >
+                                       
+                                        <div className="space-y-2 flex-1">
+                                            <div className="flex justify-between">
                                                 <label className="text-sm">District*</label>
                                             </div>
-                                            <select name="district" required className="select select-error w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 ">
-
-                                                <option disabled selected>Select Your District</option>
-                                                {
-                                                    districts.map(district => <SelectOptions key={district?.id} name={district?.name}></SelectOptions>)
-                                                }
-
+                                            <select
+                                                name="district"
+                                                value={selectedDistrict}
+                                                onChange={(e) => {
+                                                    setSelectedDistrict(e.target.value);
+                                                }}
+                                                required
+                                                className="select select-error w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 "
+                                            >
+                                                <option disabled value="">Select Your District</option>
+                                                {districts.map((district) => (
+                                                    <SelectOptions key={district?.id} district={district}></SelectOptions>
+                                                ))}
                                             </select>
                                         </div>
 
-                                        <div className="space-y-2 flex-1" >
-                                            <div className="flex justify-between" >
+                                        <div className="space-y-2 flex-1">
+                                            <div className="flex justify-between">
                                                 <label className="text-sm">Upazila*</label>
                                             </div>
-                                            <select name="upazila" required className="select select-error w-full px-3 py-2 border rounded-md dark:bg-gray-800 dark:text-gray-100 ">
-
-                                                <option disabled selected>Select Your Upazila</option>
-
-                                                {
-                                                    upazilas.map(upazila => <SelectOptions key={upazila?.id} name={upazila.name}></SelectOptions>)
-                                                }
-
+                                            <select
+                                                name="upazila"
+                                                required
+                                                className="select select-error w-full px-3 py-2 border rounded-md dark:bg-gray-800 dark:text-gray-100 "
+                                            >
+                                                <option disabled value="">Select Your Upazila</option>
+                                                {filteredUpazilas.map((upazila) => (
+                                                    <option key={upazila?.id} value={upazila.id}>
+                                                        {upazila.name}
+                                                    </option>
+                                                ))}
                                             </select>
                                         </div>
+
                                     </div>
                                 </div>
 

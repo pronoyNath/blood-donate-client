@@ -26,10 +26,7 @@ const router = createBrowserRouter([
           path: '/blogs',
           element: <Blogs></Blogs>
         },
-        {
-          path: '/dashboard',
-          element: <Dashboard></Dashboard>
-        },
+        
         {
           path: '/give-fund',
           element: <GiveFund></GiveFund>
@@ -43,7 +40,11 @@ const router = createBrowserRouter([
     {
       path: '/login',
       element: <Login></Login>
-    }
+    },
+    {
+      path: '/dashboard',
+      element: <Dashboard></Dashboard>
+    },
   ]);
 
   export default router;
