@@ -77,7 +77,7 @@ const Register = () => {
             return
         }
 
-        console.log(name, imageURL, email, password, confirmPassword, bloodGroup, district, upazila);
+        // console.log(name, imageURL, email, password, confirmPassword, bloodGroup, district, upazila);
 
 
         setRegisterError('');
@@ -98,9 +98,11 @@ const Register = () => {
         createUser(email, password)
             .then(async (res) => {
                 const currentUser = {
+                    name,
                     email,
                     role: 'donor',
-                    name, imageURL, bloodGroup, district, upazila
+                    status: 'active',
+                     imageURL, bloodGroup, district, upazila
                 }
                 const { data } = await axiosPublic.post('/user-info', currentUser)
                 console.log("responseee", data);

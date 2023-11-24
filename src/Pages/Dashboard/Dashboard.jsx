@@ -1,19 +1,21 @@
 import { useState } from "react";
+import {  Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
+  const navigate = useNavigate();
   const Menus = [
-    { title: "Dashboard", src: "Chart_fill" },
-    { title: "Inbox", src: "Chat" },
-    { title: "Accounts", src: "User", gap: true },
-    { title: "Schedule ", src: "Calendar" },
-    { title: "Search", src: "Search" },
-    { title: "Analytics", src: "Chart" },
-    { title: "Files ", src: "Folder", gap: true },
-    { title: "Setting", src: "Setting" },
+    { title: "Dashboard", src: "Chart_fill",link: '/dashboard' },
+    { title: "Inbox", src: "Chat", link: 'hello' },
+    { title: "Accounts", src: "User", gap: true, link: 'gello'  },
+    { title: "Schedule ", src: "Calendar",link: '/dashboard'  },
+    { title: "Search", src: "Search",link: '/dashboard'  },
+    { title: "Analytics", src: "Chart",link: '/dashboard'  },
+    { title: "Files ", src: "Folder", gap: true,link: '/dashboard'  },
+    { title: "Setting", src: "Setting",link: '/dashboard'  },
   ];
 
   return (
-    <div className="flex bg-gray-800">
+    <div className="flex ">
       <div
         className={` ${
           open ? "w-72" : "w-20 "
@@ -42,23 +44,29 @@ const Dashboard = () => {
         </div>
         <ul className="pt-6">
           {Menus.map((Menu, index) => (
-            <li
+            <li 
+            onClick={()=> navigate(`${Menu.link}`)}
               key={index}
               className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
               ${Menu.gap ? "mt-9" : "mt-2"} ${
                 index === 0 && "bg-light-white"
               } `}
             >
+              {/* <Link to={'hello'}> */}
               <img src={`./src/assets/${Menu.src}.png`} />
               <span className={`${!open && "hidden"} origin-left duration-200`}>
                 {Menu.title}
               </span>
+              {/* </Link> */}
+              
+             
             </li>
           ))}
         </ul>
       </div>
       <div className="h-screen flex-1 p-7">
-        <h1 className="text-2xl font-semibold ">Home Page</h1>
+        {/* <h1 className="text-2xl font-semibold ">Home Page</h1> */}
+        <Outlet></Outlet>
       </div>
     </div>
   );

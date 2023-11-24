@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import Navbar from "../sharedComponents/Navbar/Navbar";
 import MainLayout from "../Layouts/MainLayout";
 import Home from "../Pages/Home/Home";
 import DonationRequests from "../Pages/DonationRequests/DonationRequests";
@@ -8,6 +7,9 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import GiveFund from "../Pages/GiveFund/GiveFund";
 import Register from "../Pages/Register/Register";
 import Login from "../Pages/Login/Login";
+import Test from "../Pages/Dashboard/Test";
+import Hello from "../Pages/Dashboard/hello";
+import Gello from "../Pages/Dashboard/Gello";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +28,10 @@ const router = createBrowserRouter([
           path: '/blogs',
           element: <Blogs></Blogs>
         },
+        // {
+        //   path: '/hello',
+        //   element: <Hello></Hello>
+        // },
         
         {
           path: '/give-fund',
@@ -42,8 +48,23 @@ const router = createBrowserRouter([
       element: <Login></Login>
     },
     {
-      path: '/dashboard',
-      element: <Dashboard></Dashboard>
+      path:'/dashboard',
+      element: <Dashboard></Dashboard>,
+      children:[
+        // {
+        //   path:'/dashboard',
+        //   element: <Dashboard></Dashboard>
+        // },
+        {
+          path: 'hello',
+          element: <Hello></Hello>
+        },
+        {
+          path: 'gello',
+          element: <Gello></Gello>
+        }
+        
+      ]
     },
   ]);
 
