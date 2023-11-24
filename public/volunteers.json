@@ -1,0 +1,22 @@
+ [
+      {
+        "name": "John Doe",
+        "img": "https://i.ibb.co/fHtnBhc/bruno-rodrigues-279x-IHym-PYY-unsplash.jpg",
+        "position": "Event Coordinator",
+        "contactNumber": "+1234567890"
+      },
+      {
+        "name": "Jane Smith",
+        "img": "https://i.ibb.co/rmV9q3w/rian-ramirez-rm7r-ZYdl3r-Y-unsplash.jpg",
+        "position": "Community Outreach",
+        "contactNumber": "+9876543210"
+      },
+      {
+        "name": "Bob Johnson",
+        "img": "https://i.ibb.co/GcNhFCM/dalton-ngangi-ZCztnd-OWdjs-unsplash.jpg",
+        "position": "Social Media Manager",
+        "contactNumber": "+5551234567"
+      }
+    ]
+
+  

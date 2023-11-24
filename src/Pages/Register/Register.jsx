@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
@@ -9,14 +9,34 @@ import bloodDonateAnimation from '../../assets/animations/bloodPressureAnimation
 import { ImSpinner9 } from "react-icons/im";
 import { imageUpload } from '../../api/ImageUploadApi';
 import { FaBan } from "react-icons/fa6";
-import axiosSecure from '../../Hooks/useAxiosSecure';
+import SelectOptions from '../../components/SelectOptions/SelectOptions';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
 
 const Register = () => {
 
     const { user, createUser, updateUserProfile, loading } = useContext(AuthContext);
 
+    const axiosPublic = useAxiosPublic();
+
     const navigate = useNavigate();
     const [registerError, setRegisterError] = useState('');
+
+    const [districts, setDistricts] = useState([]);
+    const [upazilas, setUpazilas] = useState([]);
+
+    // district data load 
+    useEffect(() => {
+        fetch('/districts.json')
+            .then(res => res.json())
+            .then(data => setDistricts(data))
+    }, [])
+
+    // upazilas data load
+    useEffect(() => {
+        fetch('/upazilas.json')
+            .then(res => res.json())
+            .then(data => setUpazilas(data))
+    }, [])
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -37,11 +57,11 @@ const Register = () => {
         const district = form.get('district');
         const upazila = form.get('upazila');
 
-        if(!bloodGroup || !district || !upazila){
+        if (!bloodGroup || !district || !upazila) {
             setRegisterError("Please fill the form properly.")
             return
         }
-        if(password !== confirmPassword){
+        if (password !== confirmPassword) {
             setRegisterError("Confirm Password is not matching")
             return
         }
@@ -62,16 +82,17 @@ const Register = () => {
             return;
         }
 
+        
         //     //creating user
         createUser(email, password)
             .then(async (res) => {
                 const currentUser = {
-                    email: res?.user?.email,
+                    email,
                     role: 'donor',
                     name, imageURL, bloodGroup, district, upazila
                 }
-                // const { data } = await axiosSecure.put(`/users/${user?.email}`, currentUser)
-                // console.log("responseee", data);
+                const { data } = await axiosPublic.post('/user-info', currentUser)
+                console.log("responseee", data);
                 // Registration successful, update user profile
                 return updateUserProfile(name, imageURL);
             })
@@ -187,14 +208,10 @@ const Register = () => {
                                             <select name="district" required className="select select-error w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 ">
 
                                                 <option disabled selected>Select Your District</option>
-                                                <option>A+</option>
-                                                <option>A-</option>
-                                                <option>B+</option>
-                                                <option>B-</option>
-                                                <option>AB+</option>
-                                                <option>AB-</option>
-                                                <option>O+</option>
-                                                <option>O-</option>
+                                                {
+                                                    districts.map(district => <SelectOptions key={district?.id} name={district?.name}></SelectOptions>)
+                                                }
+
                                             </select>
                                         </div>
 
@@ -205,14 +222,11 @@ const Register = () => {
                                             <select name="upazila" required className="select select-error w-full px-3 py-2 border rounded-md dark:bg-gray-800 dark:text-gray-100 ">
 
                                                 <option disabled selected>Select Your Upazila</option>
-                                                <option>A+</option>
-                                                <option>A-</option>
-                                                <option>B+</option>
-                                                <option>B-</option>
-                                                <option>AB+</option>
-                                                <option>AB-</option>
-                                                <option>O+</option>
-                                                <option>O-</option>
+
+                                                {
+                                                    upazilas.map(upazila => <SelectOptions key={upazila?.id} name={upazila.name}></SelectOptions>)
+                                                }
+
                                             </select>
                                         </div>
                                     </div>
