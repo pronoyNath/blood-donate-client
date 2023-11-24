@@ -7,6 +7,7 @@ import Blogs from "../Pages/Blogs/Blogs";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import GiveFund from "../Pages/GiveFund/GiveFund";
 import Register from "../Pages/Register/Register";
+import Login from "../Pages/Login/Login";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
     {
       path: '/register',
       element: <Register></Register>
+    },
+    {
+      path: '/login',
+      element: <Login></Login>
     }
   ]);
 

@@ -10,7 +10,7 @@ const Banner = () => {
                     <p className="mb-5"> Join Our Blood Donor Community Today! Your commitment can make a world of difference. Register now and become a vital part of our mission to save lives through the gift of blood</p>
 
                     <div className="flex flex-col md:flex-row gap-5 md:gap-10 items-center">
-                        <button className="btn px-10 hover:bg-red-500 bg-red-800 border-none text-white uppercase">Join as a donor <FaHeartCirclePlus className="text-3xl" /></button>
+                        <button className="btn px-10 hover:bg-red-500 bg-red-800 border-none text-white uppercase">Join as a donor <FaHeartCirclePlus className="text-3xl animate-pulse" /></button>
 
                         <div className="join">
                             <input type="text" placeholder="Search Donors" className="input input-bordered join-item text-black" />

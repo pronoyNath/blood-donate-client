@@ -1,4 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { FaFileWaveform } from "react-icons/fa6";
+
+
 const Navbar = () => {
 
     const links = <>
@@ -82,7 +85,8 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn px-10 hover:bg-red-500 bg-red-700 border-none text-white uppercase">Login</a>
+                <Link to='/register' className="btn px-10 hover:bg-red-500 bg-red-700 border-none text-white uppercase">Register Now <FaFileWaveform  className="text-2xl animate-bounce"/>
+  </Link>
             </div>
         </div>
     );
