@@ -1,19 +1,25 @@
 import { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
+  const {user} = useAuth();
   const Menus = [
     { title: "Dashboard", src: "Chart_fill", link: '/dashboard' },
     { title: "Inbox", src: "Chat", link: 'hello' },
     { title: "Accounts", src: "User", gap: true, link: 'gello' },
-    { title: "Schedule ", src: "Calendar", link: '/dashboard' },
-    { title: "Search", src: "Search", link: '/dashboard' },
-    { title: "Analytics", src: "Chart", link: '/dashboard' },
-    { title: "Files ", src: "Folder", gap: true, link: '/dashboard' },
+    { title: "Schedule ", src: "Calendar", link: 'h' },
+    { title: "Search", src: "Search", link: 's' },
+    { title: "Analytics", src: "Chart", link: 'd' },
+    { title: "Files ", src: "Folder", gap: true, link: 'f' },
     { title: "User Profile", src: "https://i.ibb.co/kcr866p/User.png", link: 'profile' },
   ];
-
+// console.log(location.pathname);
+// const isLinkActive = (link) => location.pathname === link;
+const isDashboardActive = location.pathname === `/dashboard`;
+console.log(location.pathname);
   return (
     <div className="flex ">
       <div
@@ -26,14 +32,14 @@ const Dashboard = () => {
            border-2 rounded-full  ${!open && "rotate-180"}`}
           onClick={() => setOpen(!open)}
         />
-        <div className="flex gap-x-4 items-center">
+        <div onClick={()=>navigate('/')} className="flex gap-x-4 items-center">
           <img
             src="https://i.ibb.co/64XsX5Z/blood-Logo2.png"
             className={`cursor-pointer duration-500 ${open && "rotate-[360deg]  w-[100px] h-[70px]"
               }`}
           />
           <h1
-            className={`text-white origin-left font-medium text-sm lg:text-lg duration-200 hidden md:block ${!open && "scale-0"
+            className={`text-white origin-left font-medium text-sm lg:text-lg duration-200 hidden md:block hover:cursor-pointer ${!open && "scale-0"
               }`}
           >
             Blood Donation
@@ -42,26 +48,36 @@ const Dashboard = () => {
         <ul className="pt-6">
           {Menus.map((Menu, index) => (
             <li
-              onClick={() => navigate(`${Menu.link}`)}
+              onClick={() =>  {
+                navigate(`${Menu.link}`);
+              }}
               key={index}
               className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
-              ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0 && "bg-light-white"
-                } `}
-            >
-              {/* <Link to={'hello'}> */}
+              ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0 && "border border-red-500"}
+              ${location.pathname == `/dashboard/${Menu?.link}` ? "bg-red-500" : ""}
+              
+              `}
+              >
+             
               <img src={Menu.src} />
               <span className={`${!open && "hidden"} origin-left duration-200`}>
                 {Menu.title}
               </span>
-              {/* </Link> */}
 
 
             </li>
           ))}
         </ul>
       </div>
-      <div className="h-screen flex-1 p-7 z-0 inline-flex justify-center items-center bg-gray-700">
-        {/* <h1 className="text-2xl font-semibold ">Home Page</h1> */}
+      <div className="h-screen flex-1 p-7 z-0bg-gray-700">
+
+      {
+        isDashboardActive &&
+         <div>
+        <h1 className="text-2xl font-semibold ">Welcome {user?.displayName}</h1>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates, facere molestias magni earum non aliquam commodi sit iste possimus quasi alias blanditiis est iusto et porro optio, quas ea neque.
+    </div>
+      }
         <Outlet></Outlet>
       </div>
     </div>
