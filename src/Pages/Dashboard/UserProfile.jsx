@@ -5,6 +5,8 @@ import { FaFilePen } from "react-icons/fa6";
 import SelectOptions from "../../components/SelectOptions/SelectOptions";
 import { imageUpload } from "../../api/ImageUploadApi";
 import { ImSpinner9 } from "react-icons/im";
+import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
 
 const UserProfile = () => {
     const { user, loading } = useAuth();
@@ -48,6 +50,16 @@ const UserProfile = () => {
     }, [selectedDistrict, upazilas]);
 
 
+    // tanstack query for updated data get 
+    const { data: updatedUserInfo, refetch } = useQuery({
+        queryKey: ['updaetdUserInfo'],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/user/${user?.email}`);
+            return res.data;
+        }
+    })
+
+// console.log(updatedUserInfo);
 
     const handleUpdate = async (e) => {
         e.preventDefault();
@@ -57,20 +69,53 @@ const UserProfile = () => {
 
         //image uploading using hosting side (imgbb api)
         const img = e.target.img.files[0]
-        const imageData = await imageUpload(img)
+        let imageURL = userInfo?.imageURL
+        if(img){
+            const imageData = await imageUpload(img)
         //    console.log(imageData.data.display_url);
-        const imageURL = imageData?.data?.display_url
-
+         imageURL = imageData?.data?.display_url
+        }
+         
         const bloodGroup = form.get('bloodGroup');
 
         const updatedInfo = {
-            name, imageURL, bloodGroup,
+            name, 
+            imageURL 
+            , bloodGroup,
             district: districts.find(district => district.id === selectedDistrict)?.name,
             upazila: upazilas.find(upazila => upazila.id === selectedUpazila)?.name
         }
-        // console.log(data);
+        // console.log(updatedInfo);
+
+        
+
+
         await axiosPublic.put(`/update-user-info/${user?.email}`,updatedInfo)
-        .then(data=>console.log(data))
+        .then(({data})=>{
+            if(data?.modifiedCount>0){
+                document.getElementById('my_modal_5').close();
+                refetch();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Your work has been saved",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }
+           
+        })
+        .catch((error) => {
+            // Show error toast if update fails
+            document.getElementById('my_modal_5').close();
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Failed to update profile",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        });
     }
 
     return (
@@ -79,24 +124,23 @@ const UserProfile = () => {
                 <img src={userInfo?.imageURL} alt="" className="w-32 h-32 mx-auto rounded-full dark:bg-gray-500 aspect-square" />
                 <div className="space-y-4 text-center divide-y dark:divide-gray-700">
                     <div className="my-2 space-y-1">
-                        <h2 className="text-xl font-semibold sm:text-2xl">{userInfo?.name}</h2>
+                        <h2 className="text-xl font-semibold sm:text-2xl">{updatedUserInfo?.name}</h2>
                         <p className="px-5 text-xs sm:text-base dark:text-gray-400 uppercase">Role: <span className="text-orange-400"> {userInfo?.role}</span></p>
                         <p className="px-5 text-xs sm:text-base dark:text-gray-400"> Status: <span className={`${userInfo?.status == 'active' ? "text-green-500" :
                             " text-red-500 "} uppercase`}>{userInfo?.status}</span></p>
 
                         <p className="px-5 text-xs sm:text-base dark:text-gray-400">Email: {userInfo?.email}</p>
-                        <p className="px-5 text-xs sm:text-base dark:text-gray-400">Blood-Group: {userInfo?.bloodGroup}</p>
+                        <p className="px-5 text-xs sm:text-base dark:text-gray-400">Blood-Group: {updatedUserInfo?.bloodGroup}</p>
                         <p className="px-5 text-xs sm:text-base dark:text-gray-400">Address:
-                            {userInfo?.upazila},{userInfo?.district}</p>
+                            {updatedUserInfo?.upazila},{updatedUserInfo?.district}</p>
 
                     </div>
                     <div className="text-red-500 font-semibold hover:scale-125 transform transition-transform duration-300 flex justify-center hover:underline items-center pt-2 space-x-4 align-center">
-                        {/* <button >Edit Profile </button> <FaFilePen /> */}
 
 
                         {/* Open the modal using document.getElementById('ID').showModal() method */}
                         <button className="" onClick={() => document.getElementById('my_modal_5').showModal()}>Edit Profile </button> <FaFilePen />
-                        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                        <dialog id="my_modal_5" className="modal modal-bottom -z-10 sm:modal-middle">
                             <div className="modal-box bg-gray-800">
                                 <h3 className="font-bold text-lg">Update Profile</h3>
                                 <div className="modal-action">
@@ -184,19 +228,21 @@ const UserProfile = () => {
                                         </div>
 
 
-                                        <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-red-800 hover:scale-105 transform transition-transform duration-300 hover:bg-red-500 dark:text-white">
+                                        <button type="submit" className=" w-full px-8 py-3 font-semibold rounded-md dark:bg-red-800 hover:scale-105 transform transition-transform duration-300 hover:bg-red-500 dark:text-white">
                                             {
                                                 loading ? <ImSpinner9 className='mx-auto animate-spin text-xl'></ImSpinner9> :
                                                     'Confirm Update'
                                             }
                                         </button>
-                                    </form>
 
-
-                                    <form method="dialog">
+                                        <form method="dialog">
                                         {/* if there is a button in form, it will close the modal */}
-                                        <button className="btn">Close</button>
+                                        <button className="btn w-full ">Close</button>
                                     </form>
+                                    </form>
+
+
+                                    
                                 </div>
                             </div>
                         </dialog>
