@@ -1,28 +1,58 @@
 import { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import useUserRole from "../../Hooks/useUserRole";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAuth();
-  const Menus = [
-    { title: "Dashboard", src: "https://i.ibb.co/pZdfyDq/Chart-fill.png", link: '/dashboard' },
-    { title: "All Users", src: "https://i.ibb.co/D4CL4ZJ/group.png", link: 'all-users' },
-    { title: "Accounts", src: "User", gap: true, link: 'gello' },
-    { title: "Schedule ", src: "Calendar", link: 'h' },
-    { title: "Search", src: "Search", link: 's' },
-    { title: "Analytics", src: "Chart", link: 'd' },
-    { title: "Files ", src: "Folder", gap: true, link: 'f' },
-    { title: "User Profile", src: "https://i.ibb.co/kcr866p/User.png", link: 'profile' },
-  ];
-  // console.log(location.pathname);
-  // const isLinkActive = (link) => location.pathname === link;
+  const [userRole, isLoading] = useUserRole();
+
+
+  let Menus = [];
+
+  if(userRole === "admin"){
+     Menus = [
+      { title: "Dashboard", src: "https://i.ibb.co/pZdfyDq/Chart-fill.png", link: '/dashboard' },
+      { title: "All Users", src: "https://i.ibb.co/D4CL4ZJ/group.png", link: 'all-users' },
+      { title: "Schedule ", src: "Calendar", link: 'h' },
+      { title: "Search", src: "Search", link: 's' },
+      { title: "Analytics", src: "Chart", link: 'd' },
+      { title: "User Profile", src: "https://i.ibb.co/kcr866p/User.png",gap: true, link: 'profile' },
+    ];
+  }
+
+  if(userRole==="volunteer"){
+    Menus = [
+     { title: "Dashboard", src: "https://i.ibb.co/pZdfyDq/Chart-fill.png", link: '/dashboard' },
+     { title: "All Users", src: "https://i.ibb.co/D4CL4ZJ/group.png", link: 'all-users' },
+    //  { title: "Schedule ", src: "Calendar", link: 'h' },
+    //  { title: "Search", src: "Search", link: 's' },
+    //  { title: "Analytics", src: "Chart", link: 'd' },
+     { title: "User Profile", src: "https://i.ibb.co/kcr866p/User.png",gap: true, link: 'profile' },
+   ];
+ }
+
+ if(userRole === "donor"){
+  Menus = [
+   { title: "Dashboard", src: "https://i.ibb.co/pZdfyDq/Chart-fill.png", link: '/dashboard' },
+  //  { title: "All Users", src: "https://i.ibb.co/D4CL4ZJ/group.png", link: 'all-users' },
+  //  { title: "Schedule ", src: "Calendar", link: 'h' },
+  //  { title: "Search", src: "Search", link: 's' },
+  //  { title: "Analytics", src: "Chart", link: 'd' },
+   { title: "User Profile", src: "https://i.ibb.co/kcr866p/User.png",gap: true, link: 'profile' },
+ ];
+}
+
+
+  console.log(userRole,"----->",Menus);
+ 
   const isDashboardActive = location.pathname === `/dashboard`;
-  // console.log(location.pathname);
+  
   return (
-    <div className="flex ">
+    <div className="flex min-h-screen">
       <div
         className={` ${open ? "w-72" : "w-20 "
           } bg-gray-800 h-screen p-5 z-50 pt-8 relative duration-300`}

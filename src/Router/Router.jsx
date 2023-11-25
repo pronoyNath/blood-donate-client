@@ -13,6 +13,7 @@ import Gello from "../Pages/Dashboard/Gello";
 import UserProfile from "../Pages/Dashboard/UserProfile";
 import Welcome from "../Pages/Dashboard/Welcome";
 import AllUser from "../Pages/Dashboard/AllUser";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -68,7 +69,7 @@ const router = createBrowserRouter([
         },
         {
           path: 'all-users',
-          element: <AllUser></AllUser>
+          element: <AdminRoute><AllUser></AllUser></AdminRoute>
         },
  
         {

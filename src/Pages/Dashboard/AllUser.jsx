@@ -34,8 +34,6 @@ const AllUser = () => {
                             allUsers.map(user=><UserDataTable key={user._id} user={user}></UserDataTable>)
                         }
 
-                        
-
                     </tbody>
                 </table>
 
