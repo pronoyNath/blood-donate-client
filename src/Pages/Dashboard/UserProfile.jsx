@@ -1,16 +1,77 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-
+import { FaFilePen } from "react-icons/fa6";
+import SelectOptions from "../../components/SelectOptions/SelectOptions";
+import { imageUpload } from "../../api/ImageUploadApi";
+import { ImSpinner9 } from "react-icons/im";
 
 const UserProfile = () => {
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
 
     const axiosPublic = useAxiosPublic();
     const [userInfo, setUserInfo] = useState([]);
 
-    axiosPublic.get(`/user/${user?.email}`)
-        .then(({ data }) => setUserInfo(data))
+    useEffect(() => {
+        axiosPublic.get(`/user/${user?.email}`)
+            .then(({ data }) => setUserInfo(data))
+
+    }, [axiosPublic, user?.email])
+    console.log(userInfo);
+
+    // profile update 
+    const [districts, setDistricts] = useState([]);
+    const [upazilas, setUpazilas] = useState([]);
+
+    const [selectedDistrict, setSelectedDistrict] = useState('');
+    const [filteredUpazilas, setFilteredUpazilas] = useState([]);
+    const [selectedUpazila, setSelectedUpazila] = useState('');
+
+    // district data load 
+    useEffect(() => {
+        fetch('/districts.json')
+            .then(res => res.json())
+            .then(data => setDistricts(data))
+    }, [])
+
+    // upazilas data load
+    useEffect(() => {
+        fetch('/upazilas.json')
+            .then(res => res.json())
+            .then(data => setUpazilas(data))
+    }, [])
+
+    // filter selected district upazilas
+    useEffect(() => {
+        const filteredUpazilas = upazilas.filter(upazila => upazila.district_id === selectedDistrict);
+        setFilteredUpazilas(filteredUpazilas);
+    }, [selectedDistrict, upazilas]);
+
+
+
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+
+        const form = new FormData(e.currentTarget);
+        const name = form.get('name');
+
+        //image uploading using hosting side (imgbb api)
+        const img = e.target.img.files[0]
+        const imageData = await imageUpload(img)
+        //    console.log(imageData.data.display_url);
+        const imageURL = imageData?.data?.display_url
+
+        const bloodGroup = form.get('bloodGroup');
+
+        const updatedInfo = {
+            name, imageURL, bloodGroup,
+            district: districts.find(district => district.id === selectedDistrict)?.name,
+            upazila: upazilas.find(upazila => upazila.id === selectedUpazila)?.name
+        }
+        // console.log(data);
+        await axiosPublic.put(`/update-user-info/${user?.email}`,updatedInfo)
+        .then(data=>console.log(data))
+    }
 
     return (
         <>
@@ -26,10 +87,119 @@ const UserProfile = () => {
                         <p className="px-5 text-xs sm:text-base dark:text-gray-400">Email: {userInfo?.email}</p>
                         <p className="px-5 text-xs sm:text-base dark:text-gray-400">Blood-Group: {userInfo?.bloodGroup}</p>
                         <p className="px-5 text-xs sm:text-base dark:text-gray-400">Address:
-                          {userInfo?.upazila},{userInfo?.district}</p>
+                            {userInfo?.upazila},{userInfo?.district}</p>
 
                     </div>
-                    <div className="flex justify-center pt-2 space-x-4 align-center">
+                    <div className="text-red-500 font-semibold hover:scale-125 transform transition-transform duration-300 flex justify-center hover:underline items-center pt-2 space-x-4 align-center">
+                        {/* <button >Edit Profile </button> <FaFilePen /> */}
+
+
+                        {/* Open the modal using document.getElementById('ID').showModal() method */}
+                        <button className="" onClick={() => document.getElementById('my_modal_5').showModal()}>Edit Profile </button> <FaFilePen />
+                        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                            <div className="modal-box bg-gray-800">
+                                <h3 className="font-bold text-lg">Update Profile</h3>
+                                <div className="modal-action">
+
+                                    <form onSubmit={handleUpdate} className="space-y-8 mt-10">
+                                        <div className="space-y-4" >
+                                            <div className='flex gap-5'>
+                                                <div className="space-y-2 flex-1" >
+                                                    <label className="block text-sm text-left">Your name</label>
+                                                    <input  type="text" name="name" id="name" placeholder="your name" className="w-full px-3 py-3 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" defaultValue={userInfo?.name} />
+                                                </div>
+                                                <div className="space-y-2 flex-1" >
+
+                                                    <label className="block text-sm text-left">Upload Profile Image*</label>
+                                                    <input type="file" id="img" name="img" accept="image/*" className="file-input file-input-bordered w-full bg-gray-800 border-red-500"  />
+                                                </div>
+                                            </div>
+                                            <div className='flex gap-5'>           
+
+                                                <div className="space-y-2 flex-1" >
+                                                    <div className="flex justify-between" >
+                                                        <label className="text-sm">Blood Group*</label>
+                                                    </div>
+                                                    <select defaultValue={userInfo?.bloodGroup} name="bloodGroup" className="select select-error w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100" >
+
+                                                        <option>A+</option>
+                                                        <option>A-</option>
+                                                        <option>B+</option>
+                                                        <option>B-</option>
+                                                        <option>AB+</option>
+                                                        <option>AB-</option>
+                                                        <option>O+</option>
+                                                        <option>O-</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div className='flex gap-5'>
+
+                                                <div className="space-y-2 flex-1">
+                                                    <div className="flex justify-between">
+                                                        <label className="text-sm">District*</label>
+                                                    </div>
+                                                    <select
+                                                        defaultValue={userInfo?.district}
+                                                        name="district"
+                                                        value={selectedDistrict}
+                                                        onChange={(e) => {
+                                                            setSelectedDistrict(e.target.value);
+                                                        }}
+
+                                                        required
+                                                        className="select select-error w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 "
+                                                    >
+                                                <option disabled value="">Select Your District</option>
+
+                                                        {districts.map((district) => (
+                                                            <SelectOptions key={district?.id} district={district}></SelectOptions>
+                                                        ))}
+                                                    </select>
+                                                </div>
+
+
+                                                <div className="space-y-2 flex-1">
+                                                    <div className="flex justify-between">
+                                                        <label className="text-sm">Upazila*</label>
+                                                    </div>
+                                                    <select
+                                                        name="upazila"
+                                                        value={selectedUpazila}
+                                                        onChange={(e) => {
+                                                            setSelectedUpazila(e.target.value);
+                                                        }}
+                                                        required
+                                                        className="select select-error w-full px-3 py-2 border rounded-md dark:bg-gray-800 dark:text-gray-100 "
+                                                    >
+                                                        <option disabled value="">Select Your Upazila</option>
+                                                        {filteredUpazilas.map((upazila) => (
+                                                            <option key={upazila?.id} value={upazila.id}>
+                                                                {upazila.name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-red-800 hover:scale-105 transform transition-transform duration-300 hover:bg-red-500 dark:text-white">
+                                            {
+                                                loading ? <ImSpinner9 className='mx-auto animate-spin text-xl'></ImSpinner9> :
+                                                    'Confirm Update'
+                                            }
+                                        </button>
+                                    </form>
+
+
+                                    <form method="dialog">
+                                        {/* if there is a button in form, it will close the modal */}
+                                        <button className="btn">Close</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </dialog>
 
                     </div>
                 </div>
