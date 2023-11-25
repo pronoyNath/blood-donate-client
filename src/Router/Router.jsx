@@ -14,6 +14,7 @@ import UserProfile from "../Pages/Dashboard/UserProfile";
 import Welcome from "../Pages/Dashboard/Welcome";
 import AllUser from "../Pages/Dashboard/AllUser";
 import AdminRoute from "./AdminRoute";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -74,7 +75,7 @@ const router = createBrowserRouter([
  
         {
           path: 'profile',
-          element: <UserProfile></UserProfile>
+          element:<UserProfile></UserProfile>
         }
         
       ]

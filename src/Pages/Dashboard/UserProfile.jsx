@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { FaFilePen } from "react-icons/fa6";
 import SelectOptions from "../../components/SelectOptions/SelectOptions";
 import { imageUpload } from "../../api/ImageUploadApi";
 import { ImSpinner9 } from "react-icons/im";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
+import axiosSecure from "../../hooks/useAxiosSecure";
 
 const UserProfile = () => {
     const { user, loading } = useAuth();
 
-    const axiosPublic = useAxiosPublic();
+    
     const [userInfo, setUserInfo] = useState([]);
 
     useEffect(() => {
-        axiosPublic.get(`/user/${user?.email}`)
+        axiosSecure.get(`/user/${user?.email}`)
             .then(({ data }) => setUserInfo(data))
 
-    }, [axiosPublic, user?.email])
+    }, [ user?.email])
     // console.log(userInfo);
 
     // profile update 
@@ -54,7 +54,7 @@ const UserProfile = () => {
     const { data: updatedUserInfo, refetch } = useQuery({
         queryKey: ['updaetdUserInfo'],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/user/${user?.email}`);
+            const res = await axiosSecure.get(`/user/${user?.email}`);
             return res.data;
         }
     })
