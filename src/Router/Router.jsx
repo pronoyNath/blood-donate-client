@@ -12,6 +12,7 @@ import Hello from "../Pages/Dashboard/hello";
 import Gello from "../Pages/Dashboard/Gello";
 import UserProfile from "../Pages/Dashboard/UserProfile";
 import Welcome from "../Pages/Dashboard/Welcome";
+import AllUser from "../Pages/Dashboard/AllUser";
 
 const router = createBrowserRouter([
     {
@@ -65,7 +66,11 @@ const router = createBrowserRouter([
           path: 'gello',
           element: <Gello></Gello>
         },
-        
+        {
+          path: 'all-users',
+          element: <AllUser></AllUser>
+        },
+ 
         {
           path: 'profile',
           element: <UserProfile></UserProfile>

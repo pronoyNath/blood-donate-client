@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAuth();
   const Menus = [
-    { title: "Dashboard", src: "Chart_fill", link: '/dashboard' },
-    { title: "Inbox", src: "Chat", link: 'hello' },
+    { title: "Dashboard", src: "https://i.ibb.co/pZdfyDq/Chart-fill.png", link: '/dashboard' },
+    { title: "All Users", src: "https://i.ibb.co/D4CL4ZJ/group.png", link: 'all-users' },
     { title: "Accounts", src: "User", gap: true, link: 'gello' },
     { title: "Schedule ", src: "Calendar", link: 'h' },
     { title: "Search", src: "Search", link: 's' },
@@ -27,7 +28,7 @@ const Dashboard = () => {
           } bg-gray-800 h-screen p-5 z-50 pt-8 relative duration-300`}
       >
         <img
-          src="./src/assets/control.png"
+          src="https://i.ibb.co/TPWHKZL/control.png"
           className={`absolute cursor-pointer -right-3 top-9 w-7 border-red-500
            border-2 rounded-full  ${!open && "rotate-180"}`}
           onClick={() => setOpen(!open)}
@@ -59,7 +60,7 @@ const Dashboard = () => {
               `}
             >
 
-              <img src={Menu.src} />
+              <img src={Menu.src} className="h-[20px] w-[20px]"/>
               <span className={`${!open && "hidden"} origin-left duration-200`}>
                 {Menu.title}
               </span>
