@@ -5,6 +5,7 @@ import './AllUser.css'
 const AllUser = () => {
 
     const [allUsers, setAllUsers] = useState([]);
+    const [filteredUser,setFilteredUser] = useState(allUsers);
 
 
     // paging code 
@@ -42,11 +43,47 @@ const AllUser = () => {
             .then(({ data }) => setAllUsers(data))
     }, [currentPage, itemsPerPage])
 
+    useEffect(()=>{
+        setFilteredUser(allUsers)
+    },[allUsers])
+
+    const handleFilter = (e) => {
+        const selectedValue = e.target.value;
+         if (selectedValue === 'all') {
+            // Show all data
+            setFilteredUser(allUsers);
+            setCount(allUsers.length)
+            return;
+        }
+        if (selectedValue === 'active') {
+            const activeUsers = allUsers.filter((user) => user?.status === 'active');
+            setFilteredUser(activeUsers);
+            setCount(activeUsers.length);
+            return;
+        }
+        if (selectedValue === 'blocked') {
+            const blockedUsers = allUsers.filter((user) => user?.status === 'blocked');
+            setFilteredUser(blockedUsers);
+            setCount(blockedUsers.length);
+            return;
+        }
+       
+    };
 
     return (
         <div className='overflow-y-scroll'>
             <h3 className='text-3xl font-semibold text-red-500 text-center'>All Users Data</h3>
+           
+            <div className="text-black mr-8 ml-5 lg:ml-0 flex gap-3 items-center ">
+                <div className="text-lg mt-2 lg:mt-0 text-red-500 font-bold border-b-2">Filter By User Staus:</div>
 
+                <select onChange={handleFilter}  className="rounded p-1 ml-5 lg:ml-0 mt-5 lg:mt-0 bg-red-500 text-white lg:text-lg " name="filter" id="filter"
+                >
+                    <option  value="all">All</option>
+                    <option value="active">Active</option>
+                    <option value="blocked">Blocked</option>
+                </select>
+            </div>
 
             <div className="mx-w-3xl py-10 relative">
                 <table className="table">
@@ -63,7 +100,7 @@ const AllUser = () => {
                     </thead>
                     <tbody className='font-semibold'>
                         {
-                            allUsers.map(user => <UserDataTable key={user._id} user={user}></UserDataTable>)
+                            filteredUser.map(user => <UserDataTable key={user._id} user={user}></UserDataTable>)
                         }
 
                     </tbody>
@@ -75,7 +112,7 @@ const AllUser = () => {
 
 
                 <div className='pagination font-semibold'>
-                    <p className='mb-3 text-lg uppercase'>Current page: {currentPage + 1}</p>
+                    <p className='mb-3 text-lg uppercase'>Current page: {currentPage + 1} of {numberOfPages}</p>
                     <button className='btn bg-red-500 hover:bg-red-400 text-white' onClick={handlePrevPage}>Prev</button>
                     {
                         pages.map(page => <button

@@ -250,23 +250,7 @@ const Register = () => {
                                             </select>
                                         </div>
 
-                                        {/* <div className="space-y-2 flex-1">
-                                            <div className="flex justify-between">
-                                                <label className="text-sm">Upazila*</label>
-                                            </div>
-                                            <select
-                                                name="upazila"
-                                                required
-                                                className="select select-error w-full px-3 py-2 border rounded-md dark:bg-gray-800 dark:text-gray-100 "
-                                            >
-                                                <option disabled value="">Select Your Upazila</option>
-                                                {filteredUpazilas.map((upazila) => (
-                                                    <option key={upazila?.id} value={upazila.id}>
-                                                        {upazila.name}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div> */}
+                                        
 
                                         <div className="space-y-2 flex-1">
                                             <div className="flex justify-between">
