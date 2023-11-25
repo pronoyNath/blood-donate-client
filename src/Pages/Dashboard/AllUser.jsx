@@ -44,7 +44,7 @@ const AllUser = () => {
 
 
     return (
-        <div className=' overflow-y-scroll'>
+        <div className='overflow-y-scroll'>
             <h3 className='text-3xl font-semibold text-red-500 text-center'>All Users Data</h3>
 
 

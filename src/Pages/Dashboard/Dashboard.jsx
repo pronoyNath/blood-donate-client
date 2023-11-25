@@ -52,10 +52,10 @@ const Dashboard = () => {
   const isDashboardActive = location.pathname === `/dashboard`;
 
   return (
-    <div className="flex overflow-y-hidden">
+    <div className="flex h-[610px] overflow-y-hidden">
       <div
         className={` ${open ? "w-72" : "w-20 "
-          } bg-gray-800 h-screen p-5 z-50 pt-8 relative duration-300`}
+          } bg-gray-800  p-5 z-50 pt-8 relative duration-300`}
       >
         <img
           src="https://i.ibb.co/TPWHKZL/control.png"
