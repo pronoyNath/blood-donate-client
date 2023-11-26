@@ -1,9 +1,10 @@
 import { FaUserGear } from "react-icons/fa6";
 import { FaPencil } from "react-icons/fa6";
 
-const UserDataTable = ({ user }) => {
+const UserDataTable = ({ user, onMakeAdminClick, onMakeVolunteerClick }) => {
     // console.log(Object.keys(user).join(','));
-    const { name, email, role, status, imageURL, bloodGroup, district, upazila } = user;
+    const {_id, name, email, role, status, imageURL, bloodGroup, district, upazila } = user;
+   
     return (
         <tr>
             <td>
@@ -35,13 +36,19 @@ const UserDataTable = ({ user }) => {
 
 
                         <div className="dropdown dropdown-top dropdown-end">
-                            <label tabIndex={0} className="btn m-1">
+                            <label tabIndex={0}
+                           
+                             className="btn m-1">
                             <FaPencil className="text-xl"/>
 
                             </label>
                             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                <li><a>Make Admin</a></li>
-                                <li><a>Make Volunteer</a></li>
+                            <li>
+                                    <a onClick={onMakeAdminClick}>Make Admin</a>
+                                </li>
+                                <li>
+                                    <a onClick={onMakeVolunteerClick}>Make Volunteer</a>
+                                </li>
                             </ul>
                         </div>
                 }

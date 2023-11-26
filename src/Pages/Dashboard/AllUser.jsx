@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import UserDataTable from '../../components/UserDataTable/UserDataTable';
 import axiosSecure from '../../hooks/useAxiosSecure';
 import './AllUser.css'
+import Swal from 'sweetalert2';
+import { useQuery } from '@tanstack/react-query';
 const AllUser = () => {
 
     const [allUsers, setAllUsers] = useState([]);
-    const [filteredUser,setFilteredUser] = useState(allUsers);
+    const [filteredUser, setFilteredUser] = useState(allUsers);
 
 
     // paging code 
@@ -42,14 +44,26 @@ const AllUser = () => {
         axiosSecure.get(`/all-users?page=${currentPage}&size=${itemsPerPage}`)
             .then(({ data }) => setAllUsers(data))
     }, [currentPage, itemsPerPage])
+    console.log(allUsers);
 
-    useEffect(()=>{
+    // tanstack query for updated data get 
+    // const { data: updatedUserRole, refetch } = useQuery({
+    //     queryKey: ['updatedUserRole', currentPage, itemsPerPage],
+    //     queryFn: async () => {
+    //         const res = await axiosSecure.get(`/all-users?page=${currentPage}&size=${itemsPerPage}`);            
+    //         return res.data;
+    //     }
+    // })
+    
+
+
+    useEffect(() => {
         setFilteredUser(allUsers)
-    },[allUsers])
+    }, [allUsers])
 
     const handleFilter = (e) => {
         const selectedValue = e.target.value;
-         if (selectedValue === 'all') {
+        if (selectedValue === 'all') {
             // Show all data
             setFilteredUser(allUsers);
             setCount(allUsers.length)
@@ -67,19 +81,68 @@ const AllUser = () => {
             setCount(blockedUsers.length);
             return;
         }
-       
+
+    };
+
+
+    // on edit role 
+    const handleMakeAdmin = async (userId) => {
+        // Add logic to make the user with userId an admin
+        console.log(`Make Admin -->> ${userId}`);
+        const userRole = {
+            role: 'admin'
+        }
+        await axiosSecure.put(`/user-info/${userId}`,
+            userRole
+        )
+            .then(({ data }) => {
+                if (data?.modifiedCount > 0) {
+                    // refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "User Role Updated",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    
+                }
+            })
+    };
+
+    const handleMakeVolunteer = async (userId) => {
+        // Add logic to make the user with userId a volunteer
+        console.log(`Make Volunteer -->> ${userId}`);
+        const userRole = {
+            role: 'volunteer'
+        }
+        await axiosSecure.put(`/user-info/${userId}`,
+            userRole
+        )
+            .then(({ data }) => {
+                if (data?.modifiedCount > 0) {
+                    // refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "User Role Updated",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
     };
 
     return (
         <div className='overflow-y-scroll'>
             <h3 className='text-3xl font-semibold text-red-500 text-center'>All Users Data</h3>
-           
+
             <div className="text-black mr-8 ml-5 lg:ml-0 flex gap-3 items-center ">
                 <div className="text-lg mt-2 lg:mt-0 text-red-500 font-bold border-b-2">Filter By User Staus:</div>
 
-                <select onChange={handleFilter}  className="rounded p-1 ml-5 lg:ml-0 mt-5 lg:mt-0 bg-red-500 text-white lg:text-lg " name="filter" id="filter"
+                <select onChange={handleFilter} className="rounded p-1 ml-5 lg:ml-0 mt-5 lg:mt-0 bg-red-500 text-white lg:text-lg " name="filter" id="filter"
                 >
-                    <option  value="all">All</option>
+                    <option value="all">All</option>
                     <option value="active">Active</option>
                     <option value="blocked">Blocked</option>
                 </select>
@@ -100,7 +163,11 @@ const AllUser = () => {
                     </thead>
                     <tbody className='font-semibold'>
                         {
-                            filteredUser.map(user => <UserDataTable key={user._id} user={user}></UserDataTable>)
+                            filteredUser.map(user => <UserDataTable
+                                key={user._id}
+                                onMakeAdminClick={() => handleMakeAdmin(user._id)}
+                                onMakeVolunteerClick={() => handleMakeVolunteer(user._id)}
+                                user={user}></UserDataTable>)
                         }
 
                     </tbody>
