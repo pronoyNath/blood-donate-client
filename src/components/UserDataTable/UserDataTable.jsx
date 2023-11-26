@@ -1,7 +1,7 @@
 import { FaUserGear } from "react-icons/fa6";
 import { FaPencil } from "react-icons/fa6";
 
-const UserDataTable = ({ user, onMakeAdminClick, onMakeVolunteerClick }) => {
+const UserDataTable = ({ user, onMakeAdminClick, onMakeVolunteerClick,statusChange }) => {
     // console.log(Object.keys(user).join(','));
     const {_id, name, email, role, status, imageURL, bloodGroup, district, upazila } = user;
    
@@ -49,6 +49,10 @@ const UserDataTable = ({ user, onMakeAdminClick, onMakeVolunteerClick }) => {
                                 <li>
                                     <a onClick={onMakeVolunteerClick}>Make Volunteer</a>
                                 </li>
+                                {
+                                    status === 'blocked' ? <li  onClick={()=>statusChange("active")}><a>Active</a></li>
+                                    : <li  onClick={statusChange} ><a>Block</a></li>
+                                }
                             </ul>
                         </div>
                 }
