@@ -7,8 +7,7 @@ import loginAnimation from '../../assets/animations/loginAnimation.json'
 import Lottie from "lottie-react";
 // import PageTitle from "../../Components/PageTitle/PageTitle";
 import { ImSpinner9 } from "react-icons/im";
-import { FcGoogle } from 'react-icons/fc'
-import toast, { Toaster } from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const Login = () => {
 
@@ -33,59 +32,28 @@ const Login = () => {
         // log in 
         signIn(email, password)
             .then(result => {
-                console.log(result);
+                // console.log(result);
                 setLoading(false);
-                toast.success('Logged in Successfully!')
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Logged in Successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
                 navigate(location?.state ? location?.state : '/')
-                // alert("okk")
-                //toast pop-up
-            //    toast.custom((t) => (
-            //         <div
-            //             className={`${t.visible ? 'animate-enter' : 'animate-leave'
-            //                 } max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
-            //         >
-            //             <div className="flex-1 w-0 p-4">
-            //                 <div className="flex items-start">
-            //                     <div className="flex pt-0.5 items-center">
-            //                         <FaCircleCheck className=' h-[40px] w-[40px] text-green-500'></FaCircleCheck>
-            //                     </div>
-            //                     <div className="ml-3 flex-1">
-            //                         <p className="text-sm font-medium text-gray-900">
-            //                             WoW!!!
-            //                         </p>
-            //                         <p className="mt-1 text-sm text-gray-500">
-            //                             Account loged in!
-            //                         </p>
-            //                     </div>
-            //                 </div>
-            //             </div>
-
-            //             <div className="flex border-l border-blue-200">
-
-
-
-            //                 <Link to={`${location?.state ? location.state : '/'}`}>
-            //                     <button
-            //                         onClick={() => {
-            //                             navigate(location?.state ? location?.state : '/')
-            //                             toast.dismiss(t.id)
-            //                         }
-            //                         }
-            //                         className="w-full h-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            //                     >
-            //                         Close
-            //                     </button>
-            //                 </Link>
-            //             </div>
-
-            //         </div>
-            //     ))
-
             })
             .catch(err => {
                 console.log(err.message);
                 setLoginError(err.message)
                 setLoading(false);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "Sorry, Try Again!",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
 
             })
 
@@ -96,7 +64,7 @@ const Login = () => {
     return (
         <>
             {/* <PageTitle title={"Login | Grand Hotel"}></PageTitle> */}
-            <div><Toaster/></div>
+            
             <div className="hero -mt-20 min-h-[700px] overflow-x-hidden" style={{ backgroundImage: 'url(https://i.ibb.co/GdTntPk/R-1.jpg)' }}>
                 <div className="hero-overlay bg-opacity-60"></div>
                 <div className="hero-content  text-neutral-content">

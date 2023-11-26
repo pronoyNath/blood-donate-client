@@ -90,7 +90,7 @@ const UserProfile = () => {
         
 
 
-        await axiosPublic.put(`/update-user-info/${user?.email}`,updatedInfo)
+        await axiosSecure.put(`/update-user-info/${user?.email}`,updatedInfo)
         .then(({data})=>{
             if(data?.modifiedCount>0){
                 document.getElementById('my_modal_5').close();

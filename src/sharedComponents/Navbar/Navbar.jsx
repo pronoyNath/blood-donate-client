@@ -45,17 +45,19 @@ const Navbar = () => {
 
             </NavLink>
         </li>
+       {user && 
         <li className="text-xl hover:scale-110 transform transition-transform duration-300">
-            <NavLink
-                to="/dashboard"
-                className={({ isActive }) =>
-                    isActive ? "active text-red-500 border-b-4 border-red-500" : ""
-                }
-            >
-                Dashboard
+        <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+                isActive ? "active text-red-500 border-b-4 border-red-500" : ""
+            }
+        >
+            Dashboard
 
-            </NavLink>
-        </li>
+        </NavLink>
+    </li>
+       }
         <li className="text-xl hover:scale-110 transform transition-transform duration-300">
             <NavLink
                 to="/give-fund"
