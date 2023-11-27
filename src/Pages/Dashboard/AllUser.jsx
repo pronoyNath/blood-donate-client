@@ -4,12 +4,13 @@ import axiosSecure from '../../hooks/useAxiosSecure';
 import './AllUser.css'
 import Swal from 'sweetalert2';
 import { useQuery } from '@tanstack/react-query';
-import { Result } from 'postcss';
+
+
 const AllUser = () => {
 
     const [allUsers, setAllUsers] = useState([]);
     const [filteredUser, setFilteredUser] = useState(allUsers);
-
+    const [selectedValueState, setselectedValueState] = useState('all');
 
     // paging code 
     const [currentPage, setCurrentPage] = useState(0);
@@ -20,11 +21,13 @@ const AllUser = () => {
 
     const pages = [...Array(numberOfPages).keys()];
 
+    // total user count 
     useEffect(() => {
         fetch('http://localhost:5000/user-count')
             .then(res => res.json())
             .then(data => setCount(data.count))
     }, [])
+
 
     const handlePrevPage = () => {
         if (currentPage > 0) {
@@ -39,62 +42,60 @@ const AllUser = () => {
     }
 
 
-    //main data load
-
+    //main data load (per-page data load)
     useEffect(() => {
         axiosSecure.get(`/all-users?page=${currentPage}&size=${itemsPerPage}`)
             .then(({ data }) => setAllUsers(data))
     }, [currentPage, itemsPerPage])
     // console.log(allUsers);
 
-    // tanstack query for updated data get 
-    // const { data: updatedUserRole, refetch } = useQuery({
-    //     queryKey: ['updatedUserRole', currentPage, itemsPerPage],
-    //     queryFn: async () => {
-    //         const res = await axiosSecure.get(`/all-users?page=${currentPage}&size=${itemsPerPage}`);
-    //         return res.data;
-    //     }
-    // })
 
 
+    useEffect(() => {   
+                
+        if(selectedValueState == 'all'){
+            setFilteredUser(allUsers);
+        }
+        else{
+            
+            const activeUsers = allUsers.filter((user) => user?.status === selectedValueState);        
+            setCount(activeUsers.length);
+            setFilteredUser(activeUsers);
+            // console.log(activeUsers.length);
+            // console.log(count);
+        }
 
-    useEffect(() => {
-        setFilteredUser(allUsers)
-    }, [allUsers])
-
+    }, [allUsers,selectedValueState])
 
     // handle filter 
     const handleFilter = async (e) => {
         const selectedValue = e.target.value;
         if (selectedValue === 'all') {
             // Show all data
-            setFilteredUser(allUsers);
-            setCount(allUsers.length)
+            setselectedValueState(selectedValue)
             return;
         }
         if (selectedValue === 'active') {
-            const activeUsers = allUsers.filter((user) => user?.status === 'active');
-            setFilteredUser(activeUsers);
-            setCount(activeUsers.length);
+            setselectedValueState(selectedValue)
+            axiosSecure.get(`/all-users`)
+            .then(({ data }) => setAllUsers(data))
+
+            axiosSecure.get('/active-user-count')
+            .then(({data} )=> setCount(data.count))
+          
             return;
-            //   await axiosSecure.get(`/all-users?status=active`)
-            //         .then(( {data} ) => {
-            //             setFilteredUser(data)
-            //             setCount(data.length)
-            //         })
-            //     console.log(filteredUser);
-            //     return;
+         
         }
         if (selectedValue === 'blocked') {
-            const blockedUsers = allUsers.filter((user) => user?.status === 'blocked');
-            setFilteredUser(blockedUsers);
-            setCount(blockedUsers.length);
+            setselectedValueState(selectedValue)
+            axiosSecure.get(`/all-users`)
+            .then(({ data }) => setAllUsers(data))
+         
+            fetch('http://localhost:5000/blocked-user-count')
+            .then(res => res.json())
+            .then(data => setCount(data.count))
             return;
-            // axiosSecure.get(`/all-users?status=blocked`)
-            //     .then(({ data }) => setFilteredUser(data))
-            // setCount(filteredUser.length);
-            // console.log(filteredUser);
-            // return;
+         
         }
 
     };
@@ -185,12 +186,26 @@ const AllUser = () => {
                 status : 'active'
             }
         }
+
         await axiosSecure.put(`/update-status/${userId}`,
             userStatus
         )
             .then(({ data }) => {
                 if (data?.modifiedCount > 0) {
-
+                    setFilteredUser((previous) => {
+                        previous.forEach((itm) => {
+                        if(itm._id == userId){
+                            if(status=='blocked'){
+                                itm.status = 'active'
+                            }
+                            else{
+                                itm.status = 'blocked'
+                            }
+                        }
+                        })
+                        
+                        return [...previous]
+                    })
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -219,7 +234,7 @@ const AllUser = () => {
             </div>
 
             <div className="mx-w-3xl py-10 relative">
-                <table className="table">
+                <table className="table table-md">
                     {/* head */}
                     <thead>
                         <tr className='text-red-500 text-xl'>
