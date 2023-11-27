@@ -1,9 +1,12 @@
 import React from 'react';
 import { FaPencil, FaTrashCan } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
 
 const DonationRequstsTable = ({donationReq}) => {
+   
     // console.log(Object.keys(donationReq).join(','));
     const {_id,requesterName,requesterEmail,recieptName,address,hospitalName,bloodGroup,time,date,district,upazila,requestMessage,donationStatus} = donationReq;
+
     return (
         <tr>
             <td>
@@ -19,7 +22,9 @@ const DonationRequstsTable = ({donationReq}) => {
                 <p>{`${date}/${time}`}</p>
             </td>
             <td className='bg-base-300'>{donationStatus}</td>
-            <td className='text-sm'>Name: {requesterName} <br /> Email:{requesterEmail}</td>
+            <td className='text-sm'>Name: {requesterName} <br /> Email:{requesterEmail}</td> 
+          
+           
             {/* <th>
                 <p className={`font-semibold uppercase
                  ${status === "blocked" && 'text-red-500'}
@@ -50,7 +55,11 @@ const DonationRequstsTable = ({donationReq}) => {
                         </div>
             </td>
 
-            <td><button className='btn bg-red-500 text-white'>view</button></td>
+            <td>
+                <Link to={`/donation-details/${_id}`}>
+                <button className='btn bg-red-500 text-white'>view</button>
+                </Link>
+                </td>
         </tr>
     );
 };

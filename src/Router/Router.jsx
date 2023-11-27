@@ -17,6 +17,7 @@ import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 import CreateDonationReq from "../Pages/Dashboard/CreateDonationReq";
 import MyDonationRequests from "../Pages/Dashboard/MyDonationRequests";
+import DonaitonDetails from "../Pages/Dashboard/DonaitonDetails";
 
 const router = createBrowserRouter([
     {
@@ -89,6 +90,11 @@ const router = createBrowserRouter([
         
       ]
     },
+    {
+      path: 'donation-details/:id',
+      element:<PrivateRoute><DonaitonDetails></DonaitonDetails></PrivateRoute>,
+      loader: ({ params }) => fetch(`http://localhost:5000/donation-details/${params.id}`)
+    }
   ]);
 
   export default router;

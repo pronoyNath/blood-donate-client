@@ -114,6 +114,16 @@ const AllUser = () => {
             .then(({ data }) => {
                 if (data?.modifiedCount > 0) {
 
+                    setFilteredUser((previous) => {
+                        previous.forEach((itm) => {
+                        if(itm._id == userId){
+                        itm.role = "admin"}
+                       
+                        })
+                        
+                        return [...previous]
+                    })
+
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -137,6 +147,15 @@ const AllUser = () => {
         )
             .then(({ data }) => {
                 if (data?.modifiedCount > 0) {
+                    setFilteredUser((previous) => {
+                        previous.forEach((itm) => {
+                        if(itm._id == userId){
+                        itm.role = "volunteer"}
+                       
+                        })
+                        
+                        return [...previous]
+                    })
 
                     Swal.fire({
                         position: "top-end",
