@@ -104,7 +104,7 @@ const MyDonationRequests = () => {
             </div>
 
             <div className=" py-10 relative">
-                <table className="table border max-w-lg">
+                <table className="table">
                     {/* head */}
                     <thead>
                         <tr className='text-red-500 text-lg'>
