@@ -115,6 +115,66 @@ const MyDonationRequests = () => {
     }
 
 
+    // handle done & cancel 
+    const handleMakeDone = async(id) => {
+        const donationStatus = {
+            donationStatus: 'done'
+        }
+        await axiosSecure.put(`/donation-status/${id}`,
+        donationStatus
+        )
+            .then(({ data }) => {
+                if (data?.modifiedCount > 0) {
+                    setFilteredDonationRequests((previous) => {
+                        previous.forEach((itm) => {
+                        if(itm._id == id){
+                        itm.donationStatus = "done"}
+                       
+                        })
+                        
+                        return [...previous]
+                    })
+
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Donation Status Updated",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+    }
+
+    const handleMakeCancel =async (id) => {
+        const donationStatus = {
+            donationStatus: 'canceled'
+        }
+        await axiosSecure.put(`/donation-status/${id}`,
+        donationStatus
+        )
+            .then(({ data }) => {
+                if (data?.modifiedCount > 0) {
+                    setFilteredDonationRequests((previous) => {
+                        previous.forEach((itm) => {
+                        if(itm._id == id){
+                        itm.donationStatus = "canceled"}
+                       
+                        })
+                        
+                        return [...previous]
+                    })
+
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Donation Status Updated",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+    }
 
 
     return (
@@ -152,6 +212,8 @@ const MyDonationRequests = () => {
                             filteredDonationRequests.map(donationReq => <DonationRequstsTable key={donationReq?._id}
                                 donationReq={donationReq}
                                 handleDelteReq={() => handleDelete(donationReq._id)}
+                                handleDone={() => handleMakeDone(donationReq._id)}
+                                handleCancel={() => handleMakeCancel(donationReq._id)}
                             ></DonationRequstsTable>)
                         }
 

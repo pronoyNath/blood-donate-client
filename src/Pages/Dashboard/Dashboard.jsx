@@ -19,7 +19,6 @@ const Dashboard = () => {
       { title: "All Users", src: "https://i.ibb.co/YRYkB50/teamwork.png", link: 'all-users' },
       { title: "Create Donation Request ", src: "https://i.ibb.co/fXT8SNZ/mobile.png", link: 'create-donation-request' },
       { title: "My Donation Requests", src: "https://i.ibb.co/7p67xSz/request-for-proposal.png", link: 'my-donation-requests' },
-      { title: "Analytics", src: "Chart", link: 'd' },
       { title: "User Profile", src: "https://i.ibb.co/rtxGbDn/user.png", gap: true, link: 'profile' },
     ];
   }
@@ -29,8 +28,6 @@ const Dashboard = () => {
       { title: "Dashboard", src: "https://i.ibb.co/pZdfyDq/Chart-fill.png", link: '/dashboard' },
       { title: "All Users", src: "https://i.ibb.co/YRYkB50/teamwork.png", link: 'all-users' },
       { title: "Create Donation Request ", src: "https://i.ibb.co/fXT8SNZ/mobile.png", link: 'create-donation-request' },
-      //  { title: "Search", src: "Search", link: 's' },
-      //  { title: "Analytics", src: "Chart", link: 'd' },
       { title: "User Profile", src: "https://i.ibb.co/rtxGbDn/user.png", gap: true, link: 'profile' },
     ];
   }
@@ -38,10 +35,7 @@ const Dashboard = () => {
   if (userRole === "donor") {
     Menus = [
       { title: "Dashboard", src: "https://i.ibb.co/pZdfyDq/Chart-fill.png", link: '/dashboard' },
-      //  { title: "All Users", src: "https://i.ibb.co/YRYkB50/teamwork.png", link: 'all-users' },
       { title: "Create Donation Request ", src: "https://i.ibb.co/fXT8SNZ/mobile.png", link: 'create-donation-request' },
-      //  { title: "Search", src: "Search", link: 's' },
-      //  { title: "Analytics", src: "Chart", link: 'd' },
       { title: "User Profile", src: "https://i.ibb.co/rtxGbDn/user.png", gap: true, link: 'profile' },
     ];
   }
@@ -84,7 +78,7 @@ const Dashboard = () => {
               }}
               key={index}
               className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
-              ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0 && "border border-red-500"}
+              ${Menu.gap ? "mt-20" : "mt-2"} ${index === 0 && "border border-red-500"}
               ${location.pathname == `/dashboard/${Menu?.link}` ? "bg-red-500" : ""}
               
               `}
