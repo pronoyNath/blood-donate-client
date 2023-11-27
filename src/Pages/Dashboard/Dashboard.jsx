@@ -70,7 +70,7 @@ const Dashboard = () => {
               }`}
           />
           <h1
-            className={`text-white origin-left font-medium text-sm lg:text-lg duration-200 hidden md:block hover:cursor-pointer ${!open && "scale-0"
+            className={`text-white origin-left font-medium text-sm lg:text-lg duration-200 hidden  hover:cursor-pointer ${!open && "scale-0"
               }`}
           >
             Blood Donation

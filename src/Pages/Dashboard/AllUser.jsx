@@ -3,7 +3,6 @@ import UserDataTable from '../../components/UserDataTable/UserDataTable';
 import axiosSecure from '../../hooks/useAxiosSecure';
 import './AllUser.css'
 import Swal from 'sweetalert2';
-import { useQuery } from '@tanstack/react-query';
 
 
 const AllUser = () => {
@@ -119,7 +118,6 @@ const AllUser = () => {
                         previous.forEach((itm) => {
                         if(itm._id == userId){
                         itm.role = "admin"}
-                       
                         })
                         
                         return [...previous]

@@ -24,13 +24,6 @@ const DonationRequstsTable = ({donationReq}) => {
             <td className='bg-base-300'>{donationStatus}</td>
             <td className='text-sm'>Name: {requesterName} <br /> Email:{requesterEmail}</td> 
           
-           
-            {/* <th>
-                <p className={`font-semibold uppercase
-                 ${status === "blocked" && 'text-red-500'}
-                 ${status === "active" && 'text-green-500'}
-                 `}>{status}</p>
-            </th> */}
             <td className='flex items-center gap-3'>
                     
                         <div className="dropdown dropdown-top dropdown-end">

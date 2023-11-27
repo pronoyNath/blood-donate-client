@@ -1,10 +1,65 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import axiosSecure from "../../hooks/useAxiosSecure";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
 
 
 const DonaitonDetails = () => {
-    const donationDetails = useLoaderData();
-    // console.log(Object.keys(donationDetails).join(','));
-    const {_id,requesterName,requesterEmail,recieptName,address,hospitalName,bloodGroup,time,date,district,upazila,requestMessage,donationStatus} = donationDetails;
+    const {id} = useParams();
+    
+    // const donationDetails = useLoaderData();
+    // // console.log(Object.keys(donationDetails).join(','));
+
+    // tanstack query for updated data get 
+    const { data: donationDetails, refetch } = useQuery({
+        queryKey: ['donationDetails',id],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/donation-details/${id}`);
+            return res.data;
+        }
+    })
+   
+
+    // const {  requesterName, requesterEmail, recieptName, address, hospitalName, bloodGroup, time, date, district, upazila, requestMessage, donationStatus } = donationDetails;
+console.log(donationDetails);
+    const { user } = useAuth();
+
+    const handleDonate = () => {
+        document.getElementById('my_modal_1').close();
+
+        
+
+        axiosSecure.put(`/donation-confirm/${donationDetails?._id}`,
+            { donationStatus: 'inprogress' }
+        )
+            .then(({ data }) => {
+                console.log(data);
+                if (data?.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Donation Status Updated",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                refetch();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "Sorry!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            });
+    }
 
 
     return (
@@ -38,8 +93,8 @@ const DonaitonDetails = () => {
                             </svg>
                         </span>
                         <p className="block font-sans antialiased font-normal leading-relaxed text-lg">
-                        Requester Name: {requesterName} <br />
-                        Requester Email: {requesterEmail}
+                            Requester Name: {donationDetails?.requesterName} <br />
+                            Requester Email: {donationDetails?.requesterEmail}
                         </p>
                     </li>
                     <li className="flex items-center gap-4">
@@ -61,7 +116,7 @@ const DonaitonDetails = () => {
                             </svg>
                         </span>
                         <p className="block font-sans text-base antialiased font-normal leading-relaxed text-inherit">
-                        Reciept Name: {recieptName}
+                            Reciept Name: {donationDetails?.recieptName}
                         </p>
                     </li>
                     <li className="flex items-center gap-4">
@@ -81,7 +136,7 @@ const DonaitonDetails = () => {
                             </svg>
                         </span>
                         <p className="block font-sans text-xl text-red-500 antialiased font-normal leading-relaxed">
-                        Blood Group: {bloodGroup}
+                            Blood Group: {donationDetails?.bloodGroup}
                         </p>
                     </li>
                     <li className="flex items-center gap-4">
@@ -101,8 +156,8 @@ const DonaitonDetails = () => {
                             </svg>
                         </span>
                         <p className="block font-sans text-base antialiased font-normal leading-relaxed text-yellow-400 text-inherit">
-                        Time: {time} <br />
-                        Date: {date}
+                            Time: {donationDetails?.time} <br />
+                            Date: {donationDetails?.date}
                         </p>
                     </li>
                     <li className="flex items-center gap-4">
@@ -124,9 +179,9 @@ const DonaitonDetails = () => {
                             </svg>
                         </span>
                         <p className="block font-sans text-base antialiased font-normal leading-relaxed text-inherit">
-                        Address: {address} <br />
-                        Upazila: {upazila} <br />
-                        District: {district}
+                            Address: {donationDetails?.address} <br />
+                            Upazila: {donationDetails?.upazila} <br />
+                            District: {donationDetails?.district}
                         </p>
                     </li>
 
@@ -149,7 +204,7 @@ const DonaitonDetails = () => {
                             </svg>
                         </span>
                         <p className="block font-sans antialiased font-normal leading-relaxed text-inherit text-xl">
-                        Hospital Name: {hospitalName}
+                            Hospital Name: {donationDetails?.hospitalName}
                         </p>
                     </li>
 
@@ -172,7 +227,7 @@ const DonaitonDetails = () => {
                             </svg>
                         </span>
                         <p className="block font-sans antialiased font-normal leading-relaxed text-inherit text-xl">
-                        Request Message: {requestMessage}
+                            Request Message: {donationDetails?.requestMessage}
                         </p>
                     </li>
 
@@ -195,10 +250,10 @@ const DonaitonDetails = () => {
                             </svg>
                         </span>
                         <p className="block font-sans antialiased font-normal leading-relaxed text-inherit text-xl">
-                        Donation Status: <span className="text-green-500">{donationStatus}</span> 
+                            Donation Status: <span className="text-green-500">{donationDetails?.donationStatus}</span>
                         </p>
                     </li>
-                   
+
                 </ul>
             </div>
 
@@ -208,15 +263,23 @@ const DonaitonDetails = () => {
 
 
             <div className="p-0  mt-12">
-                <button
-                    className="block mx-auto w-3/4 select-none rounded-lg bg-red-500 hover:bg-red-400 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-blue-gray-500/10 transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-gray-500/20 focus:scale-[1.02] focus:opacity-[0.85] focus:shadow-none active:scale-100 active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                    type="button"
-                    data-ripple-dark="true"
-                >
-                    Donate
-                </button>
+                {/* Open the modal using document.getElementById('ID').showModal() method */}
+                <button className="block mx-auto w-3/4 select-none rounded-lg bg-red-500 hover:bg-red-400 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-blue-gray-500/10 transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-gray-500/20 focus:scale-[1.02] focus:opacity-[0.85] focus:shadow-none active:scale-100 active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" onClick={() => document.getElementById('my_modal_1').showModal()}>Donate Now</button>
+
+
+                <dialog id="my_modal_1" className="modal">
+                    <div className="modal-box text-white text-center bg-gray-800">
+                        <h3 className="text-xl font-bold text-red-500 border p-1 my-4">Please Confirm Your Donation</h3>
+                        <p className="text-xl font-bold">Name: {user?.displayName}</p>
+                        <p className="text-xl font-bold">Email: {user?.email}</p>
+
+                        <button onClick={handleDonate} className="btn bg-red-500 border-none w-full mt-10 text-white">Confirm Donate</button>
+                    </div>
+                </dialog>
             </div>
-        </div>
+        </div> 
+      
+   
     );
 };
 
