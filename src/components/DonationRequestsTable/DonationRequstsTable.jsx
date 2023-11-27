@@ -31,20 +31,12 @@ const DonationRequstsTable = ({donationReq,handleDelteReq}) => {
             <td className='flex items-center gap-3'>
                     
                         <div className="dropdown dropdown-top dropdown-end">
-                            <label tabIndex={0}
-                           
-                             className="btn m-1">
+                            <Link to={`/update-donation-info/${_id}`}>
+                            <label tabIndex={0}  className="btn m-1">
                             <FaPencil className="text-base"/>
-
                             </label>
-                            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                            <li>
-                                    <a >Make Admin</a>
-                                </li>
-                                <li>
-                                    <a >Make Volunteer</a>
-                                </li>
-                            </ul>
+                            </Link>
+                            
                         </div>
 
                         <Link onClick={handleDelteReq}>
