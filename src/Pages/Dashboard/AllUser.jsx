@@ -62,6 +62,8 @@ const AllUser = () => {
         setFilteredUser(allUsers)
     }, [allUsers])
 
+
+    // handle filter 
     const handleFilter = async (e) => {
         const selectedValue = e.target.value;
         if (selectedValue === 'all') {
@@ -183,7 +185,7 @@ const AllUser = () => {
     }
 
     return (
-        <div className='overflow-y-scroll'>
+        <div className=''>
             <h3 className='text-3xl font-semibold text-red-500 text-center'>All Users Data</h3>
 
             <div className="text-black mr-8 ml-5 lg:ml-0 flex gap-3 items-center ">
