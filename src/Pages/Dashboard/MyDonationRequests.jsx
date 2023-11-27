@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axiosSecure from "../../hooks/useAxiosSecure";
 import DonationRequstsTable from "../../components/DonationRequestsTable/DonationRequstsTable";
+import Swal from "sweetalert2";
 
 
 const MyDonationRequests = () => {
@@ -36,12 +37,12 @@ const MyDonationRequests = () => {
     }
 
 
- //main data load
+    //main data load
 
- useEffect(() => {
-    axiosSecure.get(`/donation-requests?page=${currentPage}&size=${itemsPerPage}`)
-        .then(({ data }) => setDonationRequests(data))
-}, [currentPage, itemsPerPage])
+    useEffect(() => {
+        axiosSecure.get(`/donation-requests?page=${currentPage}&size=${itemsPerPage}`)
+            .then(({ data }) => setDonationRequests(data))
+    }, [currentPage, itemsPerPage])
 
     useEffect(() => {
         setFilteredDonationRequests(donationRequests)
@@ -83,7 +84,35 @@ const MyDonationRequests = () => {
 
     };
 
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/donataion-req-delete/${id}`)
+                    .then(({ data }) => {
+                        if (data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your Donation Request has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    });
 
+                const remaining = filteredDonationRequests.filter(product => product._id !== id)
+                setFilteredDonationRequests(remaining)
+            }
+        })
+
+        console.log(id);
+    }
 
 
 
@@ -118,9 +147,12 @@ const MyDonationRequests = () => {
                         </tr>
                     </thead>
                     <tbody className='font-semibold'>
-                        
+
                         {
-                            filteredDonationRequests.map(donationReq => <DonationRequstsTable key={donationReq?._id} donationReq={donationReq}></DonationRequstsTable>)
+                            filteredDonationRequests.map(donationReq => <DonationRequstsTable key={donationReq?._id}
+                                donationReq={donationReq}
+                                handleDelteReq={() => handleDelete(donationReq._id)}
+                            ></DonationRequstsTable>)
                         }
 
                     </tbody>
