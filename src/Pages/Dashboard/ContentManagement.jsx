@@ -34,7 +34,7 @@ const ContentManagement = () => {
                         key={blog._id}
                         blog={blog}
                     ></BlogCard>) 
-                    : <h3 className='text-red-500 text-4xl text-center my-10'>Opps!!! No Blog Posted Yet</h3>
+                    : <div className='h-screen'><h3 className='text-red-500 text-4xl text-center my-10'>Opps!!! No Blog Posted Yet</h3></div>
                 }
             </div>
         </div>
