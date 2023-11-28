@@ -119,7 +119,7 @@ const UserProfile = () => {
     }
 
     return (
-        <div className="inline-flex justify-center items-center ">
+        <div className="inline-flex justify-center items-center h-screen">
             <div className="flex flex-col justify-center  p-6  shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100">
                 <img src={userInfo?.imageURL} alt="" className="w-32 h-32 mx-auto rounded-full dark:bg-gray-500 aspect-square" />
                 <div className="space-y-4 text-center divide-y dark:divide-gray-700">
@@ -142,7 +142,7 @@ const UserProfile = () => {
                         <button className="" onClick={() => document.getElementById('my_modal_5').showModal()}>Edit Profile </button> <FaFilePen />
                         <dialog id="my_modal_5" className="modal modal-bottom -z-10 sm:modal-middle">
                             <div className="modal-box bg-gray-800">
-                                <h3 className="font-bold text-lg">Update Profile</h3>
+                                <h3 className="font-bold text-3xl uppercase">Update Profile</h3>
                                 <div className="modal-action">
 
                                     <form onSubmit={handleUpdate} className="space-y-8 mt-10">

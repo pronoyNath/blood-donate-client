@@ -4,7 +4,7 @@ const ContentManagement = () => {
 
 
     return (
-        <div className=''>
+        <div className='h-screen'>
             <Link to='/dashboard/content-management/add-blog'>
             <button className='btn btn-lg bg-red-500 text-white uppercase relative right-0'>Add Blog Now</button>
             </Link>

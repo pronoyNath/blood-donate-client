@@ -47,10 +47,10 @@ const Dashboard = () => {
   const isDashboardActive = location.pathname === `/dashboard`;
 
   return (
-    <div className="flex h-[700px] overflow-y-hidden">
+    <div className="flex ">
       <div
         className={` ${open ? "w-72" : "w-20 "
-          } bg-gray-800  p-5 z-50 pt-8 relative duration-300`}
+          } bg-gray-800  p-5 z-50 pt-8 relative duration-300 h-auto`}
       >
         <img
           src="https://i.ibb.co/TPWHKZL/control.png"
@@ -95,11 +95,11 @@ const Dashboard = () => {
           ))}
         </ul>
       </div>
-      <div className="h-screen flex-1 p-7 z-0bg-gray-700">
+      <div className=" flex-1 p-7 z-0bg-gray-700">
 
         {
           isDashboardActive &&
-          <div>
+          <div className="h-screen">
             <h1 className="text-2xl font-semibold ">Welcome {user?.displayName}</h1>
             <p>
               "Welcome to our Blood Donation Community! Your decision to be here makes a life-saving impact. Explore, donate, and be a hero today. Together, we make a difference!"</p>

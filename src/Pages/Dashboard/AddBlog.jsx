@@ -2,9 +2,14 @@ import JoditEditor from 'jodit-react';
 import { useRef, useState } from 'react';
 import parse from 'html-react-parser';
 import { imageUpload } from '../../api/ImageUploadApi';
+import axiosSecure from '../../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 const AddBlog = () => {
     const editor = useRef(null);
     const [content, setContent] = useState('');
+
+    
 
     const handleBlog = async (e) => {
         e.preventDefault();
@@ -19,7 +24,29 @@ const AddBlog = () => {
         const blogContent = {
             blogTitle,imageURL,content
         }
-        console.log(blogContent);
+        // console.log(blogContent);
+
+        axiosSecure.post('/add-blog',blogContent)
+        .then(({data})=>{
+            if(data?.acknowledged){
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Wait For Acception By Admin",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }
+        })
+        .catch(err=>{
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "sorry!!!",
+                showConfirmButton: false,
+                timer: 1500
+              });
+        })
     }
 
     return (
