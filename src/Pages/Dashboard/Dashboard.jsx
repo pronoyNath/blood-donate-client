@@ -18,7 +18,8 @@ const Dashboard = () => {
       { title: "Dashboard", src: "https://i.ibb.co/pZdfyDq/Chart-fill.png", link: '/dashboard' },
       { title: "All Users", src: "https://i.ibb.co/YRYkB50/teamwork.png", link: 'all-users' },
       { title: "Create Donation Request ", src: "https://i.ibb.co/fXT8SNZ/mobile.png", link: 'create-donation-request' },
-      { title: "My Donation Requests", src: "https://i.ibb.co/7p67xSz/request-for-proposal.png", link: 'my-donation-requests' },
+      { title: "My Donation Requests", src: "https://i.ibb.co/TrBsKKr/blood-test.png", link: 'my-donation-requests' },
+      { title: "Content Management", src: "https://i.ibb.co/7p67xSz/request-for-proposal.png", link: 'content-management' },
       { title: "User Profile", src: "https://i.ibb.co/rtxGbDn/user.png", gap: true, link: 'profile' },
     ];
   }

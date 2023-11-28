@@ -19,6 +19,8 @@ import CreateDonationReq from "../Pages/Dashboard/CreateDonationReq";
 import MyDonationRequests from "../Pages/Dashboard/MyDonationRequests";
 import DonaitonDetails from "../Pages/Dashboard/DonaitonDetails";
 import UpdateDonationInfo from "../Pages/Dashboard/UpdateDonationInfo";
+import ContentManagement from "../Pages/Dashboard/ContentManagement";
+import AddBlog from "../Pages/Dashboard/AddBlog";
 
 const router = createBrowserRouter([
     {
@@ -83,6 +85,14 @@ const router = createBrowserRouter([
         {
           path: 'my-donation-requests',
           element:<MyDonationRequests></MyDonationRequests>
+        },
+        {
+          path: 'content-management',
+          element:<ContentManagement></ContentManagement>
+        },
+        {
+          path: 'content-management/add-blog',
+          element: <AddBlog></AddBlog>
         },
         {
           path: 'profile',
