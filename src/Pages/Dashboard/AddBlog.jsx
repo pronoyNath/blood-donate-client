@@ -7,18 +7,21 @@ import Swal from 'sweetalert2';
 import useAuth from '../../Hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import BlogCard from '../../components/BlogCard/BlogCard';
+import { useNavigate } from 'react-router-dom';
 const AddBlog = () => {
     const editor = useRef(null);
     const [content, setContent] = useState('');
     const {user} = useAuth();
-     // tanstack query for updated data get 
-     const { data: blogs = [], refetch } = useQuery({
-        queryKey: ['blogs',user?.email],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/blogs/${user?.email}`);
-            return res.data;
-        }
-    })
+    const navigate = useNavigate();
+
+    //  // tanstack query for updated data get 
+    //  const { data: blogs = [], refetch } = useQuery({
+    //     queryKey: ['blogs',user?.email],
+    //     queryFn: async () => {
+    //         const res = await axiosSecure.get(`/blogs/${user?.email}`);
+    //         return res.data.reverse();
+    //     }
+    // })
 
     // console.log(blogs);
 
@@ -35,13 +38,13 @@ const AddBlog = () => {
         const blogContent = {
             blogTitle,imageURL,content,email,
             blogStatus : 'draft'
+
         }
         // console.log(blogContent);
 
         axiosSecure.post('/add-blog',blogContent)
         .then(({data})=>{
             if(data?.acknowledged){
-                refetch();
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -49,10 +52,10 @@ const AddBlog = () => {
                     showConfirmButton: false,
                     timer: 1500
                   });
+                  navigate('/dashboard/content-management')
             }
         })
         .catch(err=>{
-            refetch();
             Swal.fire({
                 position: "top-end",
                 icon: "error",
@@ -102,14 +105,16 @@ const AddBlog = () => {
             </form>
 
 
-            <div className='grid grid-cols-1 gap-10'>
+            {/* <div className='grid grid-cols-1 gap-10'>
+                <h3 className='text-center text-3xl font-bold my-5 uppercase border-y-2 py-3 border-y-red-500'>Your All Blogs</h3>
                 {
-                    blogs.map(blog=><BlogCard 
+                   blogs.length>0 ? blogs.map(blog=><BlogCard 
                         key={blog._id}
                         blog={blog}
-                    ></BlogCard>)
+                    ></BlogCard>) 
+                    : <h3 className='text-red-500 text-4xl text-center my-10'>Opps!!! No Blog Posted Yet</h3>
                 }
-            </div>
+            </div> */}
         </div>
     );
 };

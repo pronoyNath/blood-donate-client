@@ -13,13 +13,13 @@ const BlogCard = ({blog}) => {
                 <img alt="" src={user?.photoURL} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
                 <div className="flex flex-col space-y-1">
                     <a rel="noopener noreferrer" href="#" className="text-sm font-semibold">{user?.displayName}</a>
-                    <span className={`text-md uppercase ${blogStatus == 'draft' && 'text-red-500'}`}>{blogStatus}</span>
+                    <span className={`text-base uppercase ${blogStatus == 'draft' && 'text-red-500'}`}>{blogStatus == 'draft' && blogStatus} <span className='text-sm normal-case text-green-500'>-- wait for admin to publish</span></span>
                 </div>
             </div>
             <div>
                 <img src={imageURL} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500" />
                 <h2 className="mb-1 text-xl font-semibold">{blogTitle}</h2>
-                <p className="text-sm dark:text-gray-400">{parse(content)}</p>{console.log(content)}
+                <p className="text-sm dark:text-gray-400">{parse(content)}</p>
             </div>
         </div>
     );
