@@ -116,22 +116,23 @@ const MyDonationRequests = () => {
 
 
     // handle done & cancel 
-    const handleMakeDone = async(id) => {
+    const handleMakeDone = async (id) => {
         const donationStatus = {
             donationStatus: 'done'
         }
         await axiosSecure.put(`/donation-status/${id}`,
-        donationStatus
+            donationStatus
         )
             .then(({ data }) => {
                 if (data?.modifiedCount > 0) {
                     setFilteredDonationRequests((previous) => {
                         previous.forEach((itm) => {
-                        if(itm._id == id){
-                        itm.donationStatus = "done"}
-                       
+                            if (itm._id == id) {
+                                itm.donationStatus = "done"
+                            }
+
                         })
-                        
+
                         return [...previous]
                     })
 
@@ -146,22 +147,23 @@ const MyDonationRequests = () => {
             })
     }
 
-    const handleMakeCancel =async (id) => {
+    const handleMakeCancel = async (id) => {
         const donationStatus = {
             donationStatus: 'canceled'
         }
         await axiosSecure.put(`/donation-status/${id}`,
-        donationStatus
+            donationStatus
         )
             .then(({ data }) => {
                 if (data?.modifiedCount > 0) {
                     setFilteredDonationRequests((previous) => {
                         previous.forEach((itm) => {
-                        if(itm._id == id){
-                        itm.donationStatus = "canceled"}
-                       
+                            if (itm._id == id) {
+                                itm.donationStatus = "canceled"
+                            }
+
                         })
-                        
+
                         return [...previous]
                     })
 

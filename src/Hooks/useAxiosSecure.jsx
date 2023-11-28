@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../Provider/AuthProvider'
 import { useNavigate } from 'react-router-dom'
 
-const axiosSecure =  axios.create({
+const axiosSecure = axios.create({
     baseURL: 'http://localhost:5000',
     withCredentials: true,
 })

@@ -1,10 +1,7 @@
-import JoditEditor from 'jodit-react';
-import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const ContentManagement = () => {
-    const editor = useRef(null);
-	const [content, setContent] = useState('');
+
 
     return (
         <div className=''>

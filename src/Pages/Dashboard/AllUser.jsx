@@ -50,26 +50,27 @@ const AllUser = () => {
 
 
 
-    useEffect(() => {   
-                
-        if(selectedValueState == 'all'){
+    useEffect(() => {
+
+        if (selectedValueState == 'all') {
             setFilteredUser(allUsers);
         }
-        else{
-            
-            const activeUsers = allUsers.filter((user) => user?.status === selectedValueState);        
+        else {
+
+            const activeUsers = allUsers.filter((user) => user?.status === selectedValueState);
             setCount(activeUsers.length);
             setFilteredUser(activeUsers);
             // console.log(activeUsers.length);
             // console.log(count);
         }
 
-    }, [allUsers,selectedValueState])
+    }, [allUsers, selectedValueState])
 
     // handle filter 
     const handleFilter = async (e) => {
         const selectedValue = e.target.value;
         if (selectedValue === 'all') {
+
             // Show all data
             setselectedValueState(selectedValue)
             return;
@@ -77,24 +78,24 @@ const AllUser = () => {
         if (selectedValue === 'active') {
             setselectedValueState(selectedValue)
             axiosSecure.get(`/all-users`)
-            .then(({ data }) => setAllUsers(data))
+                .then(({ data }) => setAllUsers(data))
 
             axiosSecure.get('/active-user-count')
-            .then(({data} )=> setCount(data.count))
-          
+                .then(({ data }) => setCount(data.count))
+
             return;
-         
+
         }
         if (selectedValue === 'blocked') {
             setselectedValueState(selectedValue)
             axiosSecure.get(`/all-users`)
-            .then(({ data }) => setAllUsers(data))
-         
+                .then(({ data }) => setAllUsers(data))
+
             fetch('http://localhost:5000/blocked-user-count')
-            .then(res => res.json())
-            .then(data => setCount(data.count))
+                .then(res => res.json())
+                .then(data => setCount(data.count))
             return;
-         
+
         }
 
     };
@@ -116,10 +117,11 @@ const AllUser = () => {
 
                     setFilteredUser((previous) => {
                         previous.forEach((itm) => {
-                        if(itm._id == userId){
-                        itm.role = "admin"}
+                            if (itm._id == userId) {
+                                itm.role = "admin"
+                            }
                         })
-                        
+
                         return [...previous]
                     })
 
@@ -148,11 +150,12 @@ const AllUser = () => {
                 if (data?.modifiedCount > 0) {
                     setFilteredUser((previous) => {
                         previous.forEach((itm) => {
-                        if(itm._id == userId){
-                        itm.role = "volunteer"}
-                       
+                            if (itm._id == userId) {
+                                itm.role = "volunteer"
+                            }
+
                         })
-                        
+
                         return [...previous]
                     })
 
@@ -167,21 +170,21 @@ const AllUser = () => {
             })
     };
 
-    const handleStatusChange = async(userId,status) => {
+    const handleStatusChange = async (userId, status) => {
         // console.log(userId,status);
 
         let userStatus = {
-            status : 'active'
+            status: 'active'
         }
 
-        if(status === 'active'){
+        if (status === 'active') {
             userStatus = {
-                status:'blocked'
+                status: 'blocked'
             }
         }
-        else{
+        else {
             userStatus = {
-                status : 'active'
+                status: 'active'
             }
         }
 
@@ -192,16 +195,16 @@ const AllUser = () => {
                 if (data?.modifiedCount > 0) {
                     setFilteredUser((previous) => {
                         previous.forEach((itm) => {
-                        if(itm._id == userId){
-                            if(status=='blocked'){
-                                itm.status = 'active'
+                            if (itm._id == userId) {
+                                if (status == 'blocked') {
+                                    itm.status = 'active'
+                                }
+                                else {
+                                    itm.status = 'blocked'
+                                }
                             }
-                            else{
-                                itm.status = 'blocked'
-                            }
-                        }
                         })
-                        
+
                         return [...previous]
                     })
                     Swal.fire({
@@ -248,7 +251,7 @@ const AllUser = () => {
                         {
                             filteredUser.map(user => <UserDataTable
                                 key={user._id}
-                                statusChange={() => handleStatusChange(user._id,user.status)}
+                                statusChange={() => handleStatusChange(user._id, user.status)}
                                 onMakeAdminClick={() => handleMakeAdmin(user._id)}
                                 onMakeVolunteerClick={() => handleMakeVolunteer(user._id)}
                                 user={user}></UserDataTable>)
