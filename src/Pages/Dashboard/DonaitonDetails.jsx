@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import axiosSecure from "../../hooks/useAxiosSecure";
 import { useState } from "react";
@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const DonaitonDetails = () => {
     const {id} = useParams();
-    
+    const navigate = useNavigate();
     // const donationDetails = useLoaderData();
     // // console.log(Object.keys(donationDetails).join(','));
 
@@ -37,6 +37,7 @@ console.log(donationDetails);
             .then(({ data }) => {
                 console.log(data);
                 if (data?.modifiedCount > 0) {
+                    navigate('/dashboard')
                     refetch();
                     Swal.fire({
                         position: "top-end",

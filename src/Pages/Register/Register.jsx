@@ -133,7 +133,7 @@ const Register = () => {
                     title: "Register Successfully",
                     showConfirmButton: false,
                     timer: 1500
-                  });
+                });
 
                 navigate('/');
 
@@ -147,7 +147,7 @@ const Register = () => {
                     title: "Fill the Form Correctly!",
                     showConfirmButton: false,
                     timer: 1500
-                  });
+                });
             });
     }
 
@@ -229,7 +229,7 @@ const Register = () => {
                                             </select>
                                         </div>
 
-                                        
+
 
                                         <div className="space-y-2 flex-1">
                                             <div className="flex justify-between">

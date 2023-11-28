@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useUserRole from "../../Hooks/useUserRole";
+import DashboardReqts from "./DashboardReqts";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
@@ -100,9 +101,13 @@ const Dashboard = () => {
         {
           isDashboardActive &&
           <div className="h-screen">
-            <h1 className="text-2xl font-semibold ">Welcome {user?.displayName}</h1>
-            <p>
+           <div className="text-center space-y-5 border border-dashed border-red-500 p-5">
+           <h1 className="text-3xl font-semibold ">Welcome <span className="text-red-500">{user?.displayName}</span></h1>
+            <p className="font-semibold text-xl">
               "Welcome to our Blood Donation Community! Your decision to be here makes a life-saving impact. Explore, donate, and be a hero today. Together, we make a difference!"</p>
+           </div>
+
+              <DashboardReqts></DashboardReqts>
           </div>
         }
         <Outlet></Outlet>
