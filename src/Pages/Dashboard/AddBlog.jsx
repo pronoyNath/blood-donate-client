@@ -4,24 +4,23 @@ import parse from 'html-react-parser';
 import { imageUpload } from '../../api/ImageUploadApi';
 import axiosSecure from '../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
+import BlogCard from '../../components/BlogCard/BlogCard';
 const AddBlog = () => {
     const editor = useRef(null);
     const [content, setContent] = useState('');
     const {user} = useAuth();
-
      // tanstack query for updated data get 
-     const { data: blogs, refetch } = useQuery({
-        queryKey: ['blogs'],
+     const { data: blogs = [], refetch } = useQuery({
+        queryKey: ['blogs',user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/blogs/${user?.email}`);
             return res.data;
         }
     })
 
-    console.log(blogs);
+    // console.log(blogs);
 
     const handleBlog = async (e) => {
         e.preventDefault();
@@ -42,6 +41,7 @@ const AddBlog = () => {
         axiosSecure.post('/add-blog',blogContent)
         .then(({data})=>{
             if(data?.acknowledged){
+                refetch();
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -52,6 +52,7 @@ const AddBlog = () => {
             }
         })
         .catch(err=>{
+            refetch();
             Swal.fire({
                 position: "top-end",
                 icon: "error",
@@ -99,6 +100,16 @@ const AddBlog = () => {
 
             <button type='submit' className='btn btn-lg bg-red-500 text-white my-5 w-full hover:bg-red-400'>Post Blog</button>
             </form>
+
+
+            <div className='grid grid-cols-1 gap-10'>
+                {
+                    blogs.map(blog=><BlogCard 
+                        key={blog._id}
+                        blog={blog}
+                    ></BlogCard>)
+                }
+            </div>
         </div>
     );
 };
