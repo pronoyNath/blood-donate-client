@@ -5,11 +5,23 @@ import { imageUpload } from '../../api/ImageUploadApi';
 import axiosSecure from '../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
+import { useQuery } from '@tanstack/react-query';
 const AddBlog = () => {
     const editor = useRef(null);
     const [content, setContent] = useState('');
+    const {user} = useAuth();
 
-    
+     // tanstack query for updated data get 
+     const { data: blogs, refetch } = useQuery({
+        queryKey: ['blogs'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/blogs/${user?.email}`);
+            return res.data;
+        }
+    })
+
+    console.log(blogs);
 
     const handleBlog = async (e) => {
         e.preventDefault();
@@ -20,9 +32,10 @@ const AddBlog = () => {
         const imageData = await imageUpload(img)
         //    console.log(imageData.data.display_url);
         const imageURL = imageData?.data?.display_url
-
+        const email = user?.email;
         const blogContent = {
-            blogTitle,imageURL,content
+            blogTitle,imageURL,content,email,
+            blogStatus : 'draft'
         }
         // console.log(blogContent);
 
