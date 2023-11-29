@@ -9,7 +9,9 @@ const MainLayout = () => {
            <div className="absolute top-0 w-full py-2 text-white">
                 <Navbar></Navbar>
             </div>
+            <div>
             <Outlet></Outlet>
+            </div>
             <div><Toaster/></div>
         </div>
     );

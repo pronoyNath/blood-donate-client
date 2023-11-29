@@ -21,7 +21,7 @@ const BlogCard = ({ blog, refetch }) => {
         axiosSecure.put(`/pulish-blog/${_id}`, { blogStatus })
             .then(({ data }) => {
                 if (data?.acknowledged) {
-                    refetch();
+                    
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -29,6 +29,7 @@ const BlogCard = ({ blog, refetch }) => {
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    refetch();
                 }
             })
 
@@ -40,7 +41,7 @@ const BlogCard = ({ blog, refetch }) => {
         axiosSecure.put(`/draft-blog/${_id}`, { blogStatus })
             .then(({ data }) => {
                 if (data?.acknowledged) {
-                    refetch();
+                    
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -48,6 +49,7 @@ const BlogCard = ({ blog, refetch }) => {
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    refetch();
                 }
             })
 
@@ -67,12 +69,13 @@ const BlogCard = ({ blog, refetch }) => {
                 axiosSecure.delete(`/delete-blog/${_id}`)
                     .then(({ data }) => {
                         if (data.deletedCount > 0) {
-                            refetch();
+                            
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Post has been deleted.",
                                 icon: "success"
                             });
+                            refetch();
                         }
                     });
 

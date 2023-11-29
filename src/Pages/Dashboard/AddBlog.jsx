@@ -8,12 +8,13 @@ import useAuth from '../../Hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import BlogCard from '../../components/BlogCard/BlogCard';
 import { useNavigate } from 'react-router-dom';
+import useBlogs from '../../Hooks/useBlogs';
 const AddBlog = () => {
     const editor = useRef(null);
     const [content, setContent] = useState('');
     const {user} = useAuth();
     const navigate = useNavigate();
-
+    const [blogs,isLoading,refetch] = useBlogs();
     //  // tanstack query for updated data get 
     //  const { data: blogs = [], refetch } = useQuery({
     //     queryKey: ['blogs',user?.email],
@@ -24,7 +25,7 @@ const AddBlog = () => {
     // })
 
     // console.log(blogs);
-
+console.log(user);
     const handleBlog = async (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
@@ -35,9 +36,11 @@ const AddBlog = () => {
         //    console.log(imageData.data.display_url);
         const imageURL = imageData?.data?.display_url
         const email = user?.email;
+        const userImg = user?.photoURL;
+        const userName = user?.displayName; 
         const blogContent = {
             blogTitle,imageURL,content,email,
-            blogStatus : 'draft'
+            blogStatus : 'draft',userImg,userName
 
         }
         // console.log(blogContent);
@@ -45,6 +48,7 @@ const AddBlog = () => {
         axiosSecure.post('/add-blog',blogContent)
         .then(({data})=>{
             if(data?.acknowledged){
+                refetch()
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
