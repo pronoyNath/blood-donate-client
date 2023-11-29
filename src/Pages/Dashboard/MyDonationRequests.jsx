@@ -2,12 +2,18 @@ import { useEffect, useState } from "react";
 import axiosSecure from "../../hooks/useAxiosSecure";
 import DonationRequstsTable from "../../components/DonationRequestsTable/DonationRequstsTable";
 import Swal from "sweetalert2";
+import useAuth from "../../Hooks/useAuth";
+import useUserRole from "../../Hooks/useUserRole";
 
 
 const MyDonationRequests = () => {
-    const [donationRequests, setDonationRequests] = useState([]);
-    const [filteredDonationRequests, setFilteredDonationRequests] = useState(donationRequests);
+    const { user } = useAuth();
+    const [userRole] = useUserRole();
 
+    const [donationRequests, setDonationRequests] = useState([]);
+    // console.log("out",donationRequests.length);
+    const [filteredDonationRequests, setFilteredDonationRequests] = useState(donationRequests);
+const [specificData,setSpecificData] = useState([]);
 
     // paging code 
     const [currentPage, setCurrentPage] = useState(0);
@@ -18,11 +24,19 @@ const MyDonationRequests = () => {
 
     const pages = [...Array(numberOfPages).keys()];
 
+    // all req count 
     useEffect(() => {
         fetch('http://localhost:5000/donation-requst-count')
             .then(res => res.json())
             .then(data => setCount(data.count))
     }, [])
+
+    // specific req count 
+    useEffect(() => {
+        fetch(`http://localhost:5000/donation-requst-count/${user?.email}`)
+            .then(res => res.json())
+            .then(data => setSpecificData(data.length))
+    }, [user?.email])
 
     const handlePrevPage = () => {
         if (currentPage > 0) {
@@ -38,51 +52,91 @@ const MyDonationRequests = () => {
 
 
     //main data load
-
+    // if(userRole == 'donor'){
+            // useEffect(()=>{
+            //     axiosSecure.get(`/donation-requests?page=${currentPage}&size=${itemsPerPage}&email=${userRole=='donor' && user?.email}`)
+            //     .then(({ data }) => {
+            //         setDonationRequests(data)
+            //         if(userRole == 'donor'){
+            //             setCount(donationRequests.length)
+            //         }
+            // })
+            // },[currentPage,itemsPerPage,userRole,user?.email,donationRequests.length])
+              
+    // }
+    // else{
+    //     axiosSecure.get(`/donation-requests?page=${currentPage}&size=${itemsPerPage}`)
+    //     .then(({ data }) => setDonationRequests(data))
+        
+    // }
     useEffect(() => {
-        axiosSecure.get(`/donation-requests?page=${currentPage}&size=${itemsPerPage}`)
-            .then(({ data }) => setDonationRequests(data))
-    }, [currentPage, itemsPerPage])
+        let requestUrl = `/donation-requests?page=${currentPage}&size=${itemsPerPage}`;
 
-    useEffect(() => {
-        setFilteredDonationRequests(donationRequests)
-    }, [donationRequests])
+        if (userRole === 'donor') {
+          // Only include email for donors
+          requestUrl += `&email=${user?.email}`;
+        }
+
+        async ()=>{
+           await axiosSecure.get(requestUrl)
+            .then(({ data }) => {
+              setDonationRequests(data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      
+       
+      
+      }, [currentPage, itemsPerPage, userRole, user?.email]);
+      
+      // Use another useEffect to update the count after donationRequests has been updated
+      useEffect(() => {
+        if (userRole === 'donor') {
+          setCount(specificData);
+        }
+      }, [ userRole,specificData]);
+   
+    // useEffect(() => {
+    //     setFilteredDonationRequests(donationRequests)
+    // }, [donationRequests])
 
     // handle filter 
-    const handleFilter = async (e) => {
-        const selectedValue = e.target.value;
-        if (selectedValue === 'all') {
-            // Show all data
-            setFilteredDonationRequests(donationRequests);
-            setCount(donationRequests.length)
-            return;
-        }
-        if (selectedValue === 'active') {
-            const activeUsers = donationRequests.filter((user) => user?.status === 'active');
-            setFilteredDonationRequests(activeUsers);
-            setCount(activeUsers.length);
-            return;
-            //   await axiosSecure.get(`/all-users?status=active`)
-            //         .then(( {data} ) => {
-            //             setFilteredDonationRequests(data)
-            //             setCount(data.length)
-            //         })
-            //     console.log(filteredDonationRequests);
-            //     return;
-        }
-        if (selectedValue === 'blocked') {
-            const blockedUsers = donationRequests.filter((user) => user?.status === 'blocked');
-            setFilteredDonationRequests(blockedUsers);
-            setCount(blockedUsers.length);
-            return;
-            // axiosSecure.get(`/all-users?status=blocked`)
-            //     .then(({ data }) => setFilteredDonationRequests(data))
-            // setCount(filteredDonationRequests.length);
-            // console.log(filteredDonationRequests);
-            // return;
-        }
+    // const handleFilter = async (e) => {
+    //     const selectedValue = e.target.value;
+    //     if (selectedValue === 'all') {
+    //         // Show all data
+    //         setFilteredDonationRequests(donationRequests);
+    //         setCount(donationRequests.length)
+    //         return;
+    //     }
+    //     if (selectedValue === 'active') {
+    //         const activeUsers = donationRequests.filter((user) => user?.status === 'active');
+    //         setFilteredDonationRequests(activeUsers);
+    //         setCount(activeUsers.length);
+    //         return;
+    //         //   await axiosSecure.get(`/all-users?status=active`)
+    //         //         .then(( {data} ) => {
+    //         //             setFilteredDonationRequests(data)
+    //         //             setCount(data.length)
+    //         //         })
+    //         //     console.log(filteredDonationRequests);
+    //         //     return;
+    //     }
+    //     if (selectedValue === 'blocked') {
+    //         const blockedUsers = donationRequests.filter((user) => user?.status === 'blocked');
+    //         setFilteredDonationRequests(blockedUsers);
+    //         setCount(blockedUsers.length);
+    //         return;
+    //         // axiosSecure.get(`/all-users?status=blocked`)
+    //         //     .then(({ data }) => setFilteredDonationRequests(data))
+    //         // setCount(filteredDonationRequests.length);
+    //         // console.log(filteredDonationRequests);
+    //         // return;
+    //     }
 
-    };
+    // };
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -183,7 +237,7 @@ const MyDonationRequests = () => {
         <div className='h-screen'>
             <h3 className='text-3xl font-semibold text-red-500 text-center'>My Donation Requests</h3>
 
-            <div className="text-black mr-8 ml-5 lg:ml-0 flex gap-3 items-center ">
+            {/* <div className="text-black mr-8 ml-5 lg:ml-0 flex gap-3 items-center ">
                 <div className="text-lg mt-2 lg:mt-0 text-red-500 font-bold border-b-2">Filter By User Staus:</div>
 
                 <select onChange={handleFilter} className="rounded p-1 ml-5 lg:ml-0 mt-5 lg:mt-0 bg-red-500 text-white lg:text-lg " name="filter" id="filter"
@@ -192,9 +246,10 @@ const MyDonationRequests = () => {
                     <option value="active">Active</option>
                     <option value="blocked">Blocked</option>
                 </select>
-            </div>
+            </div> */}
 
-            <div className=" py-10 relative">
+            { donationRequests.length > 0 ?
+                <div className=" py-10 relative">
                 <table className="table table-xs">
                     {/* head */}
                     <thead>
@@ -211,7 +266,7 @@ const MyDonationRequests = () => {
                     <tbody className='font-semibold'>
 
                         {
-                            filteredDonationRequests.map(donationReq => <DonationRequstsTable key={donationReq?._id}
+                            donationRequests.map(donationReq => <DonationRequstsTable key={donationReq?._id}
                                 donationReq={donationReq}
                                 handleDelteReq={() => handleDelete(donationReq._id)}
                                 handleDone={() => handleMakeDone(donationReq._id)}
@@ -244,6 +299,11 @@ const MyDonationRequests = () => {
 
                 {/* check ends here  */}
             </div>
+            :
+            <h3 className="mt-10 font-bold text-2xl">
+                Opps!!! No Donation Request Create Yet
+            </h3>
+            }
         </div>
     );
 };
