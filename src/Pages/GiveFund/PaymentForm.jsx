@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 // import { useNavigate } from "react-router-dom";
 import axiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
+import usePaymentHistory from "../../Hooks/usePaymentHistory";
 
 
 const PaymentForm = () => {
@@ -15,6 +16,7 @@ const PaymentForm = () => {
     const elements = useElements();
     const { user } = useAuth();
     // const navigate = useNavigate();
+    const [payments,refetch] = usePaymentHistory(`/payments/${user?.email}`)
 
     const totalPrice = 100
 
@@ -89,6 +91,7 @@ const PaymentForm = () => {
                 console.log('payment saved', res.data);
                 
                 if (res.data?.paymentResult?.insertedId) {
+                    refetch();
                     Swal.fire({
                         position: "top-end",
                         icon: "success",

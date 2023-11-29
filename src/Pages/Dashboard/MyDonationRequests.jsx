@@ -286,7 +286,7 @@ const MyDonationRequests = () => {
 
 
                         {/* check ends here  */}
-                    </div> : <h3>hello world</h3>
+                    </div> : <h3 className="font-bold text-2xl mt-10">No Donation Request Created Yet.</h3>
             }
 
         </div>

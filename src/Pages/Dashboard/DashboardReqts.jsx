@@ -4,17 +4,19 @@ import { useState } from "react";
 import DonationRequstsTable from "../../components/DonationRequestsTable/DonationRequstsTable";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 const DashboardReqts = () => {
     const [donationRequests, setDonationRequests] = useState([]);
     const [filteredDonationRequests, setFilteredDonationRequests] = useState(donationRequests);
 
+    const {user} = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
-        axiosSecure.get("/all-donation-requests")
+        axiosSecure.get(`/all-donation-requests?email=${user?.email}`)
             .then(({ data }) => setDonationRequests(data))
-    }, [])
+    }, [user?.email])
     // console.log(donationRequests);
     useEffect(() => {
         setFilteredDonationRequests(donationRequests)

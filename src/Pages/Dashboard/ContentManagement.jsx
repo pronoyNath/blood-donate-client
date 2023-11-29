@@ -1,14 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
-import axiosSecure from '../../Hooks/useAxiosSecure';
 import BlogCard from '../../components/BlogCard/BlogCard';
 
 const ContentManagement = () => {
     const {user} = useAuth();
 
     // tanstack query for updated data get 
-    const { data: blogs = [], refetch } = useQuery({
+    const { data: blogs = [], isLoading } = useQuery({
         queryKey: ['blogs',user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/blogs/${user?.email}`);
