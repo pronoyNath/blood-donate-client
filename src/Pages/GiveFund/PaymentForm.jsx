@@ -82,7 +82,7 @@ const PaymentForm = () => {
                     price: totalPrice,
                     transactionId: paymentIntent.id,
                     date: new Date(), // utc date convert. use moment js to 
-                    status: 'pending'
+                    status: 'done'
                 }
 
                 const res = await axiosSecure.post('/payments', payment);
@@ -92,7 +92,7 @@ const PaymentForm = () => {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: "Thank you for the taka paisa",
+                        title: "Thank you for Donating",
                         showConfirmButton: false,
                         timer: 1500
                     });

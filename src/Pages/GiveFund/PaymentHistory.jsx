@@ -27,7 +27,7 @@ const PaymentHistory = () => {
                     <thead className="text-white bg-red-500">
                         <tr>
                             <th>#</th>
-                            <th>Doner Name</th>
+                            <th>Donor Name</th>
                             <th>Price</th>
                             <th>Transaction Id</th>
                             <th>Status</th>

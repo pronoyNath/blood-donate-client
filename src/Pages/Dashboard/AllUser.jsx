@@ -22,7 +22,7 @@ const AllUser = () => {
 
     // total user count 
     useEffect(() => {
-        fetch('https://blood-donate-server.vercel.app/user-count')
+        fetch('http://localhost:5000/user-count')
             .then(res => res.json())
             .then(data => setCount(data.count))
     }, [])
@@ -70,7 +70,7 @@ const AllUser = () => {
     const handleFilter = async (e) => {
         const selectedValue = e.target.value;
         if (selectedValue === 'all') {
-            
+
             // Show all data
             setselectedValueState(selectedValue)
             return;
@@ -91,7 +91,7 @@ const AllUser = () => {
             axiosSecure.get(`/all-users`)
                 .then(({ data }) => setAllUsers(data))
 
-            fetch('https://blood-donate-server.vercel.app/blocked-user-count')
+            fetch('http://localhost:5000/blocked-user-count')
                 .then(res => res.json())
                 .then(data => setCount(data.count))
             return;

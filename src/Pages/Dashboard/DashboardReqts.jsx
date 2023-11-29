@@ -15,7 +15,7 @@ const DashboardReqts = () => {
         axiosSecure.get("/all-donation-requests")
             .then(({ data }) => setDonationRequests(data))
     }, [])
-    console.log(donationRequests);
+    // console.log(donationRequests);
     useEffect(() => {
         setFilteredDonationRequests(donationRequests)
     }, [donationRequests])
@@ -117,51 +117,51 @@ const DashboardReqts = () => {
                 }
             })
     }
-// console.log(filteredDonationRequests.reverse());
+    // console.log(filteredDonationRequests.reverse());
     return (
         <div>
-{ filteredDonationRequests.length>0 ? 
-    <div className=''>
-    <h3 className='text-3xl font-semibold text-red-500 mt-5 border-b-2 border-b-red-500 text-center pb-5'>My Recent Donation Requests</h3>
+            {filteredDonationRequests.length > 0 ?
+                <div className=''>
+                    <h3 className='text-3xl font-semibold text-red-500 mt-5 border-b-2 border-b-red-500 text-center pb-5'>My Recent Donation Requests</h3>
 
-    <div className=" py-10 relative">
-        <table className="table table-xs">
-            {/* head */}
-            <thead>
-                <tr className='text-red-500 text-lg'>
-                    <th>Reciept Name</th>
-                    <th>Reciept Location</th>
-                    <th>Donation Date/Time</th>
-                    <th>Donation Status</th>
-                    <th>Donor Info</th>
-                    <th>Upadate/Delete</th>
-                    <th>Details</th>
-                </tr>
-            </thead>
-            <tbody className='font-semibold'>
+                    <div className=" py-10 relative">
+                        <table className="table table-xs">
+                            {/* head */}
+                            <thead>
+                                <tr className='text-red-500 text-lg'>
+                                    <th>Reciept Name</th>
+                                    <th>Reciept Location</th>
+                                    <th>Donation Date/Time</th>
+                                    <th>Donation Status</th>
+                                    <th>Donor Info</th>
+                                    <th>Upadate/Delete</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody className='font-semibold'>
 
-                { 
-                    filteredDonationRequests.slice(-3).reverse().map(donationReq => <DonationRequstsTable key={donationReq?._id}
-                        donationReq={donationReq}
-                        handleDelteReq={() => handleDelete(donationReq._id)}
-                        handleDone={() => handleMakeDone(donationReq._id)}
-                        handleCancel={() => handleMakeCancel(donationReq._id)}
-                    ></DonationRequstsTable>)
-                
-                }
+                                {
+                                    filteredDonationRequests.slice(-3).reverse().map(donationReq => <DonationRequstsTable key={donationReq?._id}
+                                        donationReq={donationReq}
+                                        handleDelteReq={() => handleDelete(donationReq._id)}
+                                        handleDone={() => handleMakeDone(donationReq._id)}
+                                        handleCancel={() => handleMakeCancel(donationReq._id)}
+                                    ></DonationRequstsTable>)
 
-            </tbody>
-        </table>
-    </div>
-    <Link to={'/dashboard/my-donation-requests'}>
-    <button className="btn w-full bg-red-800 text-white uppercase hover:scale-105 transform transition-transform duration-300 hover:bg-red-500">view my all requests</button>
-    </Link>
-</div>
+                                }
 
-: 
+                            </tbody>
+                        </table>
+                    </div>
+                    <Link to={'/dashboard/my-donation-requests'}>
+                        <button className="btn w-full bg-red-800 text-white uppercase hover:scale-105 transform transition-transform duration-300 hover:bg-red-500">view my all requests</button>
+                    </Link>
+                </div>
 
-""
-}
+                :
+
+                ""
+            }
 
 
         </div>

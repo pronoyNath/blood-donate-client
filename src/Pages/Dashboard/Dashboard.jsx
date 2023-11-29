@@ -3,6 +3,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useUserRole from "../../Hooks/useUserRole";
 import DashboardReqts from "./DashboardReqts";
+import AdminDashboard from "./AdminDashboard";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
@@ -101,14 +102,17 @@ const Dashboard = () => {
 
         {
           isDashboardActive &&
-          <div className="h-screen">
-           <div className="text-center space-y-5 border border-dashed border-red-500 p-5">
-           <h1 className="text-3xl font-semibold ">Welcome <span className="text-red-500">{user?.displayName}</span></h1>
-            <p className="font-semibold text-xl">
-              "Welcome to our Blood Donation Community! Your decision to be here makes a life-saving impact. Explore, donate, and be a hero today. Together, we make a difference!"</p>
-           </div>
+          <div className="h-screen w-1/2 md:w-full">
+            <div className="text-center space-y-5 border border-dashed border-red-500 p-5">
+              <h1 className="text-lg md:text-3xl font-semibold ">Welcome <span className="text-red-500">{user?.displayName}</span></h1>
+              <p className="font-semibold text-base md:text-xl">
+                "Welcome to our Blood Donation Community! Your decision to be here makes a life-saving impact. Explore, donate, and be a hero today. Together, we make a difference!"</p>
+            </div>
+            {
+              userRole == 'admin' | userRole == 'volunteer' ? <AdminDashboard></AdminDashboard>
+                : <DashboardReqts></DashboardReqts>
+            }
 
-              <DashboardReqts></DashboardReqts>
           </div>
         }
         <Outlet></Outlet>
