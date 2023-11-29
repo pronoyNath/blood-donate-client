@@ -16,6 +16,7 @@ const PaymentForm = () => {
     const elements = useElements();
     const { user } = useAuth();
     // const navigate = useNavigate();
+    
     const [payments,refetch] = usePaymentHistory(`/payments/${user?.email}`)
 
     const totalPrice = 100

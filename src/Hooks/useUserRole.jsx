@@ -10,7 +10,7 @@ const useUserRole = () => {
     // const axiosPUblic = useAxiosPublic();
 
     //using tanstack query
-    const { data: userRole, isLoading } = useQuery({
+    const { data: userRole, isLoading,refetch } = useQuery({
         enabled: !loading && !!user?.email,
         queryFn: async () => {
             const res = await axiosSecure.get(`/user/${user?.email}`)
@@ -19,7 +19,7 @@ const useUserRole = () => {
         },
         queryKey: ['userRole']
     })
-    return [userRole, isLoading]
+    return [userRole, isLoading,refetch]
 };
 
 export default useUserRole;

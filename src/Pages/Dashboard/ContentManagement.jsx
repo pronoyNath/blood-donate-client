@@ -2,15 +2,16 @@ import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 import BlogCard from '../../components/BlogCard/BlogCard';
+import axiosSecure from '../../hooks/useAxiosSecure';
 
 const ContentManagement = () => {
     const {user} = useAuth();
 
     // tanstack query for updated data get 
-    const { data: blogs = [], isLoading } = useQuery({
+    const { data: blogs = [], isLoading,refetch } = useQuery({
         queryKey: ['blogs',user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/blogs/${user?.email}`);
+            const res = await axiosSecure.get(`/blogs`);
             return res.data.reverse();
         }
     })
@@ -29,7 +30,7 @@ const ContentManagement = () => {
             <div className='grid grid-cols-1 gap-10'>
                 
                 {
-                   blogs.length>0 ? blogs.map(blog=><BlogCard 
+                   blogs.length>0 ? blogs.map(blog=><BlogCard refetch={refetch}
                         key={blog._id}
                         blog={blog}
                     ></BlogCard>) 
