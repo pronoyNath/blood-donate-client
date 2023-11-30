@@ -8,7 +8,7 @@ import { ImSpinner9 } from "react-icons/im";
 
 
 const CreateDonationReq = () => {
-    const { user,loading } = useAuth();
+    const { user, loading } = useAuth();
     const [districts, setDistricts] = useState([]);
     const [upazilas, setUpazilas] = useState([]);
 
@@ -17,6 +17,7 @@ const CreateDonationReq = () => {
     const [selectedUpazila, setSelectedUpazila] = useState('');
     const navigate = useNavigate();
 
+    const [userStatus,setUserStatus] = useState('');
     // district data load 
     useEffect(() => {
         fetch('/districts.json')
@@ -38,7 +39,7 @@ const CreateDonationReq = () => {
     }, [selectedDistrict, upazilas]);
 
 
-    const handleCreateDonation = (e)=>{
+    const handleCreateDonation = (e) => {
         e.preventDefault();
 
         const form = new FormData(e.currentTarget);
@@ -53,8 +54,8 @@ const CreateDonationReq = () => {
         const requestMessage = form.get('requestMessage')
 
         const createDonatipon = {
-            requesterName : user?.displayName,
-            requesterEmail : user?.email,
+            requesterName: user?.displayName,
+            requesterEmail: user?.email,
             recieptName,
             address,
             hospitalName,
@@ -64,28 +65,32 @@ const CreateDonationReq = () => {
             district: districts.find(district => district.id === selectedDistrict)?.name,
             upazila: upazilas.find(upazila => upazila.id === selectedUpazila)?.name,
             requestMessage,
-            donationStatus : 'pending'
+            donationStatus: 'pending'
         }
         // console.log(createDonatipon);
 
-        axiosSecure.post('/donation-request',createDonatipon)
-        .then(({data})=>{
-            if(data?.acknowledged){
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Register Successfully",
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-            }
-            navigate('/dashboard')
-        })
+        axiosSecure.post('/donation-request', createDonatipon)
+            .then(({ data }) => {
+                if (data?.acknowledged) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Register Successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                navigate('/dashboard')
+            })
     }
 
+    //geting user status
+    useEffect(() => {
+        axiosSecure.get(`/blocked-user/${user?.email}`)
+        .then(({data})=>setUserStatus(data.status))
+    }, [user?.email])
 
-
-
+// console.log(userStatus);
     return (
         <div className="">
             <h3 className="text-red-500 font-bold text-2xl">Create Donation Request</h3>
@@ -106,7 +111,7 @@ const CreateDonationReq = () => {
                             <label className="block text-sm text-left">Adress:</label>
                             <input required type="text" name="address" id="email" placeholder="full address" className="w-full px-3 py-3 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
                         </div>
-                     
+
 
                         <div className="space-y-2 flex-1" >
                             <div className="flex justify-between" >
@@ -143,11 +148,11 @@ const CreateDonationReq = () => {
                             <label className="block text-sm text-left">Hospital Name</label>
                             <input required type="text" name="hospitalName" id="email" placeholder="hospital name" className="w-full px-3 py-3 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
                         </div>
-                        
+
                     </div>
                     <div className='flex gap-5'>
 
-                      
+
 
 
 
@@ -204,18 +209,23 @@ const CreateDonationReq = () => {
                             <label name="password" className="text-sm">Request Message</label>
                         </div>
                         <textarea required type="text" name="requestMessage" id="password" placeholder="why you need blood write in details..." className="w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
-                   
-                    </div>
-                  
-                </div>
-                
 
-                <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-red-800 hover:scale-105 transform transition-transform duration-300 hover:bg-red-500 dark:text-white">
+                    </div>
+
+                </div>
+
+
                 {
-                                        loading ? <ImSpinner9 className='mx-auto animate-spin text-xl'></ImSpinner9> :
-                                            'Create Request'
-                                    }
+                    userStatus === 'blocked' && 
+                    <button className="w-full btn-neutral uppercase px-8 py-3 font-semibold rounded-md dark:text-white">You are blocked</button>
+                    || userStatus == 'active' && 
+                    <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-red-800 hover:scale-105 transform transition-transform duration-300 hover:bg-red-500 dark:text-white">
+                    {
+                        loading ? <ImSpinner9 className='mx-auto animate-spin text-xl'></ImSpinner9> :
+                            'Create Request'
+                    }
                 </button>
+                }
             </form>
         </div>
     );
