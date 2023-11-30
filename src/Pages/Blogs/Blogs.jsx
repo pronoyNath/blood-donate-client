@@ -1,8 +1,16 @@
 import useBlogs from '../../Hooks/useBlogs';
+import useLoader from '../../Hooks/useLoader';
 import PublicBlogCard from '../../components/PublicBlogCard/PublicBlogCard';
 
 const Blogs = () => {
     const [blogs,isLoading,refetch] = useBlogs();
+    const loader = useLoader(isLoading);
+
+    const publishedBlogs = blogs.filter(blog=>blog.blogStatus === 'publish')
+
+    if(isLoading){
+        return loader;
+    }
     return (
         <div className=' pt-36 pb-10 bg-gray-800'>
             <div className='max-w-6xl  mx-auto'>
@@ -11,9 +19,9 @@ const Blogs = () => {
                 <p className='text-center mb-5 text-xl border-b border-b-red-500 pb-2 font-semibold text-white'>Life in Every Drop: Inspiring Tales of Blood Donation and Lifesaving Moments</p>
             </div>
              <div className='grid grid-cols-1 gap-10'>
-                {blogs.length > 0 ? (
-                    blogs.map(blog => (
-                        <PublicBlogCard refetch={refetch} key={blog._id} blog={blog}></PublicBlogCard>
+                {publishedBlogs.length > 0 ? (
+                    publishedBlogs.map(blog => (
+                        <PublicBlogCard  key={blog._id} blog={blog}></PublicBlogCard>
                     ))
                 ) : (
                     <div className='h-screen'>

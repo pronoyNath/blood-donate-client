@@ -4,11 +4,12 @@ import useUserRole from '../../Hooks/useUserRole';
 import { useEffect } from 'react';
 import axiosSecure from '../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
-const BlogCard = ({ blog, refetch }) => {
+const BlogCard = ({ blog,setFilter }) => {
     // console.log(Object.keys(blog).join(","));
     const [userRole, isLoading] = useUserRole();
-
+    const navigate = useNavigate();
     const { user } = useAuth();
     // console.log(user);
     const { _id, blogTitle, imageURL, content, email, blogStatus } = blog;
@@ -21,7 +22,7 @@ const BlogCard = ({ blog, refetch }) => {
         axiosSecure.put(`/pulish-blog/${_id}`, { blogStatus })
             .then(({ data }) => {
                 if (data?.acknowledged) {
-                    
+                    setFilter('all')
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -29,7 +30,8 @@ const BlogCard = ({ blog, refetch }) => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    refetch();
+                    // refetch();
+                    navigate('/dashboard/content-management')
                 }
             })
 
@@ -41,7 +43,7 @@ const BlogCard = ({ blog, refetch }) => {
         axiosSecure.put(`/draft-blog/${_id}`, { blogStatus })
             .then(({ data }) => {
                 if (data?.acknowledged) {
-                    
+                    setFilter('all')
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -49,7 +51,8 @@ const BlogCard = ({ blog, refetch }) => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    refetch();
+                    // refetch();
+                    navigate('/dashboard/content-management')
                 }
             })
 
@@ -75,7 +78,9 @@ const BlogCard = ({ blog, refetch }) => {
                                 text: "Post has been deleted.",
                                 icon: "success"
                             });
-                            refetch();
+                            // refetch();
+                            setFilter('all')
+                            navigate('/dashboard/content-management')
                         }
                     });
 

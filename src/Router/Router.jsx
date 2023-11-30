@@ -46,7 +46,7 @@ const router = createBrowserRouter([
 
       {
         path: '/give-fund',
-        element: <GiveFund></GiveFund>
+        element:<PrivateRoute> <GiveFund></GiveFund></PrivateRoute>
       }
     ]
   },

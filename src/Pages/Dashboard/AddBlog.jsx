@@ -57,6 +57,7 @@ console.log(user);
                     timer: 1500
                   });
                   navigate('/dashboard/content-management')
+
             }
         })
         .catch(err=>{

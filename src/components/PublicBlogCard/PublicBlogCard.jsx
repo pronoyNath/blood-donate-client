@@ -1,11 +1,9 @@
 import parse from 'html-react-parser';
 import useAuth from "../../Hooks/useAuth";
 
-const PublicBlogCard = ({ blog, refetch }) => {
+const PublicBlogCard = ({ blog }) => {
     // console.log(Object.keys(blog).join(","));
 
-    const { user } = useAuth();
-    // console.log(user);
     const { _id, blogTitle, imageURL, content, email, blogStatus,userName,userImg } = blog;
 
     return (
