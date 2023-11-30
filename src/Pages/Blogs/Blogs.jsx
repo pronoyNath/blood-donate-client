@@ -1,9 +1,21 @@
+import { useQuery } from '@tanstack/react-query';
 import useBlogs from '../../Hooks/useBlogs';
 import useLoader from '../../Hooks/useLoader';
 import PublicBlogCard from '../../components/PublicBlogCard/PublicBlogCard';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const Blogs = () => {
-    const [blogs,isLoading,refetch] = useBlogs();
+    // const [blogs,isLoading,refetch] = useBlogs();
+
+    const { data: blogs = [], isLoading, refetch } = useQuery({
+            queryKey: ['blogs'],
+            queryFn: async () => {
+                const res = await axios.get(`http://localhost:5000/blogs`);
+                return res.data.reverse();
+            }
+        })
+
     const loader = useLoader(isLoading);
 
     const publishedBlogs = blogs.filter(blog=>blog.blogStatus === 'publish')

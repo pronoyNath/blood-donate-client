@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/donation-requests',
-        element: <DonationRequests></DonationRequests>
+        element: <PrivateRoute><DonationRequests></DonationRequests></PrivateRoute>
       },
       {
         path: '/blogs',

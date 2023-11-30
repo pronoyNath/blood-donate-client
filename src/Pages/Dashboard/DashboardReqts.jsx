@@ -5,12 +5,13 @@ import DonationRequstsTable from "../../components/DonationRequestsTable/Donatio
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import useUserRole from "../../Hooks/useUserRole";
 
 const DashboardReqts = () => {
     const [donationRequests, setDonationRequests] = useState([]);
     const [filteredDonationRequests, setFilteredDonationRequests] = useState(donationRequests);
-
-    const {user} = useAuth();
+    const [userRole] = useUserRole();
+    const { user } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -148,6 +149,7 @@ const DashboardReqts = () => {
                                         handleDelteReq={() => handleDelete(donationReq._id)}
                                         handleDone={() => handleMakeDone(donationReq._id)}
                                         handleCancel={() => handleMakeCancel(donationReq._id)}
+                                        userRole={userRole}
                                     ></DonationRequstsTable>)
 
                                 }
