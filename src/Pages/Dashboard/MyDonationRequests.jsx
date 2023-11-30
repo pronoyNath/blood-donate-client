@@ -68,24 +68,24 @@ const MyDonationRequests = () => {
             // Only include email for donors
             requestUrl += `&email=${user?.email}`;
             axiosSecure.get(requestUrl)
-            .then(({ data }) => {
-                setDonationRequests(data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+                .then(({ data }) => {
+                    setDonationRequests(data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
-        else if(userRole ==='admin' | userRole === 'volunteer'){
+        else if (userRole === 'admin' | userRole === 'volunteer') {
             axiosSecure.get(requestUrl)
-            .then(({ data }) => {
-                setDonationRequests(data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+                .then(({ data }) => {
+                    setDonationRequests(data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
 
-        
+
 
     }, [currentPage, itemsPerPage, userRole, user?.email]);
 
@@ -96,7 +96,7 @@ const MyDonationRequests = () => {
         }
     }, [userRole, specificData]);
 
-    
+
     //     setFilteredDonationRequests(donationRequests)
     // }, [donationRequests])
 
@@ -233,7 +233,10 @@ const MyDonationRequests = () => {
 
     return (
         <div className='h-screen'>
-            <h3 className='text-3xl font-semibold text-red-500 text-center'>My Donation Requests</h3>
+            <h3 className='text-3xl font-semibold text-red-500 text-center'>
+                {userRole === 'admin' | userRole === 'volunteer' && 'All ' || userRole === 'donor' && 'My '}
+                Donatin Requests
+            </h3>
 
             {
                 donationRequests.length > 0 ?
@@ -259,6 +262,7 @@ const MyDonationRequests = () => {
                                         handleDelteReq={() => handleDelete(donationReq._id)}
                                         handleDone={() => handleMakeDone(donationReq._id)}
                                         handleCancel={() => handleMakeCancel(donationReq._id)}
+                                        userRole = {userRole}
                                     ></DonationRequstsTable>)
                                 }
 
