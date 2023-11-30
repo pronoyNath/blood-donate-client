@@ -154,7 +154,6 @@ const Register = () => {
     return (
         <>
 
-            {/* <PageTitle title={"Register | Grand Hotel"}></PageTitle> */}
 
             <div className="hero -mt-12 min-h-[900px] overflow-x-hidden" style={{ backgroundImage: 'url(https://i.ibb.co/bryRbkv/nguy-n-hi-p-2r-NHli-X6-XHk-unsplash.jpg)' }}>
                 <div className="hero-overlay bg-opacity-60"></div>

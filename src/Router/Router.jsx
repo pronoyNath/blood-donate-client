@@ -21,6 +21,7 @@ import DonaitonDetails from "../Pages/Dashboard/DonaitonDetails";
 import UpdateDonationInfo from "../Pages/Dashboard/UpdateDonationInfo";
 import ContentManagement from "../Pages/Dashboard/ContentManagement";
 import AddBlog from "../Pages/Dashboard/AddBlog";
+import SearchPage from "../Pages/SearchPage/SearchPage";
 
 const router = createBrowserRouter([
   {
@@ -39,14 +40,14 @@ const router = createBrowserRouter([
         path: '/blogs',
         element: <Blogs></Blogs>
       },
-      // {
-      //   path: '/hello',
-      //   element: <Hello></Hello>
-      // },
+      {
+        path: '/search-donor',
+        element: <SearchPage></SearchPage>
+      },
 
       {
         path: '/give-fund',
-        element:<PrivateRoute> <GiveFund></GiveFund></PrivateRoute>
+        element: <PrivateRoute> <GiveFund></GiveFund></PrivateRoute>
       }
     ]
   },
@@ -104,12 +105,12 @@ const router = createBrowserRouter([
   {
     path: 'donation-details/:id',
     element: <PrivateRoute><DonaitonDetails></DonaitonDetails></PrivateRoute>
-    // loader: ({ params }) => fetch(`http://localhost:5000/donation-details/${params.id}`)
+    // loader: ({ params }) => fetch(`https://blood-donate-server.vercel.app/donation-details/${params.id}`)
   },
   {
     path: 'update-donation-info/:id',
     element: <PrivateRoute><UpdateDonationInfo></UpdateDonationInfo></PrivateRoute>,
-    loader: ({ params }) => fetch(`http://localhost:5000/donation-details/${params.id}`)
+    loader: ({ params }) => fetch(`https://blood-donate-server.vercel.app/donation-details/${params.id}`)
   }
 ]);
 

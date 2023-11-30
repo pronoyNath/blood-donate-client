@@ -15,11 +15,8 @@ const Banner = () => {
                       {/* <Link to={'/register'}> */}
                       <button onClick={()=>navigate('/register')} className="btn px-10 hover:bg-red-500 bg-red-800 border-none text-white uppercase hover:scale-110 transform transition-transform duration-300">Join as a donor <FaHeartCirclePlus className="text-3xl animate-pulse" /></button>
                       {/* </Link> */}
-
-                        <div className="join hover:scale-110 transform transition-transform duration-300">
-                            <input type="text" placeholder="Search Donors" className="input input-bordered join-item text-black" />
-                            <button className="btn btn-red-800 hover:bg-red-500 border-none bg-red-800 join-item text-white">Search</button>
-                        </div>
+                      <button onClick={()=>navigate('/search-donor')} className="btn px-10 hover:bg-red-500 bg-red-800 border-none text-white uppercase hover:scale-110 transform transition-transform duration-300">Search Donor</button>
+                        
                     </div>
                 </div>
             </div>

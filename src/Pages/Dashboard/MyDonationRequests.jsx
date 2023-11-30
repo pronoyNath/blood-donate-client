@@ -26,14 +26,14 @@ const MyDonationRequests = () => {
 
     // all req count 
     useEffect(() => {
-        fetch('http://localhost:5000/donation-requst-count')
+        fetch('https://blood-donate-server.vercel.app/donation-requst-count')
             .then(res => res.json())
             .then(data => setAllReqCount(data.count))
     }, [])
 
     // specific req count 
     useEffect(() => {
-        fetch(`http://localhost:5000/donation-requst-count/${user?.email}`)
+        fetch(`https://blood-donate-server.vercel.app/donation-requst-count/${user?.email}`)
             .then(res => res.json())
             .then(data => setSpecificData(data.length))
     }, [user?.email])
@@ -262,7 +262,7 @@ const MyDonationRequests = () => {
                                         handleDelteReq={() => handleDelete(donationReq._id)}
                                         handleDone={() => handleMakeDone(donationReq._id)}
                                         handleCancel={() => handleMakeCancel(donationReq._id)}
-                                        userRole = {userRole}
+                                        userRole={userRole}
                                     ></DonationRequstsTable>)
                                 }
 
