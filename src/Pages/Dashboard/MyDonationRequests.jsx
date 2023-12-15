@@ -26,14 +26,14 @@ const MyDonationRequests = () => {
 
     // all req count 
     useEffect(() => {
-        fetch('https://blood-donate-server.vercel.app/donation-requst-count')
+        fetch('http://localhost:5000/donation-requst-count')
             .then(res => res.json())
             .then(data => setAllReqCount(data.count))
     }, [])
 
     // specific req count 
     useEffect(() => {
-        fetch(`https://blood-donate-server.vercel.app/donation-requst-count/${user?.email}`)
+        fetch(`http://localhost:5000/donation-requst-count/${user?.email}`)
             .then(res => res.json())
             .then(data => setSpecificData(data.length))
     }, [user?.email])
@@ -177,16 +177,30 @@ const MyDonationRequests = () => {
         )
             .then(({ data }) => {
                 if (data?.modifiedCount > 0) {
-                    setFilteredDonationRequests((previous) => {
-                        previous.forEach((itm) => {
-                            if (itm._id == id) {
-                                itm.donationStatus = "done"
-                            }
+                    
+        // console.log("updated");
+                    let requestUrl = `/donation-requests?page=${currentPage}&size=${itemsPerPage}`;
 
-                        })
-
-                        return [...previous]
-                    })
+                    if (userRole === 'donor') {
+                        // Only include email for donors
+                        requestUrl += `&email=${user?.email}`;
+                        axiosSecure.get(requestUrl)
+                            .then(({ data }) => {
+                                setDonationRequests(data);
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                    }
+                    else if (userRole === 'admin' | userRole === 'volunteer') {
+                        axiosSecure.get(requestUrl)
+                            .then(({ data }) => {
+                                setDonationRequests(data);
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                    }
 
                     Swal.fire({
                         position: "top-end",

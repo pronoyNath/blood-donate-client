@@ -105,12 +105,12 @@ const router = createBrowserRouter([
   {
     path: 'donation-details/:id',
     element: <PrivateRoute><DonaitonDetails></DonaitonDetails></PrivateRoute>
-    // loader: ({ params }) => fetch(`https://blood-donate-server.vercel.app/donation-details/${params.id}`)
+    // loader: ({ params }) => fetch(`http://localhost:5000/donation-details/${params.id}`)
   },
   {
     path: 'update-donation-info/:id',
     element: <PrivateRoute><UpdateDonationInfo></UpdateDonationInfo></PrivateRoute>,
-    loader: ({ params }) => fetch(`https://blood-donate-server.vercel.app/donation-details/${params.id}`)
+    loader: ({ params }) => fetch(`http://localhost:5000/donation-details/${params.id}`)
   }
 ]);
 

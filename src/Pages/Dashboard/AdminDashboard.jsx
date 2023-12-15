@@ -9,21 +9,21 @@ const AdminDashboard = () => {
 
     // total user count 
     useEffect(() => {
-        fetch('https://blood-donate-server.vercel.app/user-count')
+        fetch('http://localhost:5000/user-count')
             .then(res => res.json())
             .then(data => setTotalUsers(data.count))
     }, [])
 
     //total funds
     useEffect(() => {
-        fetch('https://blood-donate-server.vercel.app/fund-count')
+        fetch('http://localhost:5000/fund-count')
             .then(res => res.json())
             .then(data => setTotalFunds(data?.totalPrice))
     }, [])
 
     //total donation req count
     useEffect(() => {
-        fetch('https://blood-donate-server.vercel.app/doantion-req-count')
+        fetch('http://localhost:5000/doantion-req-count')
             .then(res => res.json())
             .then(data => setTotalDonationReq(data.count))
     }, [])

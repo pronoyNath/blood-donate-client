@@ -268,6 +268,8 @@ const Register = () => {
                                         <input required type="password" name="confirmPassword" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
                                     </div>
                                 </div>
+
+
                                 {
                                     registerError && <div className='text-red-500 flex items-center justify-center gap-2'><FaBan /> {registerError}</div>
                                 }
@@ -278,6 +280,12 @@ const Register = () => {
                                             'Register'
                                     }
                                 </button>
+
+
+                                
+                                <div>
+                                    <h3 className='text-yellow-300'>For Demo Login, please visit login page</h3>
+                                </div>
                             </form>
                         </div>
                     </div>

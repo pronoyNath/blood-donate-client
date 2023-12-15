@@ -40,7 +40,7 @@ const Login = () => {
                     title: "Logged in Successfully",
                     showConfirmButton: false,
                     timer: 1500
-                  });
+                });
                 navigate(location?.state ? location?.state : '/')
             })
             .catch(err => {
@@ -53,7 +53,7 @@ const Login = () => {
                     title: "Sorry, Try Again!",
                     showConfirmButton: false,
                     timer: 1500
-                  });
+                });
 
             })
 
@@ -64,7 +64,7 @@ const Login = () => {
     return (
         <>
             {/* <PageTitle title={"Login | Grand Hotel"}></PageTitle> */}
-            
+
             <div className="hero -mt-20 min-h-[700px] overflow-x-hidden" style={{ backgroundImage: 'url(https://i.ibb.co/GdTntPk/R-1.jpg)' }}>
                 <div className="hero-overlay bg-opacity-60"></div>
                 <div className="hero-content  text-neutral-content">
@@ -79,7 +79,7 @@ const Login = () => {
                             <p className="text-sm text-center dark:text-gray-400 hover:scale-110 transform transition-transform duration-300">Dont have account?
                                 <Link to='/register' rel="noopener noreferrer" className="focus:underline hover:underline ml-5 text-red-500 text-xl">Register here</Link>
                             </p>
-                           
+
                             <form onSubmit={handleLogin} action="" className="space-y-8">
                                 <div className="space-y-4" >
                                     <div className="space-y-2" >
@@ -100,6 +100,11 @@ const Login = () => {
                                         loading ? <ImSpinner9 className='mx-auto animate-spin text-xl'></ImSpinner9> : 'Login'
                                     }
                                 </button>
+
+                                <div className="text-yellow-300">
+                                    <h3>Admin-Email: a@b.com , Admin-Password: 121212A#</h3>
+                                    <h3>Volunteer-Email: n@y.com , Volunteer-Password: 121212A#</h3>
+                                </div>
                             </form>
                         </div>
                     </div>

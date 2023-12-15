@@ -3,6 +3,7 @@ import UserDataTable from '../../components/UserDataTable/UserDataTable';
 import axiosSecure from '../../hooks/useAxiosSecure';
 import './AllUser.css'
 import Swal from 'sweetalert2';
+import { useQuery } from '@tanstack/react-query';
 
 
 const AllUser = () => {
@@ -11,6 +12,7 @@ const AllUser = () => {
     const [filteredUser, setFilteredUser] = useState(allUsers);
     const [selectedValueState, setselectedValueState] = useState('all');
 
+    
     // paging code 
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 4;
@@ -22,10 +24,18 @@ const AllUser = () => {
 
     // total user count 
     useEffect(() => {
-        fetch('https://blood-donate-server.vercel.app/user-count')
+        fetch('http://localhost:5000/user-count')
             .then(res => res.json())
             .then(data => setCount(data.count))
     }, [])
+
+    
+
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/active-user-count')
+    //         .then(res => res.json())
+    //         // .then(data => setCount(data.count))
+    // }, [])
 
 
     const handlePrevPage = () => {
@@ -49,7 +59,18 @@ const AllUser = () => {
     // console.log(allUsers);
 
 
+    // using tanstack
+    // const { data } = useQuery({
+    //     queryKey: ['data'],
+    //     queryFn: async () => {
+    //         const res = await axiosSecure.get(`/all-users?page=${currentPage}&size=${itemsPerPage}`);
+    //         return res.data;
+    //     }
+    // })
+    // console.log("data", data);
 
+
+    //selected data load
     useEffect(() => {
 
         if (selectedValueState == 'all') {
@@ -91,7 +112,7 @@ const AllUser = () => {
             axiosSecure.get(`/all-users`)
                 .then(({ data }) => setAllUsers(data))
 
-            fetch('https://blood-donate-server.vercel.app/blocked-user-count')
+            fetch('http://localhost:5000/blocked-user-count')
                 .then(res => res.json())
                 .then(data => setCount(data.count))
             return;
