@@ -2,7 +2,7 @@
 
 const ContactUs = () => {
     return (
-        <section className="py-10 dark:bg-gray-800 dark:text-gray-50">
+        <section className="py-10 bg-gray-800 text-gray-50">
             <div className="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x" >
                 <div className="py-6 md:py-0 md:px-6 mt-10" >
                     <h1 className="text-4xl font-bold">Get in touch</h1>
@@ -32,15 +32,15 @@ const ContactUs = () => {
                 <form className="flex flex-col py-6 space-y-6 md:py-0 md:px-6">
                     <label className="block">
                         <span className="mb-1">Full name</span>
-                        <input type="text" placeholder="your name" className="block w-full border border-white p-5 rounded-md shadow-sm focus:ring focus:ri focus:ri dark:bg-gray-800" />
+                        <input type="text" placeholder="your name" className="block w-full border border-white p-5 rounded-md shadow-sm focus:ring focus:ri focus:ri bg-gray-800" />
                     </label>
                     <label className="block">
                         <span className="mb-1">Email address</span>
-                        <input type="email" placeholder="xyz@gmail.com" className="block w-full border border-white p-5 rounded-md shadow-sm focus:ring focus:ri focus:ri dark:bg-gray-800" />
+                        <input type="email" placeholder="xyz@gmail.com" className="block w-full border border-white p-5 rounded-md shadow-sm focus:ring focus:ri focus:ri bg-gray-800" />
                     </label>
                     <label className="block">
                         <span className="mb-1">Message</span>
-                        <textarea rows="3" className="block w-full border border-white p-5 rounded-md focus:ring focus:ri focus:ri dark:bg-gray-800"></textarea>
+                        <textarea rows="3" className="block w-full border border-white p-5 rounded-md focus:ring focus:ri focus:ri bg-gray-800"></textarea>
                     </label>
                     <button type="button" className="hover:scale-105 transform transition-transform duration-300 text-white  px-8 py-3 text-lg rounded    hover:bg-red-500 bg-red-800 ">Submit</button>
                 </form>

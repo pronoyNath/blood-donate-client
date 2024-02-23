@@ -12,7 +12,7 @@ const AllUser = () => {
     const [filteredUser, setFilteredUser] = useState(allUsers);
     const [selectedValueState, setselectedValueState] = useState('all');
 
-    
+
     // paging code 
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 4;
@@ -24,15 +24,15 @@ const AllUser = () => {
 
     // total user count 
     useEffect(() => {
-        fetch('http://localhost:5000/user-count')
+        fetch('https://blood-donate-server.vercel.app/user-count')
             .then(res => res.json())
             .then(data => setCount(data.count))
     }, [])
 
-    
+
 
     // useEffect(() => {
-    //     fetch('http://localhost:5000/active-user-count')
+    //     fetch('https://blood-donate-server.vercel.app/active-user-count')
     //         .then(res => res.json())
     //         // .then(data => setCount(data.count))
     // }, [])
@@ -112,7 +112,7 @@ const AllUser = () => {
             axiosSecure.get(`/all-users`)
                 .then(({ data }) => setAllUsers(data))
 
-            fetch('http://localhost:5000/blocked-user-count')
+            fetch('https://blood-donate-server.vercel.app/blocked-user-count')
                 .then(res => res.json())
                 .then(data => setCount(data.count))
             return;

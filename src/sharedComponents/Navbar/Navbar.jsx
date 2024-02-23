@@ -1,12 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
 import { FaFileWaveform } from "react-icons/fa6";
 import useAuth from "../../Hooks/useAuth";
-
+import logo from '../../assets/bloodLogo2.png'
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
-    
-
 
     const handleLogOut = () => {
         logOut()
@@ -45,36 +43,32 @@ const Navbar = () => {
 
             </NavLink>
         </li>
-       {user && 
-        <li className="text-xl hover:scale-110 transform transition-transform duration-300">
-        <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-                isActive ? "active text-red-500 border-b-4 border-red-500" : ""
-            }
-        >
-            Dashboard
+        {user &&
+            <li className="text-xl hover:scale-110 transform transition-transform duration-300">
+                <NavLink
+                    to="/dashboard"
+                    className={({ isActive }) =>
+                        isActive ? "active text-red-500 border-b-4 border-red-500" : ""
+                    }
+                >
+                    Dashboard
 
-        </NavLink>
-    </li>
-       }
-        <li className="text-xl hover:scale-110 transform transition-transform duration-300">
-            <NavLink
-                to="/give-fund"
-                className={({ isActive }) =>
-                    isActive ? "active text-red-500 border-b-4 border-red-500" : ""
-                }
-            >
-                Give Fund
+                </NavLink>
+            </li>
+        }
 
-            </NavLink>
-        </li>
     </>
 
     return (
 
-        <div className="navbar max-w-6xl mx-auto">
-            <div className="navbar-start">
+        <div className="navbar max-w-7xl mx-auto">
+
+            <div className="navbar-start hidden lg:flex">
+                <ul className="flex gap-7 px-1 text-xl">
+                    {links}
+                </ul>
+            </div>
+            <div className="navbar-center justify-center">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
@@ -84,26 +78,29 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div>
-                    <Link to='/' className=" text-xl">
-                        <img src="https://i.ibb.co/64XsX5Z/blood-Logo2.png" alt="" className='w-[180px] h-[100px] hover:scale-110 transform transition-transform duration-300' />
+                    <Link to='/' className="hidden md:block text-xl">
+                        <img src={logo} alt="" className='w-[80px] h-[80px] hover:scale-110 transform transition-transform duration-300' />
                     </Link>
                 </div>
             </div>
-            <div className="navbar hidden lg:flex ">
-                <ul className="flex gap-5 px-1 text-xl">
-                    {links}
-                </ul>
-            </div>
-            <div className="navbar-end hover:scale-110 transform transition-transform duration-300">
-           {
-            user ? <Link onClick={handleLogOut} className="btn px-10 hover:bg-red-500 bg-red-700 border-none text-white uppercase">Log out<FaFileWaveform className="text-2xl animate-bounce" />
-            </Link>
-            : <Link to='/register' className="btn px-10 hover:bg-red-500 bg-red-700 border-none text-white uppercase">Register Now <FaFileWaveform className="text-2xl animate-bounce" />
-            </Link>
-           }
-           
-           
-                
+            <div className="navbar-end gap-7 hover:scale-110 transform transition-transform duration-300">
+                <button className="text-xl hover:scale-110 transform transition-transform duration-300">
+                    <NavLink
+                        to="/give-fund"
+                        className={({ isActive }) =>
+                            isActive ? "active text-red-500 border-b-4 border-red-500" : ""
+                        }
+                    >
+                        Give Fund
+
+                    </NavLink>
+                </button>
+                {
+                    user ? <Link onClick={handleLogOut} className="btn px-10 hover:bg-red-500 bg-red-700 border-none text-white uppercase">Log out<FaFileWaveform className="text-2xl animate-bounce" />
+                    </Link>
+                        : <Link to='/register' className="btn px-10 hover:bg-red-500 bg-red-700 border-none text-white uppercase">Register Now <FaFileWaveform className="text-2xl animate-bounce" />
+                        </Link>
+                }
             </div>
         </div>
     );

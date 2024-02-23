@@ -98,7 +98,7 @@ const Dashboard = () => {
           ))}
         </ul>
       </div>
-      <div className=" flex-1 p-7 z-0bg-gray-700">
+      <div className=" flex-1 p-7 z-0">
 
         {
           isDashboardActive &&

@@ -163,9 +163,9 @@ const Register = () => {
                             <Lottie animationData={bloodDonateAnimation} className='h-96 w-96'></Lottie>
                         </div>
 
-                        <div className="w-full max-w-xl p-4 rounded-md shadow sm:p-8 bg-gray-800 dark:text-gray-100" >
+                        <div className="w-full max-w-xl p-4 rounded-md shadow sm:p-8 bg-gray-800 text-gray-100" >
                             <h2 className="mb-3 text-3xl font-semibold text-center">Register Your Account</h2>
-                            <p className="text-sm text-center dark:text-gray-400 hover:scale-110 transform transition-transform duration-300">Already have account?
+                            <p className="text-sm text-center text-gray-400 hover:scale-110 transform transition-transform duration-300">Already have account?
                                 <Link to='/login' rel="noopener noreferrer" className="focus:underline hover:underline ml-5 text-red-500 text-xl">Login here</Link>
                             </p>
                             <form onSubmit={handleRegister} action="" className="space-y-8 mt-10">
@@ -173,7 +173,7 @@ const Register = () => {
                                     <div className='flex gap-5'>
                                         <div className="space-y-2 flex-1" >
                                             <label className="block text-sm text-left">Your name</label>
-                                            <input required type="text" name="name" id="name" placeholder="your name" className="w-full px-3 py-3 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
+                                            <input required type="text" name="name" id="name" placeholder="your name" className="w-full px-3 py-3 border rounded-md border-red-500 bg-gray-800 text-gray-100 focus:border-violet-400" />
                                         </div>
                                         <div className="space-y-2 flex-1" >
 
@@ -184,7 +184,7 @@ const Register = () => {
                                     <div className='flex gap-5'>
                                         <div className="space-y-2 flex-1" >
                                             <label className="block text-sm text-left">Email address</label>
-                                            <input required type="email" name="email" id="email" placeholder="xyz@gmail.com" className="w-full px-3 py-3 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
+                                            <input required type="email" name="email" id="email" placeholder="xyz@gmail.com" className="w-full px-3 py-3 border rounded-md border-red-500 bg-gray-800 text-gray-100 focus:border-violet-400" />
                                         </div>
 
 
@@ -192,7 +192,7 @@ const Register = () => {
                                             <div className="flex justify-between" >
                                                 <label className="text-sm">Blood Group*</label>
                                             </div>
-                                            <select name="bloodGroup" className="select select-error w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100" required>
+                                            <select name="bloodGroup" className="select select-error w-full px-3 py-2 border rounded-md border-red-500 bg-gray-800 text-gray-100" required>
                                                 <option disabled selected>Select Your Blood Group</option>
                                                 <option>A+</option>
                                                 <option>A-</option>
@@ -219,7 +219,7 @@ const Register = () => {
                                                 }}
 
                                                 required
-                                                className="select select-error w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 "
+                                                className="select select-error w-full px-3 py-2 border rounded-md border-red-500 bg-gray-800 text-gray-100 "
                                             >
                                                 <option disabled value="">Select Your District</option>
                                                 {districts.map((district) => (
@@ -241,7 +241,7 @@ const Register = () => {
                                                     setSelectedUpazila(e.target.value);
                                                 }}
                                                 required
-                                                className="select select-error w-full px-3 py-2 border rounded-md dark:bg-gray-800 dark:text-gray-100 "
+                                                className="select select-error w-full px-3 py-2 border rounded-md bg-gray-800 text-gray-100 "
                                             >
                                                 <option disabled value="">Select Your Upazila</option>
                                                 {filteredUpazilas.map((upazila) => (
@@ -259,13 +259,13 @@ const Register = () => {
                                         <div className="flex justify-between" >
                                             <label name="password" className="text-sm">Password</label>
                                         </div>
-                                        <input required type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
+                                        <input required type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md border-red-500 bg-gray-800 text-gray-100 focus:border-violet-400" />
                                     </div>
                                     <div className="space-y-2 flex-1" >
                                         <div className="flex justify-between" >
                                             <label name="confirmPassword" className="text-sm">Confirm Password*</label>
                                         </div>
-                                        <input required type="password" name="confirmPassword" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
+                                        <input required type="password" name="confirmPassword" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md border-red-500 bg-gray-800 text-gray-100 focus:border-violet-400" />
                                     </div>
                                 </div>
 
@@ -274,7 +274,7 @@ const Register = () => {
                                     registerError && <div className='text-red-500 flex items-center justify-center gap-2'><FaBan /> {registerError}</div>
                                 }
 
-                                <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-red-800 hover:scale-105 transform transition-transform duration-300 hover:bg-red-500 dark:text-white">
+                                <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md bg-red-800 hover:scale-105 transform transition-transform duration-300 hover:bg-red-500 text-white">
                                     {
                                         loading ? <ImSpinner9 className='mx-auto animate-spin text-xl'></ImSpinner9> :
                                             'Register'
@@ -282,7 +282,7 @@ const Register = () => {
                                 </button>
 
 
-                                
+
                                 <div>
                                     <h3 className='text-yellow-300'>For Demo Login, please visit login page</h3>
                                 </div>

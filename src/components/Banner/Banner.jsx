@@ -4,7 +4,8 @@ import {  useNavigate } from "react-router-dom";
 const Banner = () => {
     const navigate = useNavigate();
     return (
-        <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://i.ibb.co/rpqh1gd/nguy-n-hi-p-ufw-C2cmbaa-I-unsplash.jpg)' }}>
+       <div className="min-h-[200px]">
+         <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://i.ibb.co/rpqh1gd/nguy-n-hi-p-ufw-C2cmbaa-I-unsplash.jpg)' }}>
             <div className="hero-overlay bg-opacity-70"></div>
             <div className="hero-content text-center text-neutral-content">
                 <div className="max-w-md md:max-w-lg mt-10">
@@ -21,6 +22,7 @@ const Banner = () => {
                 </div>
             </div>
         </div>
+       </div>
     );
 };
 

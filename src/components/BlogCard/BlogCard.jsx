@@ -6,7 +6,7 @@ import axiosSecure from '../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
-const BlogCard = ({ blog,setFilter }) => {
+const BlogCard = ({ blog, setFilter }) => {
     // console.log(Object.keys(blog).join(","));
     const [userRole, isLoading] = useUserRole();
     const navigate = useNavigate();
@@ -72,7 +72,7 @@ const BlogCard = ({ blog,setFilter }) => {
                 axiosSecure.delete(`/delete-blog/${_id}`)
                     .then(({ data }) => {
                         if (data.deletedCount > 0) {
-                            
+
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Post has been deleted.",
@@ -84,7 +84,7 @@ const BlogCard = ({ blog,setFilter }) => {
                         }
                     });
 
-                    
+
                 // const remaining = filteredDonationRequests.filter(product => product._id !== id)
                 // setFilteredDonationRequests(remaining)
             }
@@ -93,9 +93,9 @@ const BlogCard = ({ blog,setFilter }) => {
     }
 
     return (
-        <div className="flex flex-col p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-900 dark:text-gray-100">
+        <div className="flex flex-col p-6 space-y-6 overflow-hidden rounded-lg shadow-md bg-gray-900 text-gray-100">
             <div className="flex space-x-4">
-                <img alt="" src={user?.photoURL} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
+                <img alt="" src={user?.photoURL} className="object-cover w-12 h-12 rounded-full shadow bg-gray-500" />
                 <div className="flex flex-col space-y-1">
                     <a rel="noopener noreferrer" href="#" className="text-sm font-semibold">{user?.displayName}</a>
                     {
@@ -106,25 +106,25 @@ const BlogCard = ({ blog,setFilter }) => {
                         <span className={`text-base uppercase ${blogStatus == 'draft' && 'text-red-500'}`}>{blogStatus == 'draft' && blogStatus} <span className='text-sm normal-case text-green-500'>published</span></span>
                     }
                     <div className='flex gap-5 pt-1'>
-                    {
-                        blogStatus === 'publish' && userRole === 'admin' && <button onClick={handleDraft} className='btn btn-sm btn-primary'>Unpublish</button>
-                    }
-                    
-                    {
-                        userRole === 'admin' && blogStatus === 'draft' && <button onClick={handlePublish} className='btn btn-sm bg-green-800 hover:bg-green-500 text-white border-none'>Publish</button>
-                    }
-                    {
-                        userRole === 'admin' && <button onClick={handleDelete} className='btn btn-sm bg-red-800 hover:bg-red-500 text-white border-none'>Delete</button>
-                    }
+                        {
+                            blogStatus === 'publish' && userRole === 'admin' && <button onClick={handleDraft} className='btn btn-sm btn-primary'>Unpublish</button>
+                        }
+
+                        {
+                            userRole === 'admin' && blogStatus === 'draft' && <button onClick={handlePublish} className='btn btn-sm bg-green-800 hover:bg-green-500 text-white border-none'>Publish</button>
+                        }
+                        {
+                            userRole === 'admin' && <button onClick={handleDelete} className='btn btn-sm bg-red-800 hover:bg-red-500 text-white border-none'>Delete</button>
+                        }
                     </div>
-                   
+
 
                 </div>
             </div>
             <div>
-                <img src={imageURL} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500" />
+                <img src={imageURL} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 bg-gray-500" />
                 <h2 className="mb-1 text-xl font-semibold">{blogTitle}</h2>
-                <p className="text-sm dark:text-gray-400">{parse(content)}</p>
+                <p className="text-sm text-gray-400">{parse(content)}</p>
             </div>
         </div>
     );

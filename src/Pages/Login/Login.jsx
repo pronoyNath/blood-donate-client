@@ -63,9 +63,7 @@ const Login = () => {
 
     return (
         <>
-            {/* <PageTitle title={"Login | Grand Hotel"}></PageTitle> */}
-
-            <div className="hero -mt-20 min-h-[700px] overflow-x-hidden" style={{ backgroundImage: 'url(https://i.ibb.co/GdTntPk/R-1.jpg)' }}>
+            <div className="hero  min-h-screen  overflow-x-hidden" style={{ backgroundImage: 'url(https://i.ibb.co/GdTntPk/R-1.jpg)' }}>
                 <div className="hero-overlay bg-opacity-60"></div>
                 <div className="hero-content  text-neutral-content">
                     <div className="max-w-6xl flex items-center">
@@ -74,9 +72,9 @@ const Login = () => {
                             <Lottie animationData={loginAnimation} className=""></Lottie>
                         </div>
 
-                        <div className="w-full flex-1 max-w-xl rounded-md shadow p-5 sm:p-8 dark:bg-gray-800 dark:text-gray-100" >
+                        <div className="w-full flex-1 max-w-xl rounded-md shadow p-5 sm:p-8 bg-gray-800 text-gray-100" >
                             <h2 className="mb-3 text-3xl font-semibold text-center">Login to your account</h2>
-                            <p className="text-sm text-center dark:text-gray-400 hover:scale-110 transform transition-transform duration-300">Dont have account?
+                            <p className="text-sm text-center text-gray-400 hover:scale-110 transform transition-transform duration-300">Dont have account?
                                 <Link to='/register' rel="noopener noreferrer" className="focus:underline hover:underline ml-5 text-red-500 text-xl">Register here</Link>
                             </p>
 
@@ -84,18 +82,18 @@ const Login = () => {
                                 <div className="space-y-4" >
                                     <div className="space-y-2" >
                                         <label className="block text-sm text-left">Email address</label>
-                                        <input type="email" name="email" id="email" placeholder="xyz@gmail.com" className="w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
+                                        <input type="email" name="email" id="email" placeholder="xyz@gmail.com" className="w-full px-3 py-2 border rounded-md border-red-500 bg-gray-800 text-gray-100 focus:border-violet-400" />
                                     </div>
                                     <div className="space-y-2" >
                                         <div className="flex justify-between" >
                                             <label name="password" className="text-sm">Password</label>
 
                                         </div>
-                                        <input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
+                                        <input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md border-red-500 bg-gray-800 text-gray-100 focus:border-violet-400" />
                                     </div>
                                     <p className='text-red-500'>{loginError}</p>
                                 </div>
-                                <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-red-500 dark:text-white hover:scale-105 transform transition-transform duration-300">
+                                <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md bg-red-500 text-white hover:scale-105 transform transition-transform duration-300">
                                     {
                                         loading ? <ImSpinner9 className='mx-auto animate-spin text-xl'></ImSpinner9> : 'Login'
                                     }

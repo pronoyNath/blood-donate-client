@@ -17,7 +17,7 @@ const CreateDonationReq = () => {
     const [selectedUpazila, setSelectedUpazila] = useState('');
     const navigate = useNavigate();
 
-    const [userStatus,setUserStatus] = useState('');
+    const [userStatus, setUserStatus] = useState('');
     // district data load 
     useEffect(() => {
         fetch('/districts.json')
@@ -87,10 +87,10 @@ const CreateDonationReq = () => {
     //geting user status
     useEffect(() => {
         axiosSecure.get(`/blocked-user/${user?.email}`)
-        .then(({data})=>setUserStatus(data.status))
+            .then(({ data }) => setUserStatus(data.status))
     }, [user?.email])
 
-// console.log(userStatus);
+    // console.log(userStatus);
     return (
         <div className="">
             <h3 className="text-red-500 font-bold text-2xl">Create Donation Request</h3>
@@ -104,12 +104,12 @@ const CreateDonationReq = () => {
                     <div className='flex gap-5'>
                         <div className="space-y-2 flex-1" >
                             <label className="block text-sm text-left">Reciept name</label>
-                            <input required type="text" name="recieptName" id="name" placeholder="reciept name" className="w-full px-3 py-3 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
+                            <input required type="text" name="recieptName" id="name" placeholder="reciept name" className="w-full px-3 py-3 border rounded-md border-red-500 bg-gray-800 text-gray-100 focus:border-violet-400" />
                         </div>
                         <div className="space-y-2 flex-1" >
 
                             <label className="block text-sm text-left">Adress:</label>
-                            <input required type="text" name="address" id="email" placeholder="full address" className="w-full px-3 py-3 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
+                            <input required type="text" name="address" id="email" placeholder="full address" className="w-full px-3 py-3 border rounded-md border-red-500 bg-gray-800 text-gray-100 focus:border-violet-400" />
                         </div>
 
 
@@ -117,7 +117,7 @@ const CreateDonationReq = () => {
                             <div className="flex justify-between" >
                                 <label className="text-sm">Blood Group*</label>
                             </div>
-                            <select required name="bloodGroup" className="select select-error w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100">
+                            <select required name="bloodGroup" className="select select-error w-full px-3 py-2 border rounded-md border-red-500 bg-gray-800 text-gray-100">
                                 <option disabled selected>Select Your Blood Group</option>
                                 <option>A+</option>
                                 <option>A-</option>
@@ -135,18 +135,18 @@ const CreateDonationReq = () => {
 
                         <div className="space-y-2 flex-1" >
                             <label className="block text-sm text-left">Time:</label>
-                            <input required type="time" name="time" id="email" placeholder="hospital name" className="w-full px-3 py-3 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
+                            <input required type="time" name="time" id="email" placeholder="hospital name" className="w-full px-3 py-3 border rounded-md border-red-500 bg-gray-800 text-gray-100 focus:border-violet-400" />
                         </div>
 
                         <div className="space-y-2 flex-1" >
                             <label className="block text-sm text-left">Date:</label>
-                            <input required type="date" name="date" id="email" placeholder="hospital name" className="w-full px-3 py-3 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
+                            <input required type="date" name="date" id="email" placeholder="hospital name" className="w-full px-3 py-3 border rounded-md border-red-500 bg-gray-800 text-gray-100 focus:border-violet-400" />
                         </div>
 
 
                         <div className="space-y-2 flex-1" >
                             <label className="block text-sm text-left">Hospital Name</label>
-                            <input required type="text" name="hospitalName" id="email" placeholder="hospital name" className="w-full px-3 py-3 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
+                            <input required type="text" name="hospitalName" id="email" placeholder="hospital name" className="w-full px-3 py-3 border rounded-md border-red-500 bg-gray-800 text-gray-100 focus:border-violet-400" />
                         </div>
 
                     </div>
@@ -168,7 +168,7 @@ const CreateDonationReq = () => {
                                 }}
 
                                 required
-                                className="select select-error w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 "
+                                className="select select-error w-full px-3 py-2 border rounded-md border-red-500 bg-gray-800 text-gray-100 "
                             >
                                 <option disabled value="">Select Your District</option>
                                 {districts.map((district) => (
@@ -190,7 +190,7 @@ const CreateDonationReq = () => {
                                     setSelectedUpazila(e.target.value);
                                 }}
                                 required
-                                className="select select-error w-full px-3 py-2 border rounded-md dark:bg-gray-800 dark:text-gray-100 "
+                                className="select select-error w-full px-3 py-2 border rounded-md bg-gray-800 text-gray-100 "
                             >
                                 <option disabled value="">Select Your Upazila</option>
                                 {filteredUpazilas.map((upazila) => (
@@ -208,7 +208,7 @@ const CreateDonationReq = () => {
                         <div className="flex justify-between" >
                             <label name="password" className="text-sm">Request Message</label>
                         </div>
-                        <textarea required type="text" name="requestMessage" id="password" placeholder="why you need blood write in details..." className="w-full px-3 py-2 border rounded-md dark:border-red-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:border-violet-400" />
+                        <textarea required type="text" name="requestMessage" id="password" placeholder="why you need blood write in details..." className="w-full px-3 py-2 border rounded-md border-red-500 bg-gray-800 text-gray-100 focus:border-violet-400" />
 
                     </div>
 
@@ -216,15 +216,15 @@ const CreateDonationReq = () => {
 
 
                 {
-                    userStatus === 'blocked' && 
-                    <button className="w-full btn-neutral uppercase px-8 py-3 font-semibold rounded-md dark:text-white">You are blocked</button>
-                    || userStatus == 'active' && 
-                    <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-red-800 hover:scale-105 transform transition-transform duration-300 hover:bg-red-500 dark:text-white">
-                    {
-                        loading ? <ImSpinner9 className='mx-auto animate-spin text-xl'></ImSpinner9> :
-                            'Create Request'
-                    }
-                </button>
+                    userStatus === 'blocked' &&
+                    <button className="w-full btn-neutral uppercase px-8 py-3 font-semibold rounded-md text-white">You are blocked</button>
+                    || userStatus == 'active' &&
+                    <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md bg-red-800 hover:scale-105 transform transition-transform duration-300 hover:bg-red-500 text-white">
+                        {
+                            loading ? <ImSpinner9 className='mx-auto animate-spin text-xl'></ImSpinner9> :
+                                'Create Request'
+                        }
+                    </button>
                 }
             </form>
         </div>

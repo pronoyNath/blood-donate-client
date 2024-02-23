@@ -26,14 +26,14 @@ const MyDonationRequests = () => {
 
     // all req count 
     useEffect(() => {
-        fetch('http://localhost:5000/donation-requst-count')
+        fetch('https://blood-donate-server.vercel.app/donation-requst-count')
             .then(res => res.json())
             .then(data => setAllReqCount(data.count))
     }, [])
 
     // specific req count 
     useEffect(() => {
-        fetch(`http://localhost:5000/donation-requst-count/${user?.email}`)
+        fetch(`https://blood-donate-server.vercel.app/donation-requst-count/${user?.email}`)
             .then(res => res.json())
             .then(data => setSpecificData(data.length))
     }, [user?.email])
@@ -177,8 +177,8 @@ const MyDonationRequests = () => {
         )
             .then(({ data }) => {
                 if (data?.modifiedCount > 0) {
-                    
-        // console.log("updated");
+
+                    // console.log("updated");
                     let requestUrl = `/donation-requests?page=${currentPage}&size=${itemsPerPage}`;
 
                     if (userRole === 'donor') {
