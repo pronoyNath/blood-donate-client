@@ -61,9 +61,9 @@ const Navbar = () => {
 
     return (
 
-        <div className="navbar max-w-7xl mx-auto">
+        <div className="navbar max-w-7xl mx-auto mt-5 w-full">
 
-            <div className="navbar-start hidden lg:flex">
+            <div className="navbar-start hidden lg:flex flex-1">
                 <ul className="flex gap-7 px-1 text-xl">
                     {links}
                 </ul>
@@ -83,7 +83,7 @@ const Navbar = () => {
                     </Link>
                 </div>
             </div>
-            <div className="navbar-end gap-7 hover:scale-110 transform transition-transform duration-300">
+            <div className="navbar-end flex-1 gap-7 hover:scale-110 transform transition-transform duration-300">
                 <button className="text-xl hover:scale-110 transform transition-transform duration-300">
                     <NavLink
                         to="/give-fund"

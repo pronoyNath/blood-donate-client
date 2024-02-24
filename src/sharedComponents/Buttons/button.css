@@ -1,0 +1,83 @@
+/* custom button */
+.Achronicle-buttonss {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    line-height: 1;
+    white-space: nowrap;
+    /* padding: 0.815rem 10rem; */
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    background: linear-gradient(to right, #d00606, #bf2424);
+    transition: background 2s linear;
+    margin-bottom: 20px;
+}
+
+.Achronicle-buttonss:hover {
+    background: linear-gradient(to right, #800909, #900c0c);
+}
+
+.Achronicle-buttonss:hover span:nth-of-type(1) em {
+    opacity: 0;
+    transform: rotateX(90deg) scaleX(0.9) translate3d(0, -10px, 0);
+}
+
+.Achronicle-buttonss:hover span:nth-of-type(2) em {
+    opacity: 1;
+    transform: rotateX(0deg) scaleX(1) translateZ(0);
+    transition: transform 0.75s cubic-bezier(0.645, 0.045, 0.355, 1),
+        opacity 0.35s linear 0.3s;
+}
+
+.Achronicle-buttonss>span {
+    position: relative;
+    display: block;
+    perspective: 308px;
+}
+
+.Achronicle-buttonss>span:nth-of-type(2) {
+    position: absolute;
+}
+
+em {
+    font-style: normal;
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: 600;
+    will-change: transform, opacity, transition;
+    transition: transform 0.55s cubic-bezier(0.645, 0.045, 0.355, 1),
+        opacity 0.35s linear 0.2s;
+}
+
+.Achronicle-buttonss>span:nth-of-type(1) em {
+    transform-origin: top;
+}
+
+.Achronicle-buttonss>span:nth-of-type(2) em {
+    opacity: 0;
+    transform: rotateX(-90deg) scaleX(0.9) translate3d(0, 10px, 0);
+    transform-origin: bottom;
+}
+
+/* Add media query for tablets */
+@media only screen and (max-width: 750px) {
+    .Achronicle-buttonss {
+        padding: 0.815rem 3rem;
+        /* Adjust padding for tablets */
+    }
+}
+
+/* Add media query for mobile devices */
+@media only screen and (max-width: 480px) {
+    .Achronicle-buttonss {
+        padding: 0.815rem 1rem;
+        /* Adjust padding for mobile */
+    }
+
+    em {
+        font-size: 1rem;
+        /* Adjust font size for mobile */
+    }
+}
