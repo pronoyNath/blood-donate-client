@@ -78,8 +78,9 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div>
-                    <Link to='/' className="hidden md:block text-xl">
-                        <img src={logo} alt="" className='w-[80px] h-[80px] hover:scale-110 transform transition-transform duration-300' />
+                    <Link to='/' className=" hidden md:block text-xl">
+                        <img src={logo} alt="" className=' w-[80px] h-[80px] hover:scale-110 transform transition-transform duration-300' />
+
                     </Link>
                 </div>
             </div>

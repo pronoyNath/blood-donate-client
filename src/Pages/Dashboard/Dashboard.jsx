@@ -4,6 +4,7 @@ import useAuth from "../../Hooks/useAuth";
 import useUserRole from "../../Hooks/useUserRole";
 import DashboardReqts from "./DashboardReqts";
 import AdminDashboard from "./AdminDashboard";
+import logo from '../../assets/bloodLogo2.png'
 
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
@@ -11,7 +12,6 @@ const Dashboard = () => {
   const location = useLocation();
   const { user } = useAuth();
   const [userRole] = useUserRole();
-
 
   let Menus = [];
 
@@ -63,12 +63,12 @@ const Dashboard = () => {
         />
         <div onClick={() => navigate('/')} className="flex gap-x-4 items-center">
           <img
-            src="https://i.ibb.co/64XsX5Z/blood-Logo2.png"
-            className={`cursor-pointer duration-500 ${open && "rotate-[360deg]  w-[100px] h-[70px]"
+            src={logo}
+            className={`cursor-pointer duration-500 ${open && "rotate-[360deg]  w-[80px] h-[80px]"
               }`}
           />
           <h1
-            className={`text-white origin-left font-medium text-sm lg:text-lg duration-200 hidden  hover:cursor-pointer ${!open && "scale-0"
+            className={`text-white origin-left font-medium text-sm lg:text-lg duration-200 md:block hidden  hover:cursor-pointer ${!open && "scale-0"
               }`}
           >
             Blood Donation
@@ -98,7 +98,7 @@ const Dashboard = () => {
           ))}
         </ul>
       </div>
-      <div className=" flex-1 p-7 z-0">
+      <div className=" flex-1 p-7  z-0">
 
         {
           isDashboardActive &&
@@ -113,6 +113,9 @@ const Dashboard = () => {
                 : <DashboardReqts></DashboardReqts>
             }
 
+            {
+
+            }
           </div>
         }
         <Outlet></Outlet>

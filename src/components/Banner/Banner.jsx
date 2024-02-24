@@ -18,9 +18,10 @@ const Banner = () => {
                             {/* <button onClick={() => navigate('/register')} className="btn px-10 hover:bg-red-500 bg-red-800 border-none text-white uppercase hover:scale-110 transform transition-transform duration-300">Join as a donor <FaHeartCirclePlus className="text-3xl animate-pulse" /></button> */}
                             {/* </Link> */}
                             {/* <button onClick={() => navigate('/search-donor')} className="btn px-10 hover:bg-red-500 bg-red-800 border-none text-white uppercase hover:scale-110 transform transition-transform duration-300">Search Donor</button> */}
-                            <Buttons buttonText={"Join as a donor"} route={'/register'} icon={<FaHeartCirclePlus className="text-3xl animate-pulse ml-2 text-yellow-400" />}
+                            <Buttons buttonText={"Join as a donor"} route={'/register'} icon={<FaHeartCirclePlus className="text-3xl animate-pulse ml-2 text-yellow-400" px={"px-40 "} py={"py-5"} />}
+                            large={true}
                             />
-                            <Buttons buttonText={"Search Donor"} route={'/search-donor'} icon={<FaSearchengin className="text-3xl  ml-2 text-yellow-400" />}
+                            <Buttons buttonText={"Search Donor"} route={'/search-donor'} icon={<FaSearchengin className="text-3xl  ml-2 text-yellow-400" />} large={true}
                             />
 
                         </div>

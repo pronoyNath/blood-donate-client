@@ -6,6 +6,9 @@ import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useUserRole from "../../Hooks/useUserRole";
+import Lottie from "lottie-react";
+import pulseAnimation from '../../assets/animations/pulseAnimation.json'
+
 
 const DashboardReqts = () => {
     const [donationRequests, setDonationRequests] = useState([]);
@@ -14,6 +17,7 @@ const DashboardReqts = () => {
     const { user } = useAuth();
     const navigate = useNavigate();
 
+  
     useEffect(() => {
         axiosSecure.get(`/all-donation-requests?email=${user?.email}`)
             .then(({ data }) => setDonationRequests(data))
@@ -164,7 +168,14 @@ const DashboardReqts = () => {
 
                 :
 
-                ""
+                <div className="flex flex-col justify-center items-center mt-10">
+
+                <div>
+                  <Lottie animationData={pulseAnimation} className="" />
+                </div>
+                <h3 className="text-3xl font-bold ">No Dontaion Created Yet.</h3>
+
+              </div>
             }
 
 

@@ -7,6 +7,7 @@ import { ImSpinner9 } from "react-icons/im";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import axiosSecure from "../../hooks/useAxiosSecure";
+import animationHeart from '../../assets/animations/pulseHeart.json'
 
 const UserProfile = () => {
     const { user, loading } = useAuth();
@@ -115,32 +116,32 @@ const UserProfile = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                
+
             });
     }
 
     return (
         <div className=" h-screen">
-            <div className="flex flex-col justify-center  p-6  shadow-md rounded-xl sm:px-12 bg-gray-900 text-gray-100">
+            <div className="flex flex-col justify-center h-full p-6  shadow-md rounded-xl sm:px-12 bg-gray-900 text-gray-100">
                 <img src={userInfo?.imageURL} alt="" className="w-32 h-32 mx-auto rounded-full bg-gray-500 aspect-square" />
                 <div className="space-y-4 text-center divide-y divide-gray-700">
                     <div className="my-2 space-y-1">
-                        <h2 className="text-xl font-semibold sm:text-2xl">{updatedUserInfo?.name}</h2>
-                        <p className="px-5 text-xs sm:text-base text-gray-400 uppercase">Role: <span className="text-orange-400"> {userInfo?.role}</span></p>
-                        <p className="px-5 text-xs sm:text-base text-gray-400"> Status: <span className={`${userInfo?.status == 'active' ? "text-green-500" :
+                        <h2 className="text-xl font-semibold sm:text-5xl">{updatedUserInfo?.name}</h2>
+                        <p className="px-5 text-xs sm:text-2xl text-gray-400 uppercase">Role: <span className="text-orange-400"> {userInfo?.role}</span></p>
+                        <p className="px-5 text-xs sm:text-2xl text-gray-400"> Status: <span className={`${userInfo?.status == 'active' ? "text-green-500" :
                             " text-red-500 "} uppercase`}>{userInfo?.status}</span></p>
 
-                        <p className="px-5 text-xs sm:text-base text-gray-400">Email: {userInfo?.email}</p>
-                        <p className="px-5 text-xs sm:text-base text-gray-400">Blood-Group: {updatedUserInfo?.bloodGroup}</p>
-                        <p className="px-5 text-xs sm:text-base text-gray-400">Address:
+                        <p className="px-5 text-xs sm:text-2xl text-gray-400">Email: {userInfo?.email}</p>
+                        <p className="px-5 text-xs sm:text-2xl text-gray-400">Blood-Group: {updatedUserInfo?.bloodGroup}</p>
+                        <p className="px-5 text-xs sm:text-2xl text-gray-400">Address:
                             {updatedUserInfo?.upazila},{updatedUserInfo?.district}</p>
 
                     </div>
-                    <div className="text-red-500 font-semibold hover:scale-125 transform transition-transform duration-300 flex justify-center hover:underline items-center pt-2 space-x-4 align-center">
+                    <div className="text-red-500 font-semibold  transform transition-transform duration-300 flex justify-center hover:underline items-center pt-2 space-x-4 align-center">
 
 
                         {/* Open the modal using document.getElementById('ID').showModal() method */}
-                        <button className="" onClick={() => document.getElementById('my_modal_5').showModal()}>Edit Profile </button> <FaFilePen />
+                        <button className="text-base md:text-5xl" onClick={() => document.getElementById('my_modal_5').showModal()}>Edit Profile </button> <FaFilePen className="text-base md:text-5xl"/>
                         <dialog id="my_modal_5" className="modal modal-bottom -z-10 sm:modal-middle">
                             <div className="modal-box bg-gray-800">
                                 <h3 className="font-bold text-3xl uppercase">Update Profile</h3>
