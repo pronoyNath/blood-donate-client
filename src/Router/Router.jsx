@@ -22,6 +22,7 @@ import UpdateDonationInfo from "../Pages/Dashboard/UpdateDonationInfo";
 import ContentManagement from "../Pages/Dashboard/ContentManagement";
 import AddBlog from "../Pages/Dashboard/AddBlog";
 import SearchPage from "../Pages/SearchPage/SearchPage";
+import CreateBlogs from "../Pages/Dashboard/CreateBlogs";
 
 const router = createBrowserRouter([
   {
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
       {
         path: 'content-management/add-blog',
         element: <AddBlog></AddBlog>
+      },
+      {
+        path: 'create-blog',
+        element: <CreateBlogs/>
       },
       {
         path: 'profile',

@@ -13,18 +13,18 @@ const PaymentHistory = () => {
     //         return res.data;
     //     }
     // })
-    
+
     // console.log(payments);
     // let currentDate = new Date();
     // // console.log(currentDate.toLocaleString());
 
-    const [payments,refetch] = usePaymentHistory(`/payments/${user?.email}`)
-    
+    const [payments, refetch] = usePaymentHistory(`/payments/${user?.email}`)
+
     return (
         <div>
             <h2 className="text-xl text-white mb-5">Total Payments: {payments.length}</h2>
             <div className="overflow-x-auto">
-                <table className="table text-white">
+                <table className="table table-lg text-white">
                     {/* head */}
                     <thead className="text-white bg-red-500">
                         <tr>

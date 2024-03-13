@@ -6,14 +6,13 @@ import axiosSecure from '../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
-const BlogCard = ({ blog, setFilter }) => {
+const BlogCard = ({ blog, setFilter, refetch }) => {
     // console.log(Object.keys(blog).join(","));
     const [userRole, isLoading] = useUserRole();
     const navigate = useNavigate();
     const { user } = useAuth();
     // console.log(user);
     const { _id, blogTitle, imageURL, content, email, blogStatus } = blog;
-
 
     // publish method 
     const handlePublish = () => {
@@ -22,7 +21,7 @@ const BlogCard = ({ blog, setFilter }) => {
         axiosSecure.put(`/pulish-blog/${_id}`, { blogStatus })
             .then(({ data }) => {
                 if (data?.acknowledged) {
-                    setFilter('all')
+
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -30,7 +29,7 @@ const BlogCard = ({ blog, setFilter }) => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    // refetch();
+                    refetch();
                     navigate('/dashboard/content-management')
                 }
             })
@@ -43,7 +42,7 @@ const BlogCard = ({ blog, setFilter }) => {
         axiosSecure.put(`/draft-blog/${_id}`, { blogStatus })
             .then(({ data }) => {
                 if (data?.acknowledged) {
-                    setFilter('all')
+
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -51,7 +50,7 @@ const BlogCard = ({ blog, setFilter }) => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    // refetch();
+                    refetch();
                     navigate('/dashboard/content-management')
                 }
             })
@@ -78,7 +77,7 @@ const BlogCard = ({ blog, setFilter }) => {
                                 text: "Post has been deleted.",
                                 icon: "success"
                             });
-                            // refetch();
+                            refetch();
                             setFilter('all')
                             navigate('/dashboard/content-management')
                         }

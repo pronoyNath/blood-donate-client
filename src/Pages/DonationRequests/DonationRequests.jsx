@@ -3,7 +3,8 @@ import useAuth from "../../Hooks/useAuth";
 import useUserRole from "../../Hooks/useUserRole";
 import axiosSecure from "../../Hooks/useAxiosSecure";
 import PublicPendingDonationCard from "../../components/PublicPendingDonationCard/PublicPendingDonationCard";
-
+import bloodReq from "../../assets/animations/bloodRequest.json"
+import Lottie from "lottie-react";
 
 const DonationRequsts = () => {
     const { user } = useAuth();
@@ -25,17 +26,20 @@ const DonationRequsts = () => {
 
 
     return (
-        <div className='py-32 bg-gray-800 text-white min-h-screen'>
+        <div className='pt-48 pb-10 bg-gray-800 text-white min-h-screen '>
             <div className=" max-w-6xl mx-auto">
-                <h3 className='text-3xl font-semibold text-red-500 text-center'>My Donation Requests</h3>
+                <div className="flex items-center justify-center gap-6 bg-white rounded-full p-7 max-w-3xl mx-auto">
+                    <h3 className='text-4xl font-semibold text-red-500 text-center'>All Donation Requests </h3>
+                    <Lottie animationData={bloodReq} className="w-[300px] h-[100px] " />
+                </div>
 
                 {
                     pendingDonationRequests.length > 0 ?
                         <div className=" py-10 relative">
-                            <table className="table table-xs border">
+                            <table className="table table-md border border-red-500 bg- rounded-none">
                                 {/* head */}
                                 <thead>
-                                    <tr className='text-red-500 text-lg'>
+                                    <tr className='text-red-500 text-xl border border-red-500'>
                                         <th>Reciept Name</th>
                                         <th>Reciept Location</th>
                                         <th>Donation Date</th>
@@ -46,7 +50,7 @@ const DonationRequsts = () => {
                                         <th>Details</th>
                                     </tr>
                                 </thead>
-                                <tbody className='font-semibold'>
+                                <tbody className='font-semibold '>
 
                                     {
                                         pendingDonationRequests.map(pendingDonationReq => <PublicPendingDonationCard key={pendingDonationReq?._id}

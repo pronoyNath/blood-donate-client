@@ -12,7 +12,7 @@ const PublicPendingDonationCard = ({ userRole,pendingDonationReq}) => {
 
 
     return (
-        <tr>
+        <tr className='border border-red-500'>
             <td>
                 <p>{recieptName}</p>
             </td>

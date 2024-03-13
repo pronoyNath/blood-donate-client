@@ -151,11 +151,6 @@ const CreateDonationReq = () => {
 
                     </div>
                     <div className='flex gap-5'>
-
-
-
-
-
                         <div className="space-y-2 flex-1">
                             <div className="flex justify-between">
                                 <label className="text-sm">District*</label>

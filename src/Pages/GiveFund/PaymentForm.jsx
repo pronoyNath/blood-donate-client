@@ -16,8 +16,8 @@ const PaymentForm = () => {
     const elements = useElements();
     const { user } = useAuth();
     // const navigate = useNavigate();
-    
-    const [payments,refetch] = usePaymentHistory(`/payments/${user?.email}`)
+
+    const [payments, refetch] = usePaymentHistory(`/payments/${user?.email}`)
 
     const totalPrice = 100
 
@@ -90,7 +90,7 @@ const PaymentForm = () => {
 
                 const res = await axiosSecure.post('/payments', payment);
                 console.log('payment saved', res.data);
-                
+
                 if (res.data?.paymentResult?.insertedId) {
                     refetch();
                     Swal.fire({
@@ -110,18 +110,20 @@ const PaymentForm = () => {
 
     return (
         <form onSubmit={handleSubmit} className="p-10 border border-red-500 text-white ">
+
+            <h3 className="text-3xl font-semibold mb-4">Enter Your Card Number:</h3>
             <CardElement
                 options={{
                     style: {
                         base: {
-                            fontSize: '16px',
-                            color: '#424770',
+                            fontSize: '28px',
+                            color: '#FFFF00',
                             '::placeholder': {
                                 color: '#aab7c4',
                             },
                         },
                         invalid: {
-                            color: '#9e2146',
+                            color: '#DC143C',
                         },
                     },
                 }}

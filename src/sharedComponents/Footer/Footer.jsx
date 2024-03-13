@@ -11,7 +11,7 @@ const Footer = () => {
     }
     return (
         <div className=" border-t-4">
-            <footer className="px-4 py-8 bg-gray-800 text-gray-400">
+            <footer className="px-4 py-8 bg-black text-gray-400">
                 <div className="container flex flex-wrap items-center justify-center max-w-5xl mx-auto space-y-4 sm:justify-between sm:space-y-0" >
                     <div className="flex flex-row pr-3 space-x-4 sm:space-x-8 " >
                         <img src="https://i.ibb.co/64XsX5Z/blood-Logo2.png" alt="" className='w-[180px] h-[100px] hover:scale-110 transform transition-transform duration-300' />

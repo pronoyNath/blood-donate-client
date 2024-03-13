@@ -1,0 +1,51 @@
+[
+    {
+        "id": 1,
+        "image": "https://i.ibb.co/FHpw6bp/pexels-anna-shvets-3845115.jpg",
+        "hospitalName": "City General Hospital",
+        "date": {
+            "day": 5,
+            "month": "March"
+        },
+        "details": {
+            "bloodDonationDetails": "Successful blood donation drive conducted, collected 50 units of blood."
+        }
+    },
+    {
+        "id": 2,
+        "image": "https://i.ibb.co/qnnLGfM/pexels-suraphat-nueaon-11181872.jpg",
+        "hospitalName": "Regional Medical Center",
+        "date": {
+            "day": 10,
+            "month": "April"
+        },
+        "details": {
+            "bloodDonationDetails": "Blood donation campaign held, gathered 70 units of blood."
+        }
+    },
+    {
+        "id": 3,
+        "image": "https://i.ibb.co/MCmsWbK/pexels-los-muertos-crew-8460348.jpg",
+        "hospitalName": "Community Health Clinic",
+        "date": {
+            "day": 20,
+            "month": "June"
+        },
+        "details": {
+            "bloodDonationDetails": "Blood drive event organized, received 30 units of blood."
+        }
+    },
+    {
+        "id": 4,
+        "image": "https://i.ibb.co/SQG9RR7/pexels-suraphat-nueaon-11181866.jpg",
+        "hospitalName": "Central Hospital",
+        "date": {
+            "day": 15,
+            "month": "September"
+        },
+        "details": {
+            "bloodDonationDetails": "Annual blood donation marathon conducted, collected 100 units of blood."
+        }
+    }
+]
+

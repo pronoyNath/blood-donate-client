@@ -22,7 +22,9 @@ const Dashboard = () => {
       { title: "Create Donation Request ", src: "https://i.ibb.co/fXT8SNZ/mobile.png", link: 'create-donation-request' },
       { title: "All Donation Requests", src: "https://i.ibb.co/TrBsKKr/blood-test.png", link: 'my-donation-requests' },
       { title: "Content Management", src: "https://i.ibb.co/7p67xSz/request-for-proposal.png", link: 'content-management' },
+      { title: "Create Blog", src: "https://i.ibb.co/MkMS99P/add.png", link: 'create-blog' },
       { title: "User Profile", src: "https://i.ibb.co/rtxGbDn/user.png", gap: true, link: 'profile' },
+
     ];
   }
 
@@ -31,7 +33,9 @@ const Dashboard = () => {
       { title: "Dashboard", src: "https://i.ibb.co/pZdfyDq/Chart-fill.png", link: '/dashboard' },
       { title: "All Donation Requests", src: "https://i.ibb.co/TrBsKKr/blood-test.png", link: 'my-donation-requests' },
       { title: "Content Management", src: "https://i.ibb.co/7p67xSz/request-for-proposal.png", link: 'content-management' },
+      { title: "Create Blog", src: "https://i.ibb.co/MkMS99P/add.png",  link: 'create-blog' },
       { title: "User Profile", src: "https://i.ibb.co/rtxGbDn/user.png", gap: true, link: 'profile' },
+
     ];
   }
 

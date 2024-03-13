@@ -2,6 +2,8 @@ import { Link, NavLink } from "react-router-dom";
 import { FaFileWaveform } from "react-icons/fa6";
 import useAuth from "../../Hooks/useAuth";
 import logo from '../../assets/bloodLogo2.png'
+import fundAnimation from '../../assets/animations/fundAnimation.json'
+import Lottie from "lottie-react";
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
@@ -84,7 +86,7 @@ const Navbar = () => {
                     </Link>
                 </div>
             </div>
-            <div className="navbar-end flex-1 gap-7 hover:scale-110 transform transition-transform duration-300">
+            <div className="navbar-end flex-1 gap-7 ">
                 <button className="text-xl hover:scale-110 transform transition-transform duration-300">
                     <NavLink
                         to="/give-fund"
@@ -92,13 +94,20 @@ const Navbar = () => {
                             isActive ? "active text-red-500 border-b-4 border-red-500" : ""
                         }
                     >
-                        Give Fund
+                        <span className="flex items-center gap-1">
+                            <Lottie animationData={fundAnimation} className="w-[100px] mb-5" />
+                            <span> Give Fund</span>
+                        </span>
 
                     </NavLink>
                 </button>
+
                 {
-                    user ? <Link onClick={handleLogOut} className="btn px-10 hover:bg-red-500 bg-red-700 border-none text-white uppercase">Log out<FaFileWaveform className="text-2xl animate-bounce" />
-                    </Link>
+                    user ?
+                        <Link onClick={handleLogOut} className="btn px-10 hover:bg-red-500 bg-red-700 border-none text-white uppercase">Log out<FaFileWaveform className="text-2xl animate-bounce" />
+                        </Link>
+
+
                         : <Link to='/register' className="btn px-10 hover:bg-red-500 bg-red-700 border-none text-white uppercase">Register Now <FaFileWaveform className="text-2xl animate-bounce" />
                         </Link>
                 }
