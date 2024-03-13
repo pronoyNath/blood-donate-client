@@ -7,7 +7,6 @@ import HeartBeat from "../../components/HeartBeat/HeartBeat";
 import OurVolunteers from "../../components/OurVolunteers/OurVolunteers";
 import Footer from "../../sharedComponents/Footer/Footer";
 import SentenceMaker from "../SentenceMaker/SentenceMaker";
-import Example from "../../components/Example/Example";
 import Gallary3d from "../../components/Gallary3d/Gallary3d";
 
 
@@ -17,7 +16,6 @@ const Home = () => {
         <div className="overflow-x-hidden">
 
             <Banner />
-            {/* <Example /> */}
             <Gallary3d />
             <HeartBeat />
             <Features />

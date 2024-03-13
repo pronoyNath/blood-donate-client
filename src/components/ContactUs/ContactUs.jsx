@@ -4,9 +4,9 @@ import conactAnimation from '../../assets/animations/contactAnimation.json'
 const ContactUs = () => {
     return (
         <section className="py-10 ">
-            <div className="grid max-w-7xl gap-7 grid-cols-1 text-4xl px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x" >
+            <div className="grid max-w-7xl gap-7 grid-cols-1 md:text-4xl px-6 mx-auto lg:px-8 lg:grid-cols-2 md:divide-x" >
                 <div className="py-6 md:py-0 md:px-6 mt-10" >
-                    <h1 className="text-7xl font-bold text-red-500">Get in touch</h1>
+                    <h1 className="text-4xl md:text-7xl font-bold text-red-500">Get in touch</h1>
                     <p className="pt-2 pb-4">Fill in the form to start a conversation</p>
                     <div className="space-y-7" >
                         <p className="flex items-center">
@@ -31,7 +31,7 @@ const ContactUs = () => {
                     </div>
                 </div>
                 <div data-aos="zoom-in">
-                    <Lottie animationData={conactAnimation} className='hover:scale-110 duration-300 ease-in-out' />
+                    <Lottie animationData={conactAnimation} className='hidden lg:block hover:scale-110 duration-300 ease-in-out' />
                 </div>
 
                 {/* <form className="flex flex-col py-6 space-y-6 md:py-0 md:px-6">

@@ -11,8 +11,8 @@ const Banner = () => {
                 <div className="hero-overlay bg-black bg-opacity-70"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md md:max-w-2xl mt-10">
-                        <h1 className="mb-5 text-7xl font-bold text-red-500">Be a Lifesaver</h1>
-                        <p className="mb-5"> Join Our Blood Donor Community Today! Your commitment can make a world of difference. Register now and become a vital part of our mission to save lives through the gift of blood</p>
+                        <h1 className="mb-5 text-5xl md:text-6xl lg:text-7xl font-bold text-red-500">Be a Lifesaver</h1>
+                        <p className="mb-5 text-sm lg:text-xl"> Join Our Blood Donor Community Today! Your commitment can make a world of difference. Register now and become a vital part of our mission to save lives through the gift of blood</p>
 
                         <div data-aos="zoom-in" className="flex flex-col lg:flex-row gap-5 md:gap-10 items-center mt-10" >
                             {/* <Link to={'/register'}> */}

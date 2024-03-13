@@ -20,7 +20,7 @@ const OurVolunteers = () => {
                         <p className="max-w-2xl">At a assumenda quas cum earum ut itaque commodi saepe rem aspernatur quam natus quis nihil quod, hic explicabo doloribus magnam neque, exercitationem eius sunt!</p>
                     </div>
                     <div
-                        className="grid w-full grid-cols-1 gap-6 md:grid-cols-2" >
+                        className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2" >
 
                         {
                             lists.map(list =>
@@ -30,7 +30,7 @@ const OurVolunteers = () => {
                                     data-aos-easing="ease-out-cubic"
                                     data-aos-duration="1500"
 
-                                    key={list?.id} className="flex space-x-6" >
+                                    key={list?.id} className="flex flex-col md:flex-row space-x-6" >
                                     <img alt="" className="flex-1 hover:scale-110 ease-in-out duration-300 hover:shadow-2xl  flex-shrink-0 object-cover h-56 mb-4 bg-center bg-gray-500  rounded-xl" src={list?.img} />
                                     <div className="flex flex-col " >
                                         <h4 className="text-xl font-semibold">{list?.name}</h4>

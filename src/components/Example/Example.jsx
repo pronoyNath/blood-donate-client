@@ -7,7 +7,7 @@ import './styles.css'
 
 const Example = () => {
   return (
-    <div className='bg-white w-full h-full -mt-28 '>
+    <div className='bg-white w-full h-full lg:-mt-20'>
       <Example2 />
     </div>
   );

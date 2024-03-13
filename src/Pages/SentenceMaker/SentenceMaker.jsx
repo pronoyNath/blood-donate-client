@@ -9,7 +9,7 @@ const proOptions = { hideAttribution: true };
 const SentenceMaker = () => {
 
     return (
-        <div style={{ width: '100vw', height: '100vh' }} className='max-w-7xl mx-auto z-[999]'>
+        <div style={{ width: '100vw', height: '100vh' }} className='max-w-7xl mx-auto z-[999] hidden md:block'>
             <div className='flex gap-2 items-center justify-center'>
                 <Lottie animationData={hiAnim} className=' h-[150px]' />
                 <h3 className='  text-4xl font-bold  uppercase'>Hello Buddy You Can Play With <span className='text-red-500'>this Box's</span>

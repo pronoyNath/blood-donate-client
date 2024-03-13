@@ -10,7 +10,7 @@ const Features = () => {
     return (
         <div className={` pb-20 max-w-screen-xl mx-auto
           `}>
-            <div className='grid grid-cols-3 gap-5' >
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-5' >
                 <div data-aos="fade-right" data-aos-duration="2000">
                     <FeaturesCard title={"Admin"} des={"Admin-exclusive features such as managing users, blood donation requests, and handle-content."} animation={adminAnimation} />
                 </div>

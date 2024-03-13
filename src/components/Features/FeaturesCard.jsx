@@ -23,8 +23,8 @@ const FeaturesCard = ({ title, des, animation, parallel }) => {
             onMouseLeave={handleMouseLeave}
             onClick={() => document.getElementById("my_modal_5").showModal()}
         >
-            <figure className={`w-[80%] h-[200px] m-auto overflow-hidden ${parallel && 'h-[350px] w-full'} `}>
-                <Player loop src={animation} className={`h-full w-full ${parallel && 'h-[350px] w-full '}`} ref={playerRef}></Player>
+            <figure className={`w-[80%] h-[200px] m-auto overflow-hidden ${parallel && 'md:h-[350px] w-full'} `}>
+                <Player loop src={animation} className={`h-full w-full ${parallel && 'md:h-[350px] w-full '}`} ref={playerRef}></Player>
             </figure>
             <div className="py-6 px-4">
                 <h2 className={`text-center text-4xl font-bold uppercase text-red-500 ${parallel && "text-5xl"}`}>{title}</h2>
