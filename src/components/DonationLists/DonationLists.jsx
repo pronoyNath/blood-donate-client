@@ -18,7 +18,7 @@ const DonationLists = () => {
                                 // data-aos-easing="ease-out-cubic"
                                 // data-aos-duration="1000"
                                 key={list?.id} className=" hover:scale-110 duration-300 ease-in-out  relative flex items-end justify-start w-full text-left bg-center bg-cover h-[700px] bg-gray-500" style={{ backgroundImage: `url(${list?.image})` }} >
-                                <div className="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b via-transparent from-gray-900 to-gray-900" ></div>
+                                <div className="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b  via-transparent from-transparent to-red-600" ></div>
                                 <div className="absolute top-0 left-0 right-0 flex items-center justify-between mx-5 mt-3" >
                                     <a rel="noopener noreferrer" href="#" className="px-3 py-2 text-xs font-semibold tracki uppercase text-gray-100 bgundefined">{list?.hospitalName}</a>
                                     <div className="flex flex-col justify-start text-center text-gray-100" >

@@ -77,6 +77,19 @@ const Navbar = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-red-500 rounded-box w-52">
                         {links}
+                        <li>
+                            <NavLink
+                                to="/give-fund"
+                                className={({ isActive }) =>
+                                    isActive ? "active text-red-500 border-b-4 border-red-500" : ""
+                                }
+                            >
+                                
+                                    <span> Give Fund</span>
+                             
+
+                            </NavLink>
+                        </li>
                     </ul>
                 </div>
                 <div>
@@ -87,7 +100,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="navbar-end flex-1 gap-7 ">
-                <button className="text-xl hover:scale-110 transform transition-transform duration-300">
+                <button className="hidden md:block text-xl hover:scale-110 transform transition-transform duration-300">
                     <NavLink
                         to="/give-fund"
                         className={({ isActive }) =>

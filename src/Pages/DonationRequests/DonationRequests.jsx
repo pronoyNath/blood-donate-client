@@ -28,15 +28,15 @@ const DonationRequsts = () => {
     return (
         <div className='pt-48 pb-10 bg-gray-800 text-white min-h-screen '>
             <div className=" max-w-6xl mx-auto">
-                <div className="flex items-center justify-center gap-6 bg-white rounded-full p-7 max-w-3xl mx-auto">
-                    <h3 className='text-4xl font-semibold text-red-500 text-center'>All Donation Requests </h3>
-                    <Lottie animationData={bloodReq} className="w-[300px] h-[100px] " />
+                <div className="flex items-center justify-center gap-6 bg-white rounded-full p-2 lg:p-7 max-w-3xl mx-auto">
+                    <h3 className='text-2xl lg:text-4xl font-semibold text-red-500 text-center'>All Donation Requests </h3>
+                    <Lottie animationData={bloodReq} className="lg:w-[300px] lg:h-[100px] " />
                 </div>
 
                 {
                     pendingDonationRequests.length > 0 ?
-                        <div className=" py-10 relative">
-                            <table className="table table-md border border-red-500 bg- rounded-none">
+                        <div className=" py-10 relative overflow-x-auto">
+                            <table className="table  table-md border border-red-500 bg- rounded-none">
                                 {/* head */}
                                 <thead>
                                     <tr className='text-red-500 text-xl border border-red-500'>

@@ -11,10 +11,9 @@ const OurVolunteers = () => {
 
     return (
         <div
-            data-aos="zoom-in"
             className='w-full mx-auto bg-[#e5d5cc]'>
             <section className="py-6 ">
-                <div className="container p-4 mx-auto space-y-16 sm:p-10" >
+                <div className=" p-4 mx-auto space-y-16 sm:p-10" >
                     <div className="space-y-4" >
                         <h3 className="text-2xl font-bold leadi text-red-500 sm:text-7xl">Meet our team</h3>
                         <p className="max-w-2xl">At a assumenda quas cum earum ut itaque commodi saepe rem aspernatur quam natus quis nihil quod, hic explicabo doloribus magnam neque, exercitationem eius sunt!</p>
@@ -26,12 +25,12 @@ const OurVolunteers = () => {
                             lists.map(list =>
                                 <div
 
-                                    data-aos="zoom-in-down"
-                                    data-aos-easing="ease-out-cubic"
-                                    data-aos-duration="1500"
+                                    // data-aos="fade-right"
+                                    // data-aos-easing="ease-out-cubic"
+                                    // data-aos-duration="700"
 
                                     key={list?.id} className="flex flex-col md:flex-row space-x-6" >
-                                    <img alt="" className="flex-1 hover:scale-110 ease-in-out duration-300 hover:shadow-2xl  flex-shrink-0 object-cover h-56 mb-4 bg-center bg-gray-500  rounded-xl" src={list?.img} />
+                                    <img alt="" className="flex-1 hover:scale-110 ease-in-out duration-300 hover:shadow-2xl  flex-shrink-0 object-cover h-56 mb-4 bg-center bg-gray-500  rounded-xl w-[300px]" src={list?.img} />
                                     <div className="flex flex-col " >
                                         <h4 className="text-xl font-semibold">{list?.name}</h4>
                                         <p className="text-sm text-gray-400">{list?.position}</p>

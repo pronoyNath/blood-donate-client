@@ -29,33 +29,33 @@ const AdminDashboard = () => {
     }, [])
 
 
-    console.log(totalFunds);
+    // console.log(totalFunds);
     return (
         <div className="flex fexl-col justify-center items-center mt-16 p-5">
 
-            <div className="stats shadow-xl  shadow-red-200">
+            <div className="stats shadow-xl mt-10  shadow-red-200">
 
                 <div className="stat">
-                    <div className="stat-figure text-secondary">
+                    <div className="stat-figure text-secondary hidden md:block">
                         <img src="https://i.ibb.co/j5MMbNg/man.png" alt="" className="w-[100px]" />
                     </div>
-                    <div className="stat-title">Total User</div>
+                    <div className="stat-title font-bold">Total User</div>
                     <div className="stat-value">{toatalUsers}</div>
                 </div>
 
                 <div className="stat text-green-500">
-                    <div className="stat-figure text-secondary">
+                    <div className="stat-figure text-secondary hidden md:block">
                         <img src="https://i.ibb.co/JxyWFsr/emergency.png" alt="" className="w-[100px]" />
                     </div>
-                    <div className="stat-title ">Total Funding</div>
+                    <div className="stat-title font-bold ">Total Funding</div>
                     <div className="stat-value">{totalFunds}$</div>
                 </div>
 
                 <div className="stat text-red-500">
-                    <div className="stat-figure text-secondary">
+                    <div className="stat-figure text-secondary hidden md:block">
                         <img src="https://i.ibb.co/2g9tLFg/blood-donation.png" alt="" className="w-[100px]" />
                     </div>
-                    <div className="stat-title">Total Blood Donation Request</div>
+                    <div className="stat-title font-bold">Total Blood Donation Request</div>
                     <div className="stat-value">{totalDonationReq}</div>
                 </div>
 

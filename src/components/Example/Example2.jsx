@@ -1,10 +1,8 @@
-// https://cydstumpel.nl/
-
 import * as THREE from 'three'
 import { useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import logo from '../../assets/bloodLogo2.png'
-import { Image, Environment, ScrollControls, useScroll, useTexture } from '@react-three/drei'
+import { Image, ScrollControls, useScroll, useTexture } from '@react-three/drei'
 import { easing } from 'maath'
 import './util'
 

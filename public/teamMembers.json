@@ -6,7 +6,7 @@
         "details": {
             "role": "Assisting in organizing events and campaigns."
         },
-        "img": "https://i.ibb.co/3BjR3vR/pexels-jeffrey-reed-769745.jpg"
+        "img": "../src/assets/teamMem/1.jpg"
     },
     {
         "id": 2,
@@ -15,25 +15,25 @@
         "details": {
             "role": "Regular blood donor, contributing to blood bank supplies."
         },
-        "img": "https://i.ibb.co/vQxfff3/pexels-andrea-piacquadio-733872.jpg"
+        "img": "../src/assets/teamMem/2.jpg"
     },
+   
     {
         "id": 3,
-        "name": "Oliver Anderson",
-        "position": "Admin",
-        "details": {
-            "role": "Managing volunteer schedules and coordinating activities."
-        },
-        "img": "https://i.ibb.co/GMVrZD2/pexels-fernanda-latronico-709188.jpg"
-    },
-    {
-        "id": 4,
         "name": "Sophia Brown",
         "position": "Volunteer",
         "details": {
             "role": "Providing assistance during blood donation drives."
         },
-        "img": "https://i.ibb.co/Qk4zsDW/pexels-vinicius-wiesehofer-1130626.jpg"
+        "img": "../src/assets/teamMem/4.jpg"
+    }, {
+        "id": 4,
+        "name": "Oliver Anderson",
+        "position": "Admin",
+        "details": {
+            "role": "Managing volunteer schedules and coordinating activities."
+        },
+        "img": "../src/assets/teamMem/3.jpg"
     },
     {
         "id": 5,
@@ -42,7 +42,7 @@
         "details": {
             "role": "Regular platelet donor, helping patients with clotting disorders."
         },
-        "img": "https://i.ibb.co/m99FTJt/pexels-stefan-stefancik-91227.jpg"
+        "img": "../src/assets/teamMem/5.jpg"
     },
     {
         "id": 6,
@@ -51,6 +51,6 @@
         "details": {
             "role": "Managing donor database and organizing outreach programs."
         },
-        "img": "https://i.ibb.co/vBcqZLW/pexels-christina-morillo-1181690.jpg"
+        "img": "../src/assets/teamMem/6.jpg"
     }
 ]
